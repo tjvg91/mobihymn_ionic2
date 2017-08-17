@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Library</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-lg-4 col-md-6 col-sm-12 *ngFor="let hymnal of hymnalList">
+                <ion-card (click)="setActiveHymnal(hymnal.id)">
+                    <div class="card-image">
+                        <img src="{{ 'assets/' + hymnal.image}}" />
+                    </div>
+                    <ion-card-content>
+                        <ion-card-title>
+                            {{hymnal.name}}
+                        </ion-card-title>
+                        <p>
+                            {{hymnal.count}} hymns
+                        </p>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
