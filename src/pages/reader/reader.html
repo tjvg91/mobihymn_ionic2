@@ -8,7 +8,7 @@
     <ion-navbar>
         <ion-buttons start>
             <button ion-button icon-only (click)="presentPopover($event)">
-                <ion-icon name="brush"></ion-icon>
+                <span class="fa fa-font"></span>
             </button>
         </ion-buttons>
         <ion-title>MobiHymn</ion-title>
@@ -25,14 +25,14 @@
 </ion-header>
 
 <ion-content padding (click)="toggleFullLyrics()" #lyricsContainer>
-    <div class="hymn-content" *ngIf="currentHymn" (pinch)="pinchZoom($event)">
+    <div class="hymn-content" *ngIf="currentHymn" (pinch)="pinchZoom($event)" [ngStyle]="{'paddingBottom.px': extraSpace, 'text-align': alignment}">
         <h2 class="hymn-title">Hymn #{{ currentHymn.title }}</h2>
         <div class="lyrics" [innerHTML]="currentHymn.lyrics">
         </div>
     </div>
 
     <ion-fab bottom right>
-        <button ion-fab mini #btnPlay [@scale]="scaleState">
+        <button ion-fab #btnPlay [@scale]="scaleState">
             <ion-icon name="play"></ion-icon>
         </button>
     </ion-fab>

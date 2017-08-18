@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the SettingsPopoverPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { GlobalService } from '../../services/global-service';
 
 @IonicPage()
 @Component({
@@ -14,15 +9,31 @@ import { IonicPage, ViewController, NavParams } from 'ionic-angular';
   templateUrl: 'settings-popover.html',
 })
 export class SettingsPopoverPage {
+  paddingText: Number;
+  alignmentText: string;
 
-  constructor(public viewCtrl: ViewController, public navParams: NavParams) {
+  constructor(private viewCtrl: ViewController, private navParams: NavParams, private global : GlobalService) {
   }
 
   ionViewDidLoad() {
-    
+    this.paddingText = this.global.getPadding();
+    this.alignmentText = this.global.getActiveAlignment();
   }
 
   close(){
     this.viewCtrl.dismiss();
+  }
+
+  paddingChange(){
+    this.global.setPadding(this.paddingText);
+    let reader = this.navParams.get('ctrl');
+    reader.extraSpace = this.paddingText;
+  }
+
+  alignmentChange(align){
+    this.alignmentText = align;
+    this.global.setActiveAlignment(align);
+    let reader = this.navParams.get('ctrl');
+    reader.alignment = align;
   }
 }

@@ -11,10 +11,13 @@ export class GlobalService {
 
     activeHymnal:string = "";
     activeHymn:string = "";
-    recentCount:Number = 5;
+    activeAlignment="left";
 
     bookmarks: Array<object> = new Array<object>();
     history: Array<object> = new Array<object>();
+    
+    recentCount:Number = 5;
+    padding: Number=0;
     
     public hymnalChange : Subject<Array<object>> = new Subject<Array<object>>();
     public hymnChange : Subject<object> = new Subject<object>();
@@ -22,6 +25,9 @@ export class GlobalService {
     public activeHymnChange : Subject<string> = new Subject<string>(); 
     public bookmarksChange : Subject<Array<object>> = new Subject<Array<object>>(); 
     public historyChange : Subject<Array<object>> = new Subject<Array<object>>(); 
+    public historyCountChange : Subject<Number> = new Subject<Number>(); 
+    public paddingChange : Subject<Number> = new Subject<Number>(); 
+    public activeAlignmentChange : Subject<string> = new Subject<string>(); 
 
     constructor() {
      }
@@ -83,6 +89,21 @@ export class GlobalService {
         });
     }
 
+    setRecentCount(newValue:Number){
+        this.recentCount = newValue
+        this.historyCountChange.next(this.recentCount);
+    }
+
+    setPadding(newValue: Number){
+        this.padding = newValue;
+        this.paddingChange.next(this.padding);
+    }
+
+    setActiveAlignment(newValue: string){
+        this.activeAlignment = newValue;
+        this.activeAlignmentChange.next(this.activeAlignment);
+    }
+
     getHymnalList() : Array<object>{
         return this.hymnals;
     }
@@ -109,6 +130,14 @@ export class GlobalService {
 
     getRecentList() : Array<object>{
         return this.history;
+    }
+
+    getPadding() : Number{
+        return this.padding;
+    }
+
+    getActiveAlignment(): string{
+        return this.activeAlignment;
     }
 
     getHymnals(http: Http){        

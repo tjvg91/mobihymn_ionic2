@@ -21,7 +21,7 @@
         <ion-item>
             <ion-icon name="time" item-start></ion-icon>
             <ion-label>Recent items</ion-label>
-            <ion-select [(ngModel)]="recentNum">
+            <ion-select [(ngModel)]="recentNum" (ion-change)="recentChange()">
                 <ion-option value="5">5</ion-option>
                 <ion-option value="6">6</ion-option>
                 <ion-option value="7">7</ion-option>

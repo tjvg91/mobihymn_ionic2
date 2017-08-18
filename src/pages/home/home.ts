@@ -18,6 +18,8 @@ export class HomePage implements OnInit, OnDestroy{
   hymnalSubscribe: any;
   hymnSubscribe: any;
 
+  activeHymnal: string;
+
   constructor(public homeCtrl: NavController, global : GlobalService, http: Http) {
     this.title = "MobiHymn";
     this.myGlobal = global;
@@ -40,6 +42,7 @@ export class HomePage implements OnInit, OnDestroy{
     })[0]
     this.myGlobal.setActiveHymnal(activeHymnal['id']);
     this.myGlobal.setActiveHymn('1');
+    this.activeHymnal = activeHymnal['id'];
 
     this.goToReader(true);
   }
@@ -54,6 +57,7 @@ export class HomePage implements OnInit, OnDestroy{
     this.myGlobal.getHymnals(this.myHttp).subscribe(res => {
       this.myGlobal.setHymnals(res.output);
     });
+    this.activeHymnal = this.myGlobal.getActiveHymnal();
   }
 
   ngOnDestroy(){

@@ -6,11 +6,42 @@
 -->
 <ion-content padding>
   <ion-list>
+    <ion-row>
+      <ion-col>
+        <button ion-button small color="primary" *ngIf="alignmentText=='left'">
+          <span class="fa fa-align-left"></span>
+        </button>
+        <button ion-button small color="primary" clear (click)="alignmentChange('left')" *ngIf="alignmentText!='left'">
+          <span class="fa fa-align-left"></span>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button small color="primary" *ngIf="alignmentText=='center'">
+          <span class="fa fa-align-center"></span>
+        </button>
+        <button ion-button small color="primary" clear (click)="alignmentChange('center')" *ngIf="alignmentText!='center'">
+          <span class="fa fa-align-center"></span>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button small color="primary" *ngIf="alignmentText=='right'">
+          <span class="fa fa-align-right"></span>
+        </button>
+        <button ion-button small color="primary" clear (click)="alignmentChange('right')" *ngIf="alignmentText!='right'">
+          <span class="fa fa-align-right"></span>
+        </button>        
+      </ion-col>
+    </ion-row>
+
     <ion-list-header>
-      <ion-label>Extra space</ion-label>
+      <ion-label>Extra space
+        <ion-badge>{{ paddingText }}</ion-badge>
+      </ion-label>
+      
     </ion-list-header> 
-    <ion-item>     
-      <ion-range min="0" max="200" [(ngModel)]="paddingText" step="10" snap="true">
+    <ion-item>
+      
+      <ion-range min="0" max="500" [(ngModel)]="paddingText" step="10" snap="true" pin="true" (ionChange)="paddingChange()">
         <ion-label range-left>0</ion-label>
         <ion-label range-right>500</ion-label>
       </ion-range>

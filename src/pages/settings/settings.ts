@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { RevisionsModalPage } from '../../pages/revisions-modal/revisions-modal';
 import { AuthorModalPage } from '../../pages/author-modal/author-modal';
 
+import { GlobalService } from '../../services/global-service';
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -18,13 +20,20 @@ import { AuthorModalPage } from '../../pages/author-modal/author-modal';
 })
 export class SettingsPage {
   revisionString : string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public revisionsModal: ModalController, public authorModal: ModalController) {
+  recentNum: Number;
+
+  recentSubscribe: any;
+  constructor(public navCtrl: NavController, private navParams: NavParams, private http: Http, private revisionsModal: ModalController, private authorModal: ModalController, private global: GlobalService) {
+    this.recentSubscribe = global.historyCountChange.subscribe(value =>{
+      console.log(value);
+    })
   }
 
   ionViewDidLoad() {
     this.http.get('../assets/revision.html').map(res => res).subscribe(res => {
       this.revisionString = res["_body"];
     })
+    this.recentNum = this.global.getRecentCount();
   }
 
   showRevisionModal(){
@@ -37,5 +46,9 @@ export class SettingsPage {
   showAuthorModal(){
     let authModal = this.authorModal.create(AuthorModalPage);
     authModal.present();
+  }
+
+  recentChange(){
+    this.global.setRecentCount(this.recentNum);
   }
 }

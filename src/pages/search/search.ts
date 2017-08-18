@@ -29,10 +29,10 @@ export class SearchPage {
     this.activeHymnal = global.getActiveHymnal();
   }
 
-  ngAfterViewInit(){
+  ionViewDidEnter(){
     setTimeout(() => {
       this.hymnFilterSearchbar.setFocus();
-    }, 500);    
+    }, 500);
   }
 
   getItems(event){

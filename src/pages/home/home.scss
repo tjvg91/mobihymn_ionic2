@@ -22,6 +22,9 @@ page-home {
         }
     }
     ion-card {
+        &.active, &:hover{
+            box-shadow: 0px 1px 20px 2px #ffeb3b;
+        }
         .card-image {
             height: 200px;
             overflow: hidden;

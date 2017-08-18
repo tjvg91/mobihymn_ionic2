@@ -62,5 +62,9 @@ page-reader {
     }    
 }
 
+ion-list-header ion-label ion-badge{
+    float: right;
+}
+
 @include verse-without-refrain;
 @include verse-with-refrain;

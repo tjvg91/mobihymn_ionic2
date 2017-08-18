@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { IonicPage, NavController, PopoverController, ModalController, AlertController, ToastController, Gesture, FabButton, Content } from 'ionic-angular';
+import { IonicPage, NavController, PopoverController, ModalController, AlertController, ToastController, Gesture, FabButton, Content, Platform } from 'ionic-angular';
 import { GlobalService } from '../../services/global-service';
 import { InputModalPage } from '../../pages/input-modal/input-modal';
 import { SettingsPopoverPage } from '../../pages/settings-popover/settings-popover';
@@ -56,6 +56,10 @@ export class ReaderPage implements OnDestroy{
   scaleState: string = 'shown';
   slideUpState: string = 'down';
 
+  paddingSubscribe: any;
+  extraSpace: Number = 0;
+  alignment: string = "left";
+
   private lyricsContainer: HTMLElement;
   @ViewChild('lyricsContainer') lyricsContainerRef: Content;
   @ViewChild('btnPlay') btnPlayElemRef: FabButton;
@@ -63,8 +67,13 @@ export class ReaderPage implements OnDestroy{
   scrollContent: any;
   divTab: any;
 
-  constructor(public readerCtrl: NavController, public inputPopCtrl: PopoverController, public inputModalCtrl: ModalController, global: GlobalService, private alertCtrl: AlertController, private toastCtrl: ToastController) {
+  constructor(public readerCtrl: NavController, public inputPopCtrl: PopoverController, public inputModalCtrl: ModalController, global: GlobalService, private alertCtrl: AlertController, private toastCtrl: ToastController, private platform: Platform) {
     this.myGlobal = global;
+
+    this.paddingSubscribe = global.paddingChange.subscribe((value) => {
+      this.extraSpace = value;
+    },)
+
     this.hymnSubscribe = global.activeHymnChange.subscribe((value) => {
       let hymnList = this.myGlobal.getHymnList()['hymnal' + this.myGlobal.getActiveHymnal()];
       let activeHymn = this.myGlobal.getActiveHymn();
@@ -76,13 +85,15 @@ export class ReaderPage implements OnDestroy{
 
     this.bookmarksSubscribe = global.bookmarksChange.subscribe((value) => {
       this.isBookmarked = global.isInBookmark(this.activeHymnal, this.currentHymn['id']);
-    });    
+    });
   }
 
   presentPopover(myEvent) {
-    let popover = this.inputPopCtrl.create(SettingsPopoverPage);
+    let popover = this.inputPopCtrl.create(SettingsPopoverPage,{
+      ctrl: this
+    });
     popover.present({
-      ev: myEvent
+      'ev': myEvent
     });
   }
 
@@ -144,7 +155,6 @@ export class ReaderPage implements OnDestroy{
     this.isBookmarked = this.myGlobal.isInBookmark(this.activeHymnal, this.currentHymn);
     this.scrollContent = this.lyricsContainerRef._elementRef.nativeElement.querySelector('.scroll-content');
     this.divTab = this.readerCtrl.parent._elementRef.nativeElement.querySelector('.tabbar');
-    console.log(this.divTab);
   }
 
   ngAfterViewInit(){
@@ -158,6 +168,8 @@ export class ReaderPage implements OnDestroy{
 
   ngOnDestroy(){
     this.hymnSubscribe.unsubscribe();
+    this.bookmarksSubscribe.unsubscribe();
+    this.paddingSubscribe.unsubscribe();
   }
 
   goToTab(index){
@@ -185,9 +197,25 @@ export class ReaderPage implements OnDestroy{
   }
 
   toggleFullLyrics(){
+    let margUp = "";
+    let translateUp = "";
+
+    if(this.platform.is('android')){
+      margUp = '56px 0';
+      translateUp = 'translate(0, 56px)';
+    }
+    else if(this.platform.is('ios')){
+      margUp = '44px 0 49px';
+      translateUp = 'translate(0, 49px)';
+    }
+    else{ //windows
+      margUp = '115px 0 0';
+      translateUp = 'translate(0, -115px)';
+    }
+
     if(this.scaleState == 'shown'){
       this.scrollContent.animate([
-        { offset: 0, 'margin': '56px 0 56px 0' },
+        { offset: 0, 'margin': margUp },
         { offset: 1, 'margin': '0 0 0 0' }
       ],{
         duration: 500,
@@ -196,7 +224,7 @@ export class ReaderPage implements OnDestroy{
       });
       this.divTab.animate([
         { offset: 0, 'transform': 'translate(0, 0)' },
-        { offset: 1, 'transform': 'translate(0, 56px)' }
+        { offset: 1, 'transform': translateUp }
       ],{
         duration: 500,
         easing: 'ease',
@@ -208,14 +236,14 @@ export class ReaderPage implements OnDestroy{
     else{
       this.scrollContent.animate([
         { offset: 0, margin: '0 0 0 0' },
-        { offset: 1, margin: '56px 0 56px 0' }
+        { offset: 1, margin: margUp }
       ],{
         duration: 500,
         easing: 'ease',
         fill: 'forwards'
       });
       this.divTab.animate([
-        { offset: 0, 'transform': 'translate(0, 56px)' },
+        { offset: 0, 'transform': translateUp },
         { offset: 1, 'transform': 'translate(0, 0)' }
       ],{
         duration: 500,
