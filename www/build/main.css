@@ -28288,6 +28288,10 @@ ion-navbar.toolbar {
   color: #999 !important;
 }
 
+.alert-md .alert-message {
+  color: #fff !important;
+}
+
 page-author-modal ion-card ion-card-content ion-card-title {
   font-size: 1.2em !important;
   color: #fff !important;

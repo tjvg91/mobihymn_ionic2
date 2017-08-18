@@ -12,10 +12,8 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-
-
 .content .scroll-content {
-    overflow: auto;    
+    overflow: auto;
     user-select: auto !important;
 }
 
@@ -33,20 +31,23 @@
     }
 }
 
-.alert-wp{
-    .alert-message{
+.alert-wp {
+    .alert-message {
         color: #ffeb3b !important;
     }
 }
 
-.bar-button-ios{
+.bar-button-ios {
     color: #000 !important;
-
-    & + &{
+    &+& {
         margin-left: 10px;
     }
 }
 
-.list-ios .list-header{
+.list-ios .list-header {
     color: #999 !important;
+}
+
+.alert-md .alert-message {
+    color: #fff !important;
 }
