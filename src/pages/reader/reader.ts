@@ -59,6 +59,7 @@ export class ReaderPage implements OnDestroy{
   paddingSubscribe: any;
   extraSpace: Number = 0;
   alignment: string = "left";
+  fontSize: Number = 1.4;
 
   private lyricsContainer: HTMLElement;
   @ViewChild('lyricsContainer') lyricsContainerRef: Content;
@@ -153,6 +154,7 @@ export class ReaderPage implements OnDestroy{
       return item.id == activeHymn;
     })[0];
     this.isBookmarked = this.myGlobal.isInBookmark(this.activeHymnal, this.currentHymn);
+    this.fontSize = this.myGlobal.getFontSize();
     this.scrollContent = this.lyricsContainerRef._elementRef.nativeElement.querySelector('.scroll-content');
     this.divTab = this.readerCtrl.parent._elementRef.nativeElement.querySelector('.tabbar');
   }
@@ -200,7 +202,7 @@ export class ReaderPage implements OnDestroy{
     let margUp = "";
     let translateUp = "";
 
-    if(this.platform.is('android')){
+    if(this.platform.is('android') || this.platform.is('core')){
       margUp = '56px 0';
       translateUp = 'translate(0, 56px)';
     }

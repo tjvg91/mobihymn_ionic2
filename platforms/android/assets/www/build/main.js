@@ -1,6 +1,6 @@
 webpackJsonp([7],{
 
-/***/ 130:
+/***/ 131:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49,7 +49,7 @@ RevisionsModalPage = __decorate([
 
 /***/ }),
 
-/***/ 131:
+/***/ 132:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -97,7 +97,7 @@ AuthorModalPage = __decorate([
 
 /***/ }),
 
-/***/ 132:
+/***/ 133:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105,8 +105,9 @@ AuthorModalPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_revisions_modal_revisions_modal__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_author_modal_author_modal__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_revisions_modal_revisions_modal__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_author_modal_author_modal__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_global_service__ = __webpack_require__(39);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -121,6 +122,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -128,18 +130,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * on Ionic pages and navigation.
  */
 var SettingsPage = (function () {
-    function SettingsPage(navCtrl, navParams, http, revisionsModal, authorModal) {
+    function SettingsPage(navCtrl, http, revisionsModal, authorModal, global) {
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
         this.http = http;
         this.revisionsModal = revisionsModal;
         this.authorModal = authorModal;
+        this.global = global;
+        this.recentSubscribe = global.historyCountChange.subscribe(function (value) {
+            console.log(value);
+        });
     }
     SettingsPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.http.get('../assets/revision.html').map(function (res) { return res; }).subscribe(function (res) {
             _this.revisionString = res["_body"];
         });
+        this.recentNum = this.global.getRecentCount();
     };
     SettingsPage.prototype.showRevisionModal = function () {
         var revModal = this.revisionsModal.create(__WEBPACK_IMPORTED_MODULE_3__pages_revisions_modal_revisions_modal__["a" /* RevisionsModalPage */], {
@@ -151,28 +157,31 @@ var SettingsPage = (function () {
         var authModal = this.authorModal.create(__WEBPACK_IMPORTED_MODULE_4__pages_author_modal_author_modal__["a" /* AuthorModalPage */]);
         authModal.present();
     };
+    SettingsPage.prototype.recentChange = function () {
+        this.global.setRecentCount(this.recentNum);
+    };
     return SettingsPage;
 }());
 SettingsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-settings',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/settings/settings.html"*/'<!--\n  Generated template for the SettingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Settings</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list>\n        <ion-list-header>\n            Data\n        </ion-list-header>\n        <ion-item>\n            <ion-icon name="time" item-start></ion-icon>\n            <ion-label>Recent items</ion-label>\n            <ion-select [(ngModel)]="recentNum">\n                <ion-option value="5">5</ion-option>\n                <ion-option value="6">6</ion-option>\n                <ion-option value="7">7</ion-option>\n                <ion-option value="8">8</ion-option>\n                <ion-option value="9">9</ion-option>\n                <ion-option value="10">10</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-list-header>\n            About\n        </ion-list-header>\n        <ion-item (click)="showAuthorModal()">\n            <ion-icon name="person" item-start></ion-icon>\n            <ion-label>Author</ion-label>\n        </ion-item>\n        <ion-item (click)="showRevisionModal()">\n            <ion-icon name="clock" item-start></ion-icon>\n            <ion-label>Revisions</ion-label>\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/settings/settings.html"*/,
+        selector: 'page-settings',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/settings/settings.html"*/'<!--\n  Generated template for the SettingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Settings</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list>\n        <ion-list-header>\n            Data\n        </ion-list-header>\n        <ion-item>\n            <ion-icon name="time" item-start></ion-icon>\n            <ion-label>Recent items</ion-label>\n            <ion-select [(ngModel)]="recentNum" (ion-change)="recentChange()">\n                <ion-option value="5">5</ion-option>\n                <ion-option value="6">6</ion-option>\n                <ion-option value="7">7</ion-option>\n                <ion-option value="8">8</ion-option>\n                <ion-option value="9">9</ion-option>\n                <ion-option value="10">10</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-list-header>\n            About\n        </ion-list-header>\n        <ion-item (click)="showAuthorModal()">\n            <ion-icon name="person" item-start></ion-icon>\n            <ion-label>Author</ion-label>\n        </ion-item>\n        <ion-item (click)="showRevisionModal()">\n            <ion-icon name="clock" item-start></ion-icon>\n            <ion-label>Revisions</ion-label>\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/settings/settings.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ModalController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ModalController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavController */], __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ModalController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ModalController */], __WEBPACK_IMPORTED_MODULE_5__services_global_service__["a" /* GlobalService */]])
 ], SettingsPage);
 
 //# sourceMappingURL=settings.js.map
 
 /***/ }),
 
-/***/ 133:
+/***/ 134:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InputModalPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -304,13 +313,14 @@ InputModalPage = __decorate([
 
 /***/ }),
 
-/***/ 134:
+/***/ 135:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPopoverPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_global_service__ = __webpack_require__(39);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -322,48 +332,57 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-/**
- * Generated class for the SettingsPopoverPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 var SettingsPopoverPage = (function () {
-    function SettingsPopoverPage(viewCtrl, navParams) {
+    function SettingsPopoverPage(viewCtrl, navParams, global) {
         this.viewCtrl = viewCtrl;
         this.navParams = navParams;
+        this.global = global;
     }
     SettingsPopoverPage.prototype.ionViewDidLoad = function () {
+        this.paddingText = this.global.getPadding();
+        this.alignmentText = this.global.getActiveAlignment();
     };
     SettingsPopoverPage.prototype.close = function () {
         this.viewCtrl.dismiss();
+    };
+    SettingsPopoverPage.prototype.paddingChange = function () {
+        this.global.setPadding(this.paddingText);
+        var reader = this.navParams.get('ctrl');
+        reader.extraSpace = this.paddingText;
+    };
+    SettingsPopoverPage.prototype.alignmentChange = function (align) {
+        this.alignmentText = align;
+        this.global.setActiveAlignment(align);
+        var reader = this.navParams.get('ctrl');
+        reader.alignment = align;
     };
     return SettingsPopoverPage;
 }());
 SettingsPopoverPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-settings-popover',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/settings-popover/settings-popover.html"*/'<!--\n  Generated template for the SettingsPopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-content padding>\n  <ion-list>\n    <ion-list-header>\n      <ion-label>Extra space</ion-label>\n    </ion-list-header> \n    <ion-item>     \n      <ion-range min="0" max="200" [(ngModel)]="paddingText" step="10" snap="true">\n        <ion-label range-left>0</ion-label>\n        <ion-label range-right>500</ion-label>\n      </ion-range>\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/settings-popover/settings-popover.html"*/,
+        selector: 'page-settings-popover',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/settings-popover/settings-popover.html"*/'<!--\n  Generated template for the SettingsPopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-content padding>\n  <ion-list>\n    <ion-row>\n      <ion-col>\n        <button ion-button small color="primary" *ngIf="alignmentText==\'left\'">\n          <span class="fa fa-align-left"></span>\n        </button>\n        <button ion-button small color="primary" clear (click)="alignmentChange(\'left\')" *ngIf="alignmentText!=\'left\'">\n          <span class="fa fa-align-left"></span>\n        </button>\n      </ion-col>\n      <ion-col>\n        <button ion-button small color="primary" *ngIf="alignmentText==\'center\'">\n          <span class="fa fa-align-center"></span>\n        </button>\n        <button ion-button small color="primary" clear (click)="alignmentChange(\'center\')" *ngIf="alignmentText!=\'center\'">\n          <span class="fa fa-align-center"></span>\n        </button>\n      </ion-col>\n      <ion-col>\n        <button ion-button small color="primary" *ngIf="alignmentText==\'right\'">\n          <span class="fa fa-align-right"></span>\n        </button>\n        <button ion-button small color="primary" clear (click)="alignmentChange(\'right\')" *ngIf="alignmentText!=\'right\'">\n          <span class="fa fa-align-right"></span>\n        </button>        \n      </ion-col>\n    </ion-row>\n\n    <ion-list-header>\n      <ion-label>Extra space\n        <ion-badge>{{ paddingText }}</ion-badge>\n      </ion-label>\n      \n    </ion-list-header> \n    <ion-item>\n      \n      <ion-range min="0" max="500" [(ngModel)]="paddingText" step="10" snap="true" pin="true" (ionChange)="paddingChange()">\n        <ion-label range-left>0</ion-label>\n        <ion-label range-right>500</ion-label>\n      </ion-range>\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/settings-popover/settings-popover.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_global_service__["a" /* GlobalService */]])
 ], SettingsPopoverPage);
 
 //# sourceMappingURL=settings-popover.js.map
 
 /***/ }),
 
-/***/ 135:
+/***/ 136:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReaderPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__(149);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_global_service__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_input_modal_input_modal__ = __webpack_require__(133);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_settings_popover_settings_popover__ = __webpack_require__(134);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_global_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_input_modal_input_modal__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_settings_popover_settings_popover__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -388,16 +407,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * on Ionic pages and navigation.
  */
 var ReaderPage = (function () {
-    function ReaderPage(readerCtrl, inputPopCtrl, inputModalCtrl, global, alertCtrl, toastCtrl) {
+    function ReaderPage(readerCtrl, inputPopCtrl, inputModalCtrl, global, alertCtrl, toastCtrl, platform) {
         var _this = this;
         this.readerCtrl = readerCtrl;
         this.inputPopCtrl = inputPopCtrl;
         this.inputModalCtrl = inputModalCtrl;
         this.alertCtrl = alertCtrl;
         this.toastCtrl = toastCtrl;
+        this.platform = platform;
         this.scaleState = 'shown';
         this.slideUpState = 'down';
+        this.extraSpace = 0;
+        this.alignment = "left";
+        this.fontSize = 1.4;
         this.myGlobal = global;
+        this.paddingSubscribe = global.paddingChange.subscribe(function (value) {
+            _this.extraSpace = value;
+        });
         this.hymnSubscribe = global.activeHymnChange.subscribe(function (value) {
             var hymnList = _this.myGlobal.getHymnList()['hymnal' + _this.myGlobal.getActiveHymnal()];
             var activeHymn = _this.myGlobal.getActiveHymn();
@@ -411,9 +437,11 @@ var ReaderPage = (function () {
         });
     }
     ReaderPage.prototype.presentPopover = function (myEvent) {
-        var popover = this.inputPopCtrl.create(__WEBPACK_IMPORTED_MODULE_5__pages_settings_popover_settings_popover__["a" /* SettingsPopoverPage */]);
+        var popover = this.inputPopCtrl.create(__WEBPACK_IMPORTED_MODULE_5__pages_settings_popover_settings_popover__["a" /* SettingsPopoverPage */], {
+            ctrl: this
+        });
         popover.present({
-            ev: myEvent
+            'ev': myEvent
         });
     };
     ReaderPage.prototype.presentInputModal = function () {
@@ -469,6 +497,7 @@ var ReaderPage = (function () {
             return item.id == activeHymn;
         })[0];
         this.isBookmarked = this.myGlobal.isInBookmark(this.activeHymnal, this.currentHymn);
+        this.fontSize = this.myGlobal.getFontSize();
         this.scrollContent = this.lyricsContainerRef._elementRef.nativeElement.querySelector('.scroll-content');
         this.divTab = this.readerCtrl.parent._elementRef.nativeElement.querySelector('.tabbar');
     };
@@ -483,6 +512,8 @@ var ReaderPage = (function () {
     };
     ReaderPage.prototype.ngOnDestroy = function () {
         this.hymnSubscribe.unsubscribe();
+        this.bookmarksSubscribe.unsubscribe();
+        this.paddingSubscribe.unsubscribe();
     };
     ReaderPage.prototype.goToTab = function (index) {
         this.readerCtrl.parent.select(index);
@@ -506,9 +537,23 @@ var ReaderPage = (function () {
         console.log(event);
     };
     ReaderPage.prototype.toggleFullLyrics = function () {
+        var margUp = "";
+        var translateUp = "";
+        if (this.platform.is('android')) {
+            margUp = '56px 0';
+            translateUp = 'translate(0, 56px)';
+        }
+        else if (this.platform.is('ios')) {
+            margUp = '44px 0 49px';
+            translateUp = 'translate(0, 49px)';
+        }
+        else {
+            margUp = '115px 0 0';
+            translateUp = 'translate(0, -115px)';
+        }
         if (this.scaleState == 'shown') {
             this.scrollContent.animate([
-                { offset: 0, 'margin': '56px 0 56px 0' },
+                { offset: 0, 'margin': margUp },
                 { offset: 1, 'margin': '0 0 0 0' }
             ], {
                 duration: 500,
@@ -517,7 +562,7 @@ var ReaderPage = (function () {
             });
             this.divTab.animate([
                 { offset: 0, 'transform': 'translate(0, 0)' },
-                { offset: 1, 'transform': 'translate(0, 56px)' }
+                { offset: 1, 'transform': translateUp }
             ], {
                 duration: 500,
                 easing: 'ease',
@@ -529,14 +574,14 @@ var ReaderPage = (function () {
         else {
             this.scrollContent.animate([
                 { offset: 0, margin: '0 0 0 0' },
-                { offset: 1, margin: '56px 0 56px 0' }
+                { offset: 1, margin: margUp }
             ], {
                 duration: 500,
                 easing: 'ease',
                 fill: 'forwards'
             });
             this.divTab.animate([
-                { offset: 0, 'transform': 'translate(0, 56px)' },
+                { offset: 0, 'transform': translateUp },
                 { offset: 1, 'transform': 'translate(0, 0)' }
             ], {
                 duration: 500,
@@ -564,7 +609,7 @@ __decorate([
 ReaderPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-reader',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/'<!--\n  Generated template for the ReaderPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header #readerHeader [@slideUp]="slideUpState">\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button icon-only (click)="presentPopover($event)">\n                <ion-icon name="brush"></ion-icon>\n            </button>\n        </ion-buttons>\n        <ion-title>MobiHymn</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only (click)="toggleBookmark()">\n                <ion-icon name="star-outline" *ngIf="!isBookmarked"></ion-icon>\n                <ion-icon name="star" *ngIf="isBookmarked"></ion-icon>\n            </button>\n            <button ion-button icon-only (click)="presentInputModal()">\n                <ion-icon name="musical-note"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding (click)="toggleFullLyrics()" #lyricsContainer>\n    <div class="hymn-content" *ngIf="currentHymn" (pinch)="pinchZoom($event)">\n        <h2 class="hymn-title">Hymn #{{ currentHymn.title }}</h2>\n        <div class="lyrics" [innerHTML]="currentHymn.lyrics">\n        </div>\n    </div>\n\n    <ion-fab bottom right>\n        <button ion-fab mini #btnPlay [@scale]="scaleState">\n            <ion-icon name="play"></ion-icon>\n        </button>\n    </ion-fab>\n</ion-content>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/,
+        selector: 'page-reader',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/'<!--\n  Generated template for the ReaderPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header #readerHeader [@slideUp]="slideUpState">\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button icon-only (click)="presentPopover($event)">\n                <span class="fa fa-font"></span>\n            </button>\n        </ion-buttons>\n        <ion-title>MobiHymn</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only (click)="toggleBookmark()">\n                <ion-icon name="star-outline" *ngIf="!isBookmarked"></ion-icon>\n                <ion-icon name="star" *ngIf="isBookmarked"></ion-icon>\n            </button>\n            <button ion-button icon-only (click)="presentInputModal()">\n                <ion-icon name="musical-note"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding (click)="toggleFullLyrics()" #lyricsContainer>\n    <div class="hymn-content" *ngIf="currentHymn" (pinch)="pinchZoom($event)" [ngStyle]="{\'paddingBottom.px\': extraSpace, \'text-align\': alignment, \'font-size\': fontSize }">\n        <h2 class="hymn-title">Hymn #{{ currentHymn.title }}</h2>\n        <div class="lyrics" [innerHTML]="currentHymn.lyrics">\n        </div>\n    </div>\n\n    <ion-fab bottom right>\n        <button ion-fab #btnPlay [@scale]="scaleState">\n            <ion-icon name="play"></ion-icon>\n        </button>\n    </ion-fab>\n</ion-content>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/,
         animations: [
             Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* trigger */])('scale', [
                 Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* state */])('hidden', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["f" /* style */])({
@@ -588,14 +633,14 @@ ReaderPage = __decorate([
             ])
         ]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* PopoverController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ModalController */], __WEBPACK_IMPORTED_MODULE_3__services_global_service__["a" /* GlobalService */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["r" /* ToastController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* PopoverController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ModalController */], __WEBPACK_IMPORTED_MODULE_3__services_global_service__["a" /* GlobalService */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["r" /* ToastController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* Platform */]])
 ], ReaderPage);
 
 //# sourceMappingURL=reader.js.map
 
 /***/ }),
 
-/***/ 136:
+/***/ 137:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -604,7 +649,7 @@ ReaderPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__(558);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_global_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_global_service__ = __webpack_require__(39);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -634,7 +679,7 @@ var SearchPage = (function () {
         this.hymnList = global.getHymnList();
         this.activeHymnal = global.getActiveHymnal();
     }
-    SearchPage.prototype.ngAfterViewInit = function () {
+    SearchPage.prototype.ionViewDidEnter = function () {
         var _this = this;
         setTimeout(function () {
             _this.hymnFilterSearchbar.setFocus();
@@ -710,7 +755,7 @@ SearchPage = __decorate([
 
 /***/ }),
 
-/***/ 147:
+/***/ 148:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -723,40 +768,40 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 147;
+webpackEmptyAsyncContext.id = 148;
 
 /***/ }),
 
-/***/ 191:
+/***/ 192:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/author-modal/author-modal.module": [
-		582,
+		583,
 		6
 	],
 	"../pages/input-modal/input-modal.module": [
-		584,
+		585,
 		5
 	],
 	"../pages/reader/reader.module": [
-		586,
+		587,
 		4
 	],
 	"../pages/revisions-modal/revisions-modal.module": [
-		581,
+		582,
 		3
 	],
 	"../pages/search/search.module": [
-		587,
+		588,
 		2
 	],
 	"../pages/settings-popover/settings-popover.module": [
-		585,
+		586,
 		1
 	],
 	"../pages/settings/settings.module": [
-		583,
+		584,
 		0
 	]
 };
@@ -771,7 +816,7 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 191;
+webpackAsyncContext.id = 192;
 module.exports = webpackAsyncContext;
 
 /***/ }),
@@ -783,11 +828,11 @@ module.exports = webpackAsyncContext;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__settings_settings__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__settings_settings__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reader_reader__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__search_search__ = __webpack_require__(136);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_global_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reader_reader__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__search_search__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_global_service__ = __webpack_require__(39);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -836,8 +881,8 @@ TabsPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_global_service__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_global_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -879,6 +924,7 @@ var HomePage = (function () {
         })[0];
         this.myGlobal.setActiveHymnal(activeHymnal['id']);
         this.myGlobal.setActiveHymn('1');
+        this.activeHymnal = activeHymnal['id'];
         this.goToReader(true);
     };
     HomePage.prototype.goToReader = function (enable) {
@@ -891,6 +937,7 @@ var HomePage = (function () {
         this.myGlobal.getHymnals(this.myHttp).subscribe(function (res) {
             _this.myGlobal.setHymnals(res.output);
         });
+        this.activeHymnal = this.myGlobal.getActiveHymnal();
     };
     HomePage.prototype.ngOnDestroy = function () {
         this.hymnalSubscribe.unsubscribe();
@@ -900,7 +947,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>Library</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <ion-grid>\n        <ion-row>\n            <ion-col col-lg-4 col-md-6 col-sm-12 *ngFor="let hymnal of hymnalList">\n                <ion-card (click)="setActiveHymnal(hymnal.id)">\n                    <div class="card-image">\n                        <img src="{{ \'assets/\' + hymnal.image}}" />\n                    </div>\n                    <ion-card-content>\n                        <ion-card-title>\n                            {{hymnal.name}}\n                        </ion-card-title>\n                        <p>\n                            {{hymnal.count}} hymns\n                        </p>\n                    </ion-card-content>\n                </ion-card>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n</ion-content>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>Library</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <ion-grid>\n        <ion-row>\n            <ion-col col-lg-4 col-md-6 col-sm-12 *ngFor="let hymnal of hymnalList">\n                <ion-card (click)="setActiveHymnal(hymnal.id)" [ngClass]="{ \'active\': (activeHymnal == hymnal.id) }">\n                    <div class="card-image">\n                        <img src="{{ \'assets/\' + hymnal.image}}" />\n                    </div>\n                    <ion-card-content>\n                        <ion-card-title>\n                            {{hymnal.name}}\n                        </ion-card-title>\n                        <p>\n                            {{hymnal.count}} hymns\n                        </p>\n                    </ion-card-content>\n                </ion-card>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n</ion-content>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__services_global_service__["a" /* GlobalService */], __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
 ], HomePage);
@@ -916,7 +963,7 @@ HomePage = __decorate([
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(262);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(266);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_web_animations_js_web_animations_min__ = __webpack_require__(580);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_web_animations_js_web_animations_min__ = __webpack_require__(581);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_web_animations_js_web_animations_min___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_web_animations_js_web_animations_min__);
 
 
@@ -937,17 +984,17 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(576);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_global_service__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_settings_settings__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_global_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_settings_settings__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_home_home__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_reader_reader__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_search_search__ = __webpack_require__(136);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_input_modal_input_modal__ = __webpack_require__(133);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_author_modal_author_modal__ = __webpack_require__(131);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_revisions_modal_revisions_modal__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_settings_popover_settings_popover__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_reader_reader__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_search_search__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_input_modal_input_modal__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_author_modal_author_modal__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_revisions_modal_revisions_modal__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_settings_popover_settings_popover__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_tabs_tabs__ = __webpack_require__(259);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_status_bar__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_status_bar__ = __webpack_require__(256);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_splash_screen__ = __webpack_require__(258);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1034,7 +1081,7 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 43:
+/***/ 39:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1042,7 +1089,7 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__(288);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1062,15 +1109,22 @@ var GlobalService = (function () {
         this.hymns = {};
         this.activeHymnal = "";
         this.activeHymn = "";
-        this.recentCount = 5;
+        this.activeAlignment = "left";
         this.bookmarks = new Array();
         this.history = new Array();
+        this.recentCount = 5;
+        this.padding = 0;
+        this.fontSize = 1.4;
         this.hymnalChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
         this.hymnChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
         this.activeHymnalChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
         this.activeHymnChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
         this.bookmarksChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
         this.historyChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.historyCountChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.paddingChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.activeAlignmentChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.fontSizeChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
     }
     GlobalService.prototype.setHymnals = function (newValue) {
         this.hymnals = newValue;
@@ -1118,6 +1172,22 @@ var GlobalService = (function () {
             'firstLine': curHymn['firstLine']
         });
     };
+    GlobalService.prototype.setRecentCount = function (newValue) {
+        this.recentCount = newValue;
+        this.historyCountChange.next(this.recentCount);
+    };
+    GlobalService.prototype.setPadding = function (newValue) {
+        this.padding = newValue;
+        this.paddingChange.next(this.padding);
+    };
+    GlobalService.prototype.setActiveAlignment = function (newValue) {
+        this.activeAlignment = newValue;
+        this.activeAlignmentChange.next(this.activeAlignment);
+    };
+    GlobalService.prototype.setFontSize = function (newValue) {
+        this.fontSize = newValue;
+        this.fontSizeChange.next(this.fontSize);
+    };
     GlobalService.prototype.getHymnalList = function () {
         return this.hymnals;
     };
@@ -1138,6 +1208,15 @@ var GlobalService = (function () {
     };
     GlobalService.prototype.getRecentList = function () {
         return this.history;
+    };
+    GlobalService.prototype.getPadding = function () {
+        return this.padding;
+    };
+    GlobalService.prototype.getActiveAlignment = function () {
+        return this.activeAlignment;
+    };
+    GlobalService.prototype.getFontSize = function () {
+        return this.fontSize;
     };
     GlobalService.prototype.getHymnals = function (http) {
         return http.get('../assets/hymnals.json').map(function (res) { return res.json(); });
@@ -1166,10 +1245,11 @@ GlobalService = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(256);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(258);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_global_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_global_service__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_tabs_tabs__ = __webpack_require__(259);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(580);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1185,23 +1265,107 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var MyApp = (function () {
-    function MyApp(platform, statusBar, splashScreen) {
+    function MyApp(platform, statusBar, splashScreen, global, file) {
+        var _this = this;
+        this.global = global;
+        this.file = file;
         this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_tabs_tabs__["a" /* TabsPage */];
+        this.MAIN_FOLDER_NAME = "MobiHymn";
+        this.BOOKMARKS_JSON_NAME = "bookmarks.json";
+        this.HISTORY_JSON_NAME = "history.json";
+        this.SETTINGS_JSON_NAME = "settings.json";
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
             splashScreen.hide();
+            _this.android = platform.is('android');
+            _this.ios = platform.is('ios');
+            _this.wp = platform.is('wp');
+            _this.storage = _this.android ? file.externalRootDirectory : file.dataDirectory;
+        });
+        this.onResumeSubscription = platform.pause.subscribe(function () {
+            _this.file.checkDir(_this.storage, _this.MAIN_FOLDER_NAME).then(function () {
+            }).catch(function () {
+                _this.file.createDir(_this.storage, _this.MAIN_FOLDER_NAME, false).then(function () {
+                });
+            });
         });
     }
+    MyApp.prototype.checkBookmarks = function () {
+        var _this = this;
+        this.file.checkFile(this.storage, this.BOOKMARKS_JSON_NAME).then(function () {
+            _this.writeBookmarks(true);
+        }).catch(function () {
+            _this.file.createDir(_this.storage, _this.BOOKMARKS_JSON_NAME, false).then(function () {
+                _this.writeBookmarks(false);
+            });
+        });
+    };
+    MyApp.prototype.writeBookmarks = function (exists) {
+        var data = this.global.getBookmarksList();
+        if (!exists)
+            this.file.writeFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.BOOKMARKS_JSON_NAME, JSON.stringify(data), {
+                append: false, replace: true
+            });
+        else
+            this.file.writeExistingFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.BOOKMARKS_JSON_NAME, JSON.stringify(data));
+    };
+    MyApp.prototype.checkHistory = function () {
+        var _this = this;
+        this.file.checkFile(this.storage, this.MAIN_FOLDER_NAME + '/' + this.HISTORY_JSON_NAME).then(function () {
+            _this.writeBookmarks(true);
+        }).catch(function () {
+            _this.file.createDir(_this.storage, _this.MAIN_FOLDER_NAME + '/' + _this.HISTORY_JSON_NAME, false).then(function () {
+                _this.writeBookmarks(false);
+            });
+        });
+    };
+    MyApp.prototype.writeHistory = function (exists) {
+        var data = this.global.getRecentList();
+        if (!exists)
+            this.file.writeFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.HISTORY_JSON_NAME, JSON.stringify(data), {
+                append: false, replace: true
+            });
+        else
+            this.file.writeExistingFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.HISTORY_JSON_NAME, JSON.stringify(data));
+    };
+    MyApp.prototype.checkSettings = function () {
+        var _this = this;
+        this.file.checkFile(this.storage, this.MAIN_FOLDER_NAME + '/' + this.SETTINGS_JSON_NAME).then(function () {
+            _this.writeSettings(true);
+        }).catch(function () {
+            _this.file.createDir(_this.storage, _this.SETTINGS_JSON_NAME, false).then(function () {
+                _this.writeSettings(false);
+            });
+        });
+    };
+    MyApp.prototype.writeSettings = function (exists) {
+        var data = {
+            'activeHymnal': this.global.getActiveHymnal(),
+            'activeHymn': this.global.getActiveHymn(),
+            'recentCount': this.global.getRecentCount(),
+            'extraSpace': this.global.getPadding(),
+            'alignment': this.global.getActiveAlignment(),
+            'fontSize': this.global.getFontSize()
+        };
+        if (!exists)
+            this.file.writeFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME, JSON.stringify(data), {
+                append: false, replace: true
+            });
+        else
+            this.file.writeExistingFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME, JSON.stringify(data));
+    };
     return MyApp;
 }());
 MyApp = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/app/app.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_4__services_global_service__["a" /* GlobalService */]]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_4__services_global_service__["a" /* GlobalService */],
+        __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map

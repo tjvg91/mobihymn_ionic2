@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import { RevisionsModalPage } from '../../pages/revisions-modal/revisions-modal';
 import { AuthorModalPage } from '../../pages/author-modal/author-modal';
 
@@ -23,7 +23,7 @@ export class SettingsPage {
   recentNum: Number;
 
   recentSubscribe: any;
-  constructor(public navCtrl: NavController, private navParams: NavParams, private http: Http, private revisionsModal: ModalController, private authorModal: ModalController, private global: GlobalService) {
+  constructor(public navCtrl: NavController, private http: Http, private revisionsModal: ModalController, private authorModal: ModalController, private global: GlobalService) {
     this.recentSubscribe = global.historyCountChange.subscribe(value =>{
       console.log(value);
     })

@@ -18,6 +18,7 @@ export class GlobalService {
     
     recentCount:Number = 5;
     padding: Number=0;
+    fontSize: Number = 1.4;
     
     public hymnalChange : Subject<Array<object>> = new Subject<Array<object>>();
     public hymnChange : Subject<object> = new Subject<object>();
@@ -28,6 +29,7 @@ export class GlobalService {
     public historyCountChange : Subject<Number> = new Subject<Number>(); 
     public paddingChange : Subject<Number> = new Subject<Number>(); 
     public activeAlignmentChange : Subject<string> = new Subject<string>(); 
+    public fontSizeChange : Subject<Number> = new Subject<Number>();
 
     constructor() {
      }
@@ -104,6 +106,11 @@ export class GlobalService {
         this.activeAlignmentChange.next(this.activeAlignment);
     }
 
+    setFontSize(newValue: Number){
+        this.fontSize = newValue;
+        this.fontSizeChange.next(this.fontSize);
+    }
+
     getHymnalList() : Array<object>{
         return this.hymnals;
     }
@@ -138,6 +145,10 @@ export class GlobalService {
 
     getActiveAlignment(): string{
         return this.activeAlignment;
+    }
+
+    getFontSize() : Number{
+        return this.fontSize;
     }
 
     getHymnals(http: Http){        
