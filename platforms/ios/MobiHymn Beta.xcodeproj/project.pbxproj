@@ -25,6 +25,7 @@
 		FCE89C463CDA44899F042BE1 /* CDVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E9193CCC09A4493B9E1D5399 /* CDVFile.m */; };
 		2DD87889FE034C73A0770B54 /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 24534047E7E2469B9B3442D3 /* CDVLocalFilesystem.m */; };
 		3C8A0A754D964F8AAF3AF16A /* CDVAssetLibraryFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E5FE64F0B04ACE92A28415 /* CDVAssetLibraryFilesystem.m */; };
+		C85D820A474349BC9702A801 /* Insomnia.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AB7485E06D475BAC83486C /* Insomnia.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		967B19F4E7174D0FB96181D5 /* CDVFile.h */ = {isa = PBXFileReference; name = "CDVFile.h"; path = "cordova-plugin-file/CDVFile.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		3563CBF374E242EC88FDB85B /* CDVLocalFilesystem.h */ = {isa = PBXFileReference; name = "CDVLocalFilesystem.h"; path = "cordova-plugin-file/CDVLocalFilesystem.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		0F456699FAFF40CEB517CCBA /* CDVAssetLibraryFilesystem.h */ = {isa = PBXFileReference; name = "CDVAssetLibraryFilesystem.h"; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		11AB7485E06D475BAC83486C /* Insomnia.m */ = {isa = PBXFileReference; name = "Insomnia.m"; path = "cordova-plugin-insomnia/Insomnia.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		7ABCE83C437B4BC6B115E59B /* Insomnia.h */ = {isa = PBXFileReference; name = "Insomnia.h"; path = "cordova-plugin-insomnia/Insomnia.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +207,8 @@
 				967B19F4E7174D0FB96181D5 /* CDVFile.h */,
 				3563CBF374E242EC88FDB85B /* CDVLocalFilesystem.h */,
 				0F456699FAFF40CEB517CCBA /* CDVAssetLibraryFilesystem.h */,
+				11AB7485E06D475BAC83486C /* Insomnia.m */,
+				7ABCE83C437B4BC6B115E59B /* Insomnia.h */,
 			);
 			name = Plugins;
 			path = "MobiHymn Beta/Plugins";
@@ -325,6 +330,7 @@
 				FCE89C463CDA44899F042BE1 /* CDVFile.m in Sources */,
 				2DD87889FE034C73A0770B54 /* CDVLocalFilesystem.m in Sources */,
 				3C8A0A754D964F8AAF3AF16A /* CDVAssetLibraryFilesystem.m in Sources */,
+				C85D820A474349BC9702A801 /* Insomnia.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
