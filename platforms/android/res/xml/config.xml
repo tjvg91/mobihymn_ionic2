@@ -66,4 +66,7 @@
         <param name="onload" value="true" />
     </feature>
     <allow-navigation href="cdvfile:*" />
+    <feature name="Insomnia">
+        <param name="android-package" value="nl.xservices.plugins.Insomnia" />
+    </feature>
 </widget>
