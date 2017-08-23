@@ -13,7 +13,7 @@ import { Insomnia } from '@ionic-native/insomnia';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [GlobalService, File]
+  providers: [GlobalService, File, Insomnia]
 })
 export class MyApp{
   rootPage:any = TabsPage;
@@ -32,43 +32,46 @@ export class MyApp{
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private global : GlobalService,
               private file: File, private insomnia: Insomnia) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-      insomnia.keepAwake();
+    if(!platform.is('core')){
+      platform.ready().then(() => {
+        // Okay, so the platform is ready and our plugins are available.
+        // Here you can do any higher level native things you might need.
+        statusBar.styleDefault();
+        splashScreen.hide();
+        insomnia.keepAwake();
 
-      this.android = platform.is('android');
-      this.ios = platform.is('ios');
-      this.wp = platform.is('wp');
+        this.android = platform.is('android');
+        this.ios = platform.is('ios');
+        this.wp = platform.is('wp');
 
-      this.storage = this.android ? file.externalRootDirectory : file.dataDirectory;
-      this.file.checkDir(this.storage, this.MAIN_FOLDER_NAME).then(() =>{
-        this.checkBookmarks("read");
-        this.checkHistory("read");
-        this.checkSettings("read");
-      }).catch(() => {
-        this.file.createDir(this.storage, this.MAIN_FOLDER_NAME, false).then(() =>{
+        this.storage = this.android ? file.externalRootDirectory : file.dataDirectory;
+        this.file.checkDir(this.storage, this.MAIN_FOLDER_NAME).then(() =>{
           this.checkBookmarks("read");
           this.checkHistory("read");
           this.checkSettings("read");
+        }).catch(() => {
+          this.file.createDir(this.storage, this.MAIN_FOLDER_NAME, false).then(() =>{
+            this.checkBookmarks("read");
+            this.checkHistory("read");
+            this.checkSettings("read");
+          });
         });
-      });
-    });
-    this.onPauseSubscription = platform.pause.subscribe(() => {
-      this.file.checkDir(this.storage, this.MAIN_FOLDER_NAME).then(() => {
-        this.checkBookmarks("write");
-        this.checkHistory("write");
-        this.checkSettings("write");
-      }).catch(() => {
-        this.file.createDir(this.storage, this.MAIN_FOLDER_NAME, false).then(() =>{
-          this.checkBookmarks("write");
-          this.checkHistory("write");
-          this.checkSettings("write");
+
+        this.onPauseSubscription = platform.pause.subscribe(() => {
+          this.file.checkDir(this.storage, this.MAIN_FOLDER_NAME).then(() => {
+            this.checkBookmarks("write");
+            this.checkHistory("write");
+            this.checkSettings("write");
+          }).catch(() => {
+            this.file.createDir(this.storage, this.MAIN_FOLDER_NAME, false).then(() =>{
+              this.checkBookmarks("write");
+              this.checkHistory("write");
+              this.checkSettings("write");
+            });
+          });
         });
-      });
-    });
+      }); 
+    }   
   }
 
   checkBookmarks(mode: string){

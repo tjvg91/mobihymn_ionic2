@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, ViewController, NavParams, Searchbar, AlertController, ToastController } from 'ionic-angular';
 import { GlobalService } from '../../services/global-service';
+import { KeyboardComponent } from '../../components/keyboard/keyboard';
 
 import * as _ from 'lodash';
 
@@ -14,7 +15,8 @@ import * as _ from 'lodash';
 @IonicPage()
 @Component({
   selector: 'page-input-modal',
-  templateUrl: 'input-modal.html'
+  templateUrl: 'input-modal.html',
+  providers: [KeyboardComponent]
 })
 
 export class InputModalPage{
@@ -26,18 +28,21 @@ export class InputModalPage{
   navParams: NavParams
   hymnLimit : Number;
   hymnSubscribe: any;
-  hymnFilter: string;
+  hymnFilter: object;
+  hymnFilterString: string
   recentList: Array<object>;
   bookmarkList: Array<object>;
 
-  @ViewChild('hymnFilter') hymnFilterSearchbar:Searchbar;
   @ViewChild('bkmkFilter') bkmkFilterSearchbar:Searchbar;
-
-  Math: any;
-
   origHymnList : Array<object>;
+  origBkmkList : Array<object>;
+  number: string;
+  tune: string;
+  keyboardView: string;
 
-  constructor(public viewCtrl: ViewController, inputParams: NavParams, private alertCtrl: AlertController, private toastCtrl: ToastController) {
+  constructor(public viewCtrl: ViewController, inputParams: NavParams,
+            private alertCtrl: AlertController, private toastCtrl: ToastController,
+            private keyboardComp: KeyboardComponent) {
     this.inputType = "all_hymns";
     this.hymnLimit = 5;  
     this.navParams = inputParams;
@@ -54,19 +59,20 @@ export class InputModalPage{
     
     this.activeHymn = this.myGlobal.getActiveHymn();
     let activeHymn = this.activeHymn
-    this.hymnFilter = _.filter(this.hymnList, item => {
+    /*this.hymnFilter = _.filter(this.hymnList, item => {
       return item.id == activeHymn;
-    })[0].number;
+    })[0].number;*/
+    this.hymnFilter = {
+      'number': '',
+      'tune': ''
+    };
 
     this.origHymnList = this.hymnList.map(x => Object.assign({}, x));
-    this.recentList = this.myGlobal.getRecentList();
+    this.recentList = this.myGlobal.getRecentList();    
     this.bookmarkList = this.myGlobal.getBookmarksList();
-  }
+    this.origBkmkList = this.bookmarkList.map(x => Object.assign({}, x));
 
-  ngAfterViewInit(){
-    setTimeout(() => {
-      this.hymnFilterSearchbar.setFocus();
-    }, 500);    
+    this.keyboardView = "shown";
   }
 
   filterHymns(event){
@@ -77,6 +83,16 @@ export class InputModalPage{
       });
     else
       this.hymnList = this.origHymnList;
+  }
+
+  filterBookmarks(event){
+    let st = event.target.value;
+    if(st)
+      this.bookmarkList = this.origBkmkList.filter((item) => {
+        return new RegExp(st).test(item['number']) || new RegExp(st).test(item['firstLine']);
+      });
+    else
+      this.bookmarkList = this.origBkmkList;
   }
 
   setActiveHymn(hymnId){
@@ -90,16 +106,29 @@ export class InputModalPage{
     return 'Displaying ' + Math.min(+limit, length) + ' of ' + this.hymnList.length + ' hymns';
   }
 
-  allHymnSelect(){
-    setTimeout(() => {
-      this.hymnFilterSearchbar.setFocus();
-    }, 200);    
-  }
-
   bkmkSelect(){
     setTimeout(() => {
       this.bkmkFilterSearchbar.setFocus();
     }, 200);    
+  }
+
+  handleKeyChange(inp){
+    this.number = inp.outs;
+    this.tune = inp.tune;
+    this.hymnFilter['number'] = this.number;
+    this.hymnFilter['tune']= this.tune;
+
+    this.hymnFilterString = this.hymnFilter['number'] + this.hymnFilter['tune'];
+
+    let num = this.hymnFilter['number'];
+    let tune = this.hymnFilter['tune'];
+    this.hymnList = this.origHymnList.filter((item) => {
+      return new RegExp(num + '' + tune).test(item['number']);
+    });
+  }
+
+  showKeyboard(){
+    this.keyboardView = "shown";
   }
 
   presentConfirmUnbookmark(){
@@ -123,7 +152,7 @@ export class InputModalPage{
     confirmUnbookmark.present();
   }
 
-    presentUnbookmarkConfirmed(){
+  presentUnbookmarkConfirmed(){
     let confirmedUnbookmark = this.toastCtrl.create({
       message: 'Bookmark removed',
       duration: 3000
@@ -131,3 +160,4 @@ export class InputModalPage{
     confirmedUnbookmark.present();
   }
 }
+

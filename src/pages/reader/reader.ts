@@ -27,8 +27,7 @@ import * as _ from 'lodash';
       state('shown', style({
         transform: 'scale(1)'
       })),
-      transition('hidden => shown', animate('500ms ease')),
-      transition('shown => hidden', animate('500ms ease'))
+      transition('hidden <=> shown', animate('500ms ease'))
     ]),
     trigger('slideUp', [
       state('up', style({
@@ -37,8 +36,7 @@ import * as _ from 'lodash';
       state('down', style({
         transform: 'translate(0px, 0px)'
       })),
-      transition('up => down', animate('500ms ease')),
-      transition('down => up', animate('500ms ease'))
+      transition('up <=> down', animate('500ms ease'))
     ])
   ]
 })
@@ -172,6 +170,7 @@ export class ReaderPage implements OnDestroy{
     this.hymnSubscribe.unsubscribe();
     this.bookmarksSubscribe.unsubscribe();
     this.paddingSubscribe.unsubscribe();
+    this.gesture.destroy();
   }
 
   goToTab(index){
