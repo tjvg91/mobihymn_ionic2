@@ -6,6 +6,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { GlobalService } from '../services/global-service';
 
+import { KeyboardComponent } from '../components/keyboard/keyboard';
+
 import { SettingsPage } from '../pages/settings/settings';
 import { HomePage } from '../pages/home/home';
 import { ReaderPage } from '../pages/reader/reader';
@@ -22,6 +24,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
+    KeyboardComponent,
     SettingsPage,
     ReaderPage,
     SearchPage,
