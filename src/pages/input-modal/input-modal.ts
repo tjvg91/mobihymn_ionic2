@@ -38,7 +38,7 @@ export class InputModalPage{
   origBkmkList : Array<object>;
   number: string;
   tune: string;
-  keyboardView: string;
+  keyboardShow: string;
 
   constructor(public viewCtrl: ViewController, inputParams: NavParams,
             private alertCtrl: AlertController, private toastCtrl: ToastController,
@@ -72,7 +72,10 @@ export class InputModalPage{
     this.bookmarkList = this.myGlobal.getBookmarksList();
     this.origBkmkList = this.bookmarkList.map(x => Object.assign({}, x));
 
-    this.keyboardView = "shown";
+    this.keyboardShow = "shown";
+    this.hymnFilterString = _.filter(this.hymnList, item => {
+      return item.id == activeHymn;
+    })[0].number;;
   }
 
   filterHymns(event){
@@ -113,22 +116,36 @@ export class InputModalPage{
   }
 
   handleKeyChange(inp){
-    this.number = inp.outs;
-    this.tune = inp.tune;
-    this.hymnFilter['number'] = this.number;
-    this.hymnFilter['tune']= this.tune;
+    if(inp.go != true){
+      this.number = inp.outs;
+      this.tune = inp.tune;
+      this.hymnFilter['number'] = this.number;
+      this.hymnFilter['tune']= this.tune;
 
-    this.hymnFilterString = this.hymnFilter['number'] + this.hymnFilter['tune'];
+      this.hymnFilterString = this.hymnFilter['number'] + this.hymnFilter['tune'];
 
-    let num = this.hymnFilter['number'];
-    let tune = this.hymnFilter['tune'];
-    this.hymnList = this.origHymnList.filter((item) => {
-      return new RegExp(num + '' + tune).test(item['number']);
-    });
+      let num = this.hymnFilter['number'];
+      let tune = this.hymnFilter['tune'];
+      this.hymnList = this.origHymnList.filter((item) => {
+        return new RegExp(num + '' + tune).test(item['number']);
+      });
+    }
+    else{
+      let activeHymn = this.hymnFilterString;
+      let hymnIds = this.origHymnList.filter(x => {
+        return x['number'] == activeHymn
+      });
+      if(hymnIds.length > 0)
+        this.setActiveHymn(hymnIds[0]['id']);
+    }
   }
 
   showKeyboard(){
-    this.keyboardView = "shown";
+    setTimeout(function() {
+      this.keyboardShow = "shown";
+      console.log(this.keyboardShow);
+    }, 100);
+    
   }
 
   presentConfirmUnbookmark(){
