@@ -9,6 +9,32 @@ page-settings-popover {
                 margin: 10px 0 0 !important;
             }
         }
+
+        .button-theme {
+            width: 20px;
+            height: 20px;
+
+            &:not(.active){
+                border: 2px solid #ccc;
+            }
+            &.active{
+                border: 2px solid map-get($colors, 'primary');
+            }
+
+            &.theme-light{
+                background: map-get($colors, 'light');
+            }
+            &.theme-tan{
+                background: map-get($colors, 'tan');
+            }
+            &.theme-dark{
+                background: map-get($colors, 'dark');
+            }
+            &.theme-pic{
+                background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/Congregation%20Singing.jpg');
+                background-size: cover;
+            }
+        }
     }
     ion-label{
         color: #aaa;

@@ -32,8 +32,11 @@ export class InputModalPage{
   hymnFilterString: string
   recentList: Array<object>;
   bookmarkList: Array<object>;
+  hymnTextFilter: string;
 
   @ViewChild('bkmkFilter') bkmkFilterSearchbar:Searchbar;
+  @ViewChild('hymnFilter') hymnFilterSearchbar:Searchbar;
+
   origHymnList : Array<object>;
   origBkmkList : Array<object>;
   number: string;
@@ -67,7 +70,9 @@ export class InputModalPage{
       'tune': ''
     };
 
-    this.origHymnList = this.hymnList.map(x => Object.assign({}, x));
+    this.origHymnList = this.hymnList.filter(x => {
+      return !/f|s|t/ig.test(x['number']);
+    });
     this.recentList = this.myGlobal.getRecentList();    
     this.bookmarkList = this.myGlobal.getBookmarksList();
     this.origBkmkList = this.bookmarkList.map(x => Object.assign({}, x));
@@ -75,7 +80,7 @@ export class InputModalPage{
     this.keyboardShow = "shown";
     this.hymnFilterString = _.filter(this.hymnList, item => {
       return item.id == activeHymn;
-    })[0].number;;
+    })[0].number;
   }
 
   filterHymns(event){
