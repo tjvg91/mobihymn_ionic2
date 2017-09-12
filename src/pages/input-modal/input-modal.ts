@@ -44,7 +44,7 @@ export class InputModalPage{
             private alertCtrl: AlertController, private toastCtrl: ToastController,
             private keyboardComp: KeyboardComponent) {
     this.inputType = "all_hymns";
-    this.hymnLimit = 5;  
+    this.hymnLimit = 5;
     this.navParams = inputParams;
   }
 
