@@ -33,6 +33,21 @@
       </ion-col>
     </ion-row>
 
+    <ion-row>
+      <ion-col>
+        <button ion-fab class="button-theme theme-light" (click)="setTheme('light')" [ngClass]="{ 'active': themeText=='light' }"></button>
+      </ion-col>
+      <ion-col>
+        <button ion-fab class="button-theme theme-tan" (click)="setTheme('tan')" [ngClass]="{ 'active': themeText=='tan' }"></button>
+      </ion-col>
+      <ion-col>
+        <button ion-fab class="button-theme theme-dark" (click)="setTheme('dark')" [ngClass]="{ 'active': themeText=='dark' }"></button>
+      </ion-col>
+      <ion-col>
+          <button ion-fab class="button-theme theme-pic" (click)="setTheme('pic')" [ngClass]="{ 'active': themeText=='pic' }"></button>
+        </ion-col>
+    </ion-row>
+
     <ion-list-header>
       <ion-label>Extra space
         <ion-badge>{{ paddingText }}</ion-badge>

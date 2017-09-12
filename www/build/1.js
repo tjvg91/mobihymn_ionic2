@@ -1,1 +1,45 @@
+webpackJsonp([1],{471:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),t.d(n,"SettingsPopoverPageModule",function(){return o});t(2),t(15),t(71);var o=function(){return function(){}}()}});<<<<<<< HEAD
 webpackJsonp([1],{471:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),t.d(n,"SettingsPopoverPageModule",function(){return o});t(2),t(15),t(71);var o=function(){return function(){}}()}});
+=======
+webpackJsonp([1],{
+
+/***/ 588:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingsPopoverPageModule", function() { return SettingsPopoverPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__settings_popover__ = __webpack_require__(136);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var SettingsPopoverPageModule = (function () {
+    function SettingsPopoverPageModule() {
+    }
+    return SettingsPopoverPageModule;
+}());
+SettingsPopoverPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__settings_popover__["a" /* SettingsPopoverPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__settings_popover__["a" /* SettingsPopoverPage */]),
+        ],
+    })
+], SettingsPopoverPageModule);
+
+//# sourceMappingURL=settings-popover.module.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=1.js.map
