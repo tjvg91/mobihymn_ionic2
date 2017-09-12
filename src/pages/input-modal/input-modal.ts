@@ -83,6 +83,12 @@ export class InputModalPage{
     })[0].number;
   }
 
+  ngAfterViewInit(){
+    setTimeout(() => {
+      this.hymnFilterSearchbar.setFocus();
+    }, 500);    
+  }
+
   filterHymns(event){
     let st = event.target.value;
     if(st)
