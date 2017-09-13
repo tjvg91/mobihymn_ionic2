@@ -7,7 +7,7 @@
 <ion-header #readerHeader [@slideUp]="slideUpState">
     <ion-navbar>
         <ion-buttons start>
-            <button ion-button icon-only (click)="presentPopover($event)">
+            <button ion-button icon-only (click)="presentPopover($event)" id="settings">
                 <span class="fa fa-font"></span>
             </button>
         </ion-buttons>
@@ -24,10 +24,12 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding (click)="toggleFullLyrics()" #lyricsContainer>
+<ion-content padding #lyricsContainer>
     <div class="hymn-content" *ngIf="currentHymn" (pinch)="pinchZoom($event)" [ngStyle]="{'paddingBottom.px': extraSpace, 'text-align': alignment, 'font-size': fontSize }">
-        <h2 class="hymn-title">Hymn #{{ currentHymn.title }}</h2>
-        <div class="lyrics" [innerHTML]="currentHymn.lyrics">
+        <div class="hymn-title">
+            <h2 class="hymn-title" (click)="presentTunePopover($event)">Hymn #{{ currentHymn.title }}</h2>
+        </div>        
+        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (click)="toggleFullLyrics()">
         </div>
     </div>
 

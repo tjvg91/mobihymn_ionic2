@@ -56,7 +56,6 @@ export class InputModalPage{
   }
 
   ionViewDidLoad(){
-    this.hymnList = this.navParams.get('allHymns')
     this.activeHymnal = this.navParams.get('activeHymnal');
     this.myGlobal = this.navParams.get('globalService');
     
@@ -70,12 +69,13 @@ export class InputModalPage{
       'tune': ''
     };
 
-    this.origHymnList = this.hymnList.filter(x => {
+    this.origHymnList = this.navParams.get('allHymns').filter(x => {
       return !/f|s|t/ig.test(x['number']);
     });
     this.recentList = this.myGlobal.getRecentList();    
     this.bookmarkList = this.myGlobal.getBookmarksList();
     this.origBkmkList = this.bookmarkList.map(x => Object.assign({}, x));
+    this.hymnList = this.origHymnList.map(x => Object.assign({}, x))
 
     this.keyboardShow = "shown";
     this.hymnFilterString = _.filter(this.hymnList, item => {

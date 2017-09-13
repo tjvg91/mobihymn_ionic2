@@ -5,6 +5,7 @@ import { IonicPage, NavController, PopoverController, ModalController, AlertCont
 import { GlobalService } from '../../services/global-service';
 import { InputModalPage } from '../../pages/input-modal/input-modal';
 import { SettingsPopoverPage } from '../../pages/settings-popover/settings-popover';
+import { TunePopoverPage } from '../../pages/tune-popover/tune-popover';
 
 import * as _ from 'lodash';
 
@@ -50,6 +51,7 @@ export class ReaderPage implements OnDestroy{
   activeHymnal: string;
   isBookmarked: boolean;
   gesture: Gesture;
+  tunes: Array<string>;
 
   scaleState: string = 'shown';
   slideUpState: string = 'down';
@@ -66,7 +68,7 @@ export class ReaderPage implements OnDestroy{
   scrollContent: any;
   divTab: any;
 
-  constructor(public readerCtrl: NavController, public inputPopCtrl: PopoverController, public inputModalCtrl: ModalController, global: GlobalService, private alertCtrl: AlertController, private toastCtrl: ToastController, private platform: Platform) {
+  constructor(public readerCtrl: NavController, public inputPopCtrl: PopoverController, public tunePopCtrl: PopoverController, public inputModalCtrl: ModalController, global: GlobalService, private alertCtrl: AlertController, private toastCtrl: ToastController, private platform: Platform) {
     this.myGlobal = global;
 
     this.paddingSubscribe = global.paddingChange.subscribe((value) => {
@@ -79,6 +81,10 @@ export class ReaderPage implements OnDestroy{
       this.currentHymn = _.filter(hymnList, function(item){
         return item.id == activeHymn;
       })[0];
+      let currentHymn = this.currentHymn['number'].replace(/f|s|t/i, "");
+      this.tunes = _.filter(hymnList, function(item){
+        return new RegExp(currentHymn + "(f|s|t)", "i").test(item['number']);
+      });
       this.isBookmarked = global.isInBookmark(this.activeHymnal, this.currentHymn['id']);
     });
 
@@ -89,10 +95,21 @@ export class ReaderPage implements OnDestroy{
 
   presentPopover(myEvent) {
     let popover = this.inputPopCtrl.create(SettingsPopoverPage,{
-      ctrl: this
+      ctrl: this,
     });
     popover.present({
-      'ev': myEvent
+      ev: myEvent
+    });
+  }
+
+  presentTunePopover(myEvent){    
+    let popover = this.inputPopCtrl.create(TunePopoverPage,{
+      ctrl: this,
+      tunes: this.tunes,
+      activeHymn: this.currentHymn['number']
+    });
+    popover.present({
+      ev: myEvent
     });
   }
 
@@ -155,6 +172,10 @@ export class ReaderPage implements OnDestroy{
     this.fontSize = this.myGlobal.getFontSize();
     this.scrollContent = this.lyricsContainerRef._elementRef.nativeElement.querySelector('.scroll-content');
     this.divTab = this.readerCtrl.parent._elementRef.nativeElement.querySelector('.tabbar');
+    let currentHymn = this.currentHymn;
+    this.tunes = _.filter(hymnList, function(item){
+      return /[0-9]+(f|s|t)/i.test(currentHymn['number']);
+    });
   }
 
   ngAfterViewInit(){

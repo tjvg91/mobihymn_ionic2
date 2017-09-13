@@ -15,15 +15,22 @@
 }
 
 page-reader {
+    #settings{
+        font-size: 1.5em !important;
+    }
     .scroll-content{
         background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/Congregation%20Singing.jpg');
         background-size: cover;
+
         .hymn-content{
             margin-bottom: 20px;
             display: block;
 
             .hymn-title{
                 margin-bottom: 20px;
+                h2{
+                    display: inline;
+                }
             }        
 
             .hymn-stanza {

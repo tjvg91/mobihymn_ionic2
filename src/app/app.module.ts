@@ -16,6 +16,7 @@ import { InputModalPage } from '../pages/input-modal/input-modal';
 import { AuthorModalPage } from '../pages/author-modal/author-modal';
 import { RevisionsModalPage } from '../pages/revisions-modal/revisions-modal';
 import { SettingsPopoverPage } from '../pages/settings-popover/settings-popover';
+import { TunePopoverPage } from '../pages/tune-popover/tune-popover';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -33,7 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     InputModalPage,
     SettingsPopoverPage,
     AuthorModalPage,
-    RevisionsModalPage
+    RevisionsModalPage,
+    TunePopoverPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     InputModalPage,
     SettingsPopoverPage,
     AuthorModalPage,
-    RevisionsModalPage
+    RevisionsModalPage,
+    TunePopoverPage
   ],
   providers: [
     StatusBar,
