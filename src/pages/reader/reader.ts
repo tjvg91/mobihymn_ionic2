@@ -32,7 +32,7 @@ import * as _ from 'lodash';
     ]),
     trigger('slideUp', [
       state('up', style({
-        transform: 'translate(0px, -56px)'
+        transform: 'translate(0px, -63px)'
       })),
       state('down', style({
         transform: 'translate(0px, 0px)'
@@ -45,8 +45,6 @@ import * as _ from 'lodash';
 export class ReaderPage implements OnDestroy{
   hymnList: object;
   myGlobal:GlobalService;
-  hymnSubscribe: any;
-  bookmarksSubscribe: any;
   currentHymn: object;
   activeHymnal: string;
   isBookmarked: boolean;
@@ -55,11 +53,16 @@ export class ReaderPage implements OnDestroy{
 
   scaleState: string = 'shown';
   slideUpState: string = 'down';
-
+  
+  hymnSubscribe: any;
+  bookmarksSubscribe: any;
   paddingSubscribe: any;
+  themeSubscribe: any;
+
   extraSpace: Number = 0;
   alignment: string = "left";
   fontSize: Number = 1.4;
+  themeString: string = "pic";
 
   private lyricsContainer: HTMLElement;
   @ViewChild('lyricsContainer') lyricsContainerRef: Content;
@@ -91,6 +94,10 @@ export class ReaderPage implements OnDestroy{
     this.bookmarksSubscribe = global.bookmarksChange.subscribe((value) => {
       this.isBookmarked = global.isInBookmark(this.activeHymnal, this.currentHymn['id']);
     });
+
+    this.themeSubscribe = global.themeChange.subscribe((value) => {
+      this.themeString = value;
+    })
   }
 
   presentPopover(myEvent) {
@@ -223,8 +230,8 @@ export class ReaderPage implements OnDestroy{
     let translateUp = "";
 
     if(this.platform.is('android') || this.platform.is('core')){
-      margUp = '56px 0';
-      translateUp = 'translate(0, 56px)';
+      margUp = '63px 0';
+      translateUp = 'translate(0, 63px)';
     }
     else if(this.platform.is('ios')){
       margUp = '44px 0 49px';

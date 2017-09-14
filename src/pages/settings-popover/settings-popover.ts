@@ -12,15 +12,18 @@ export class SettingsPopoverPage {
   paddingText: Number;
   alignmentText: string;
   themeText: string;
+  global: GlobalService
 
-  constructor(private viewCtrl: ViewController, private navParams: NavParams, private global : GlobalService) {
+  constructor(private viewCtrl: ViewController, private navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+    let main = this.navParams.get('ctrl');
+    this.global = main['myGlobal'];
     this.paddingText = this.global.getPadding();
     this.alignmentText = this.global.getActiveAlignment();
     //this.themeText = this.global.getTheme();
-    this.themeText = "pic";
+    this.themeText = this.global.getTheme();
   }
 
   close(){
@@ -42,5 +45,6 @@ export class SettingsPopoverPage {
 
   setTheme(theme){
     this.themeText = theme;
+    this.global.setTheme(theme);
   }
 }

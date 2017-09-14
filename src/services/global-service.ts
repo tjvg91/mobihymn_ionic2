@@ -19,6 +19,7 @@ export class GlobalService {
     recentCount:Number = 5;
     padding: Number=0;
     fontSize: Number = 1.4;
+    theme: string = "pic";
     
     public hymnalChange : Subject<Array<object>> = new Subject<Array<object>>();
     public hymnChange : Subject<object> = new Subject<object>();
@@ -30,6 +31,7 @@ export class GlobalService {
     public paddingChange : Subject<Number> = new Subject<Number>(); 
     public activeAlignmentChange : Subject<string> = new Subject<string>(); 
     public fontSizeChange : Subject<Number> = new Subject<Number>();
+    public themeChange : Subject<string> = new Subject<string>();
 
     constructor() {
      }
@@ -111,6 +113,11 @@ export class GlobalService {
         this.fontSizeChange.next(this.fontSize);
     }
 
+    setTheme(newValue: string){
+        this.theme = newValue;
+        this.themeChange.next(this.theme);
+    }
+
     getHymnalList() : Array<object>{
         return this.hymnals;
     }
@@ -149,6 +156,10 @@ export class GlobalService {
 
     getFontSize() : Number{
         return this.fontSize;
+    }
+
+    getTheme() : string{
+        return this.theme;
     }
 
     getHymnals(http: Http){        

@@ -24,7 +24,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding #lyricsContainer>
+<ion-content padding #lyricsContainer class="{{ 'theme-' + themeString }}">
     <div class="hymn-content" *ngIf="currentHymn" (pinch)="pinchZoom($event)" [ngStyle]="{'paddingBottom.px': extraSpace, 'text-align': alignment, 'font-size': fontSize }">
         <div class="hymn-title">
             <h2 class="hymn-title" (click)="presentTunePopover($event)">Hymn #{{ currentHymn.title }}</h2>

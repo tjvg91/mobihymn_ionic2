@@ -18,20 +18,43 @@ page-reader {
     #settings{
         font-size: 1.5em !important;
     }
-    .scroll-content{
-        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/Congregation%20Singing.jpg');
-        background-size: cover;
+    ion-content{
+        &.theme-pic{
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/Congregation%20Singing.jpg');
+            background-size: cover;
+            color: map-get($colors, 'light');
+        }
+        &.theme-light{
+            background: map-get($colors, 'light');
+            color: map-get($colors, 'dark')
+        }
+        &.theme-tan{
+            background: map-get($colors, 'semi');
+            color: map-get($colors, 'dark')
+        }
+        &.theme-dark{
+            background: map-get($colors, 'dark-2');
+            color: map-get($colors, 'light')
+        }
 
         .hymn-content{
             margin-bottom: 20px;
-            display: block;
+            display: flex;
+            height: 100%;
+            flex-flow: column;
 
             .hymn-title{
                 margin-bottom: 20px;
                 h2{
                     display: inline;
                 }
-            }        
+            }    
+            
+            .lyrics{
+                display: inline-flex;
+                flex-flow: column;
+                flex-grow: 2;            
+            }
 
             .hymn-stanza {
                 display: block;
