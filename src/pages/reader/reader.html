@@ -25,11 +25,11 @@
 </ion-header>
 
 <ion-content padding #lyricsContainer class="{{ 'theme-' + themeString }}">
-    <div class="hymn-content" *ngIf="currentHymn" (pinch)="pinchZoom($event)" [ngStyle]="{'paddingBottom.px': extraSpace, 'text-align': alignment, 'font-size': fontSize }">
+    <div class="hymn-content" *ngIf="currentHymn" (pinch)="pinchZoom($event)" [ngStyle]="{'paddingBottom.px': extraSpace, 'text-align': alignment, 'fontSize.em': fontSize }">
         <div class="hymn-title">
             <h2 class="hymn-title" (click)="presentTunePopover($event)">Hymn #{{ currentHymn.title }}</h2>
         </div>        
-        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (click)="toggleFullLyrics()">
+        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (click)="toggleFullLyrics($event)">
         </div>
     </div>
 

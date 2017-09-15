@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnDestroy, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { IonicPage, NavController, PopoverController, ModalController, AlertController, ToastController, Gesture, FabButton, Content, Platform } from 'ionic-angular';
@@ -61,7 +61,7 @@ export class ReaderPage implements OnDestroy{
 
   extraSpace: Number = 0;
   alignment: string = "left";
-  fontSize: Number = 1.4;
+  fontSize: number = 1.4;
   themeString: string = "pic";
 
   private lyricsContainer: HTMLElement;
@@ -225,7 +225,7 @@ export class ReaderPage implements OnDestroy{
     console.log(event);
   }
 
-  toggleFullLyrics(){
+  toggleFullLyrics(ev){
     let margUp = "";
     let translateUp = "";
 
@@ -283,5 +283,18 @@ export class ReaderPage implements OnDestroy{
       this.slideUpState = 'down';
       this.scaleState = 'shown';
     }
+  }
+
+  @HostListener('mousewheel', ['$event'])
+  scroll(e: WheelEvent) {
+      if(e.ctrlKey){
+        e.preventDefault();
+        this.zoom(Math.sign(e.wheelDelta))
+      }
+  }
+
+  zoom(sign: number){
+    var prod = (0.2 * sign);
+    this.fontSize = parseFloat((this.fontSize + prod).toFixed(2));
   }
 }

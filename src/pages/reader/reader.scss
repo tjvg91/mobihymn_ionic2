@@ -39,26 +39,18 @@ page-reader {
 
         .hymn-content{
             margin-bottom: 20px;
-            display: flex;
-            height: 100%;
-            flex-flow: column;
 
             .hymn-title{
                 margin-bottom: 20px;
+                font-size: inherit;
                 h2{
                     display: inline;
                 }
-            }    
-            
-            .lyrics{
-                display: inline-flex;
-                flex-flow: column;
-                flex-grow: 2;            
             }
 
             .hymn-stanza {
                 display: block;
-                margin-bottom: 20px;
+                margin-bottom: 1em;
                 
                 .hymn-line{
                     display: block;

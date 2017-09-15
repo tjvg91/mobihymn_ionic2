@@ -18,7 +18,7 @@ export class GlobalService {
     
     recentCount:Number = 5;
     padding: Number=0;
-    fontSize: Number = 1.4;
+    fontSize: number = 1.4;
     theme: string = "pic";
     
     public hymnalChange : Subject<Array<object>> = new Subject<Array<object>>();
@@ -30,7 +30,7 @@ export class GlobalService {
     public historyCountChange : Subject<Number> = new Subject<Number>(); 
     public paddingChange : Subject<Number> = new Subject<Number>(); 
     public activeAlignmentChange : Subject<string> = new Subject<string>(); 
-    public fontSizeChange : Subject<Number> = new Subject<Number>();
+    public fontSizeChange : Subject<number> = new Subject<number>();
     public themeChange : Subject<string> = new Subject<string>();
 
     constructor() {
@@ -108,7 +108,7 @@ export class GlobalService {
         this.activeAlignmentChange.next(this.activeAlignment);
     }
 
-    setFontSize(newValue: Number){
+    setFontSize(newValue: number){
         this.fontSize = newValue;
         this.fontSizeChange.next(this.fontSize);
     }
@@ -154,7 +154,7 @@ export class GlobalService {
         return this.activeAlignment;
     }
 
-    getFontSize() : Number{
+    getFontSize() : number{
         return this.fontSize;
     }
 

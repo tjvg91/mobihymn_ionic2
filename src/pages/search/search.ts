@@ -84,8 +84,8 @@ export class SearchPage {
   }
 
   sortByLine (a,b) {
-    var a1 = a.line.replace(/^\"/, "");
-    var b1 = b.line.replace(/^\"/, "");
+    var a1 = a.line.replace(/^(\"|\')/, "");
+    var b1 = b.line.replace(/^(\"|\')/, "");
     if (a1 < b1)
         return -1;
     if ( a1 > b1 )
