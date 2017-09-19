@@ -1,17 +1,14 @@
-webpackJsonp([0],{469:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),t.d(n,"SettingsPageModule",function(){return u});t(2),t(15),t(69);var u=function(){return function(){}}()}});<<<<<<< HEAD
-webpackJsonp([0],{469:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),t.d(n,"SettingsPageModule",function(){return u});t(2),t(15),t(69);var u=function(){return function(){}}()}});
-=======
 webpackJsonp([0],{
 
-/***/ 586:
+/***/ 590:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingsPageModule", function() { return SettingsPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TunePopoverPageModule", function() { return TunePopoverPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__settings__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tune_popover__ = __webpack_require__(137);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -21,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var SettingsPageModule = (function () {
-    function SettingsPageModule() {
+var TunePopoverPageModule = (function () {
+    function TunePopoverPageModule() {
     }
-    return SettingsPageModule;
+    return TunePopoverPageModule;
 }());
-SettingsPageModule = __decorate([
+TunePopoverPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__settings__["a" /* SettingsPage */],
+            __WEBPACK_IMPORTED_MODULE_2__tune_popover__["a" /* TunePopoverPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__settings__["a" /* SettingsPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__tune_popover__["a" /* TunePopoverPage */]),
         ],
     })
-], SettingsPageModule);
+], TunePopoverPageModule);
 
-//# sourceMappingURL=settings.module.js.map
+//# sourceMappingURL=tune-popover.module.js.map
 
 /***/ })
 

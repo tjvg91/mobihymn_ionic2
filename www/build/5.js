@@ -1,17 +1,14 @@
-webpackJsonp([5],{470:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),t.d(n,"InputModalPageModule",function(){return u});t(2),t(15),t(70);var u=function(){return function(){}}()}});<<<<<<< HEAD
-webpackJsonp([5],{470:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),t.d(n,"InputModalPageModule",function(){return u});t(2),t(15),t(70);var u=function(){return function(){}}()}});
-=======
 webpackJsonp([5],{
 
-/***/ 587:
+/***/ 591:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputModalPageModule", function() { return InputModalPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReaderPageModule", function() { return ReaderPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__input_modal__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reader__ = __webpack_require__(138);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -21,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var InputModalPageModule = (function () {
-    function InputModalPageModule() {
+var ReaderPageModule = (function () {
+    function ReaderPageModule() {
     }
-    return InputModalPageModule;
+    return ReaderPageModule;
 }());
-InputModalPageModule = __decorate([
+ReaderPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__input_modal__["a" /* InputModalPage */],
+            __WEBPACK_IMPORTED_MODULE_2__reader__["a" /* ReaderPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__input_modal__["a" /* InputModalPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__reader__["a" /* ReaderPage */]),
         ],
     })
-], InputModalPageModule);
+], ReaderPageModule);
 
-//# sourceMappingURL=input-modal.module.js.map
+//# sourceMappingURL=reader.module.js.map
 
 /***/ })
 
