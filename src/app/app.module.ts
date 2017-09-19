@@ -1,4 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
@@ -6,7 +7,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { GlobalService } from '../services/global-service';
 
-import { KeyboardComponent } from '../components/keyboard/keyboard';
+//import { KeyboardComponent } from '../components/keyboard/keyboard';
 
 import { SettingsPage } from '../pages/settings/settings';
 import { HomePage } from '../pages/home/home';
@@ -25,7 +26,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    KeyboardComponent,
     SettingsPage,
     ReaderPage,
     SearchPage,
@@ -41,7 +41,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    CommonModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

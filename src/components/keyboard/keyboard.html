@@ -1,11 +1,11 @@
 <div class="keyboard" [@slideUp]="keyboardShown">
-    <div class="buttons">
-        <button ion-button color="primary" class="slide up" *ngIf="keyboardShown == 'hidden'" (click)="showKeyboard()">
+    <div class="buttons" *ngIf="keyboardShown == 'hidden'">
+        <button ion-button color="primary" class="slide up" (click)="showKeyboard()">
             <i class="fa fa-caret-up"></i>
         </button>
     </div>
     <div class="keys">
-         <button class="key" aria-valuetext="1" (click)="keyChange('1')">1</button>
+        <button class="key" aria-valuetext="1" (click)="keyChange('1')">1</button>
         <button class="key" aria-valuetext="2" (click)="keyChange('2')">2</button>
         <button class="key" aria-valuetext="3" (click)="keyChange('3')">3</button>
         <button class="key" aria-valuetext="s" (click)="keyChange('s')">s</button>
