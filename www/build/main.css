@@ -33144,55 +33144,6 @@ ion-navbar.toolbar {
   color: #fff !important;
 }
 
-keyboard .keyboard {
-  background-color: #242424;
-  z-index: 10000;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-
-keyboard .keyboard .keys .key {
-  color: #cfcfcf;
-  background-color: #333333;
-  border: 1px solid #3d3d3d;
-  width: 25%;
-  height: 3em;
-}
-
-keyboard .keyboard .keys .key:active, keyboard .keyboard .keys .key:hover {
-  background-color: #cfcfcf;
-  color: #333333;
-}
-
-keyboard .keyboard .keys .key + .key {
-  margin-left: -4px !important;
-}
-
-keyboard .buttons {
-  background-color: #191919;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-keyboard .buttons .slide {
-  height: 1.5em;
-  font-size: 1.4em;
-  border-radius: 0;
-  opacity: 0.5;
-}
-
-keyboard .buttons .slide:hover, keyboard .buttons .slide:active {
-  opacity: 1;
-}
-
 page-author-modal ion-card ion-card-content ion-card-title {
   font-size: 1.2em !important;
   color: #fff !important;

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, LoadingController } from 'ionic-angular';
 import { GlobalService } from '../../services/global-service';
 import * as _ from 'lodash';
 
@@ -14,16 +14,18 @@ export class HomePage implements OnInit, OnDestroy{
   hymnList:object;
   myHttp: Http;
   myGlobal: GlobalService;
+  readerLoader: any;
 
   hymnalSubscribe: any;
   hymnSubscribe: any;
 
   activeHymnal: string;
 
-  constructor(public homeCtrl: NavController, global : GlobalService, http: Http, private platform: Platform) {
+  constructor(public homeCtrl: NavController, global : GlobalService, http: Http, private platform: Platform, private loadingCtrl: LoadingController) {
     this.title = "MobiHymn";
     this.myGlobal = global;
     this.myHttp = http;
+
     this.hymnalSubscribe = global.hymnalChange.subscribe((value) => {
       this.hymnalList = value;
 
@@ -31,12 +33,18 @@ export class HomePage implements OnInit, OnDestroy{
         let hymnalID = this.hymnalList[i]['id'];
         this.myGlobal.getHymns(this.myHttp, hymnalID).subscribe(res1 => {
           this.myGlobal.addToHymns('hymnal' + hymnalID, res1);
+
         });
       }
     });
+    
+    if(global.getActiveHymnal()){
+      this.goToReader(true);
+    }
   }
   
   setActiveHymnal(hymnalId : string){
+    this.showLoader();
     let activeHymnal = _.filter(this.hymnalList, function(h){
       return h.id == hymnalId;
     })[0]
@@ -44,6 +52,7 @@ export class HomePage implements OnInit, OnDestroy{
     this.myGlobal.setActiveHymn('1');
     this.activeHymnal = activeHymnal['id'];
 
+    this.dismissLoader();
     this.goToReader(true);
   }
 
@@ -69,6 +78,19 @@ export class HomePage implements OnInit, OnDestroy{
       this.myGlobal.setHymnals(res.output);
     });
     this.activeHymnal = this.myGlobal.getActiveHymnal();
+  }
+
+  showLoader() {
+    this.readerLoader = this.loadingCtrl.create({
+      content: 'Loading...',
+      spinner: 'circles'
+    });
+
+    this.readerLoader.present();
+  }
+
+  dismissLoader(){
+    this.readerLoader.dismiss();
   }
 
   ngOnDestroy(){

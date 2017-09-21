@@ -76,7 +76,7 @@ export class ReaderPage implements OnDestroy{
 
     this.paddingSubscribe = global.paddingChange.subscribe((value) => {
       this.extraSpace = value;
-    },)
+    });
 
     this.hymnSubscribe = global.activeHymnChange.subscribe((value) => {
       let hymnList = this.myGlobal.getHymnList()['hymnal' + this.myGlobal.getActiveHymnal()];

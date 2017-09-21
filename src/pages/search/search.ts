@@ -23,8 +23,7 @@ export class SearchPage {
   searchItems: Array<object>;  
   searchLoader: Loading;
 
-  constructor(public searchCtrl: NavController, private loadingCtrl: LoadingController, public navParams: NavParams, private global : GlobalService) {
-    console.log(global);
+  constructor(public searchCtrl: NavController, private loadingCtrl: LoadingController, public navParams: NavParams, private global : GlobalService) {    
     this.hymnList = global.getHymnList();
     this.activeHymnal = global.getActiveHymnal();
   }

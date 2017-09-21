@@ -78,16 +78,25 @@ export class InputModalPage{
     this.hymnFilterString = _.filter(this.hymnList, item => {
       return item.id == activeHymn;
     })[0].number;
+
   }
 
   ngAfterViewInit(){
     setTimeout(() => {
+      this.hymnFilterSearchbar.value = this.hymnFilterString;
       this.hymnFilterSearchbar.setFocus();
-    }, 500);    
+      this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
+      this.filterHymns(null);
+    }, 500);
   }
 
   filterHymns(event){
-    let st = event.target.value;
+    let st = ""
+    if(event)
+      st = event.target.value;
+    else
+      st = this.hymnFilterSearchbar.value;
+
     if(st)
       this.hymnList = this.origHymnList.filter((item) => {
         return new RegExp(st).test(item['number']) || new RegExp(st).test(item['firstLine']);
@@ -104,6 +113,13 @@ export class InputModalPage{
       });
     else
       this.bookmarkList = this.origBkmkList;
+  }
+
+  preSetActiveHymn(event){
+    let tempId = _.filter(this.hymnList, item => {
+      return item.number == event;
+    })[0].id;
+    this.setActiveHymn(tempId);
   }
 
   setActiveHymn(hymnId){
@@ -125,6 +141,7 @@ export class InputModalPage{
 
   hymnSelect(){
     setTimeout(() => {
+      this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
       this.hymnFilterSearchbar.setFocus();
     }, 200);    
   }
