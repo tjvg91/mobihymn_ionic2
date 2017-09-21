@@ -1,1 +1,39 @@
-webpackJsonp([2],{571:function(t,e,o){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),o.d(e,"SettingsPopoverPageModuleNgFactory",function(){return M});var n=o(1),i=o(579),_=o(12),r=o(19),u=o(161),a=o(229),s=o(230),c=o(231),l=o(232),h=o(233),p=o(234),d=o(235),f=o(236),g=o(243),b=o(132),y=o(57),m=this&&this.__extends||function(){var t=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var o in e)e.hasOwnProperty(o)&&(t[o]=e[o])};return function(e,o){function n(){this.constructor=e}t(e,o),e.prototype=null===o?Object.create(o):(n.prototype=o.prototype,new n)}}(),P=function(t){function e(e){return t.call(this,e,[a.a,s.a,c.a,l.a,h.a,p.a,d.a,f.a,g.a],[])||this}return m(e,t),Object.defineProperty(e.prototype,"_NgLocalization_7",{get:function(){return null==this.__NgLocalization_7&&(this.__NgLocalization_7=new _.i(this.parent.get(n.u))),this.__NgLocalization_7},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"_ɵi_8",{get:function(){return null==this.__ɵi_8&&(this.__ɵi_8=new r.k),this.__ɵi_8},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"_FormBuilder_9",{get:function(){return null==this.__FormBuilder_9&&(this.__FormBuilder_9=new r.c),this.__FormBuilder_9},enumerable:!0,configurable:!0}),e.prototype.createInternal=function(){return this._CommonModule_0=new _.b,this._ɵba_1=new r.j,this._FormsModule_2=new r.d,this._ReactiveFormsModule_3=new r.i,this._IonicModule_4=new u.a,this._IonicPageModule_5=new u.b,this._SettingsPopoverPageModule_6=new i.a,this._LAZY_LOADED_TOKEN_10=b.a,this._SettingsPopoverPageModule_6},e.prototype.getInternal=function(t,e){return t===_.b?this._CommonModule_0:t===r.j?this._ɵba_1:t===r.d?this._FormsModule_2:t===r.i?this._ReactiveFormsModule_3:t===u.a?this._IonicModule_4:t===u.b?this._IonicPageModule_5:t===i.a?this._SettingsPopoverPageModule_6:t===_.j?this._NgLocalization_7:t===r.k?this._ɵi_8:t===r.c?this._FormBuilder_9:t===y.a?this._LAZY_LOADED_TOKEN_10:e},e.prototype.destroyInternal=function(){},e}(n.Z),M=new n.v(P,i.a)},579:function(t,e,o){"use strict";o.d(e,"a",function(){return n});o(1),o(34),o(132);var n=function(){return function(){}}()}});
+webpackJsonp([2],{
+
+/***/ 589:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingsPopoverPageModule", function() { return SettingsPopoverPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__settings_popover__ = __webpack_require__(136);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var SettingsPopoverPageModule = (function () {
+    function SettingsPopoverPageModule() {
+    }
+    return SettingsPopoverPageModule;
+}());
+SettingsPopoverPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__settings_popover__["a" /* SettingsPopoverPage */]),
+        ],
+    })
+], SettingsPopoverPageModule);
+
+//# sourceMappingURL=settings-popover.module.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=2.js.map
