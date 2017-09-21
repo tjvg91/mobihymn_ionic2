@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { animate, trigger, state, style, transition } from '@angular/animations';
-import { Subject } from "rxjs/Subject";
 
 /**
  * Generated class for the KeyboardComponent component.

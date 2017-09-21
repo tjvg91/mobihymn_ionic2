@@ -11,7 +11,7 @@
       </button>
     </ion-buttons>
     <ion-segment [(ngModel)]="inputType">
-        <ion-segment-button value="all_hymns">
+        <ion-segment-button value="all_hymns" (click)="hymnSelect()">
             All hymns
         </ion-segment-button>
         <ion-segment-button value="bookmarks">
@@ -42,7 +42,7 @@
             <p class="indicator">{{ getIndicator() }}</p>
             <!-- <ion-infinite-scroll (ionInfinite)="hymnsInfinite($event)">
                 <ion-infinite-scroll-content></ion-infinite-scroll-content>
-            </ion-infinite-scroll> -->            
+            </ion-infinite-scroll> -->
             <!-- <keyboard (outputChange)="handleKeyChange($event)" [(keyboardView)]="keyboardShow"></keyboard> -->
         </div>
         <div *ngSwitchCase="'bookmarks'">

@@ -222,7 +222,7 @@ export class ReaderPage implements OnDestroy{
   }
 
   pinchZoom(event){
-    console.log(event);
+    this.zoom(Math.sign(event.scale));
   }
 
   toggleFullLyrics(ev){
@@ -296,5 +296,7 @@ export class ReaderPage implements OnDestroy{
   zoom(sign: number){
     var prod = (0.2 * sign);
     this.fontSize = parseFloat((this.fontSize + prod).toFixed(2));
+    let fontSize = this.fontSize
+    this.myGlobal.setFontSize(fontSize);
   }
 }

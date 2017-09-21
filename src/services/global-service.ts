@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
+import { File } from '@ionic-native/file';
+import { Platform } from 'ionic-angular';
 
 import 'rxjs/Rx';
 
@@ -33,7 +35,7 @@ export class GlobalService {
     public fontSizeChange : Subject<number> = new Subject<number>();
     public themeChange : Subject<string> = new Subject<string>();
 
-    constructor() {
+    constructor(private file: File, private platform: Platform) {
      }
 
     setHymnals(newValue:Array<object>) {        
@@ -162,12 +164,24 @@ export class GlobalService {
         return this.theme;
     }
 
-    getHymnals(http: Http){        
-        return http.get('../assets/hymnals.json').map(res => res.json());
+    getHymnals(http: Http){
+        let url = "";
+        
+        if(this.platform.is('cordova'))
+            url = this.file.applicationDirectory + 'www/assets/hymnals.json';
+        else
+            url = '../assets/hymnals.json';
+        return http.get(url).map(res => res.json());
     }
 
     getHymns(http: Http, i: number){
-        return http.get('../assets/hymnal ' + i + '.json').map(res => res.json());
+        let url = "";
+        if(this.platform.is('cordova'))
+            url = this.file.applicationDirectory + 'www/assets/hymnal ' + i + '.json';
+        else
+            url = '../assets/hymnal ' + i + '.json';
+
+        return http.get(url).map(res => res.json());
     }
 
     isInBookmark(hymnalId, hymnId){

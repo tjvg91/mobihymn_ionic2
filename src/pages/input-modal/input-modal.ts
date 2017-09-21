@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, ViewController, NavParams, Searchbar, AlertController, ToastController } from 'ionic-angular';
 import { GlobalService } from '../../services/global-service';
-import { KeyboardComponent } from '../../components/keyboard/keyboard';
 
 import * as _ from 'lodash';
 
@@ -15,8 +14,7 @@ import * as _ from 'lodash';
 @IonicPage()
 @Component({
   selector: 'page-input-modal',
-  templateUrl: 'input-modal.html',
-  providers: [KeyboardComponent]
+  templateUrl: 'input-modal.html'
 })
 
 export class InputModalPage{
@@ -44,8 +42,7 @@ export class InputModalPage{
   keyboardShow: string;
 
   constructor(public viewCtrl: ViewController, inputParams: NavParams,
-            private alertCtrl: AlertController, private toastCtrl: ToastController,
-            private keyboardComp: KeyboardComponent) {
+            private alertCtrl: AlertController, private toastCtrl: ToastController) {
     this.inputType = "all_hymns";
     this.hymnLimit = 5;
     this.navParams = inputParams;
@@ -123,6 +120,12 @@ export class InputModalPage{
   bkmkSelect(){
     setTimeout(() => {
       this.bkmkFilterSearchbar.setFocus();
+    }, 200);    
+  }
+
+  hymnSelect(){
+    setTimeout(() => {
+      this.hymnFilterSearchbar.setFocus();
     }, 200);    
   }
 

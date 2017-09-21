@@ -81,7 +81,7 @@ export class MyApp{
       else if (mode == "read")
         this.readBookmarks();
     }).catch(() => {
-      this.file.createDir(this.storage, this.BOOKMARKS_JSON_NAME, false).then(() => {
+      this.file.createFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.BOOKMARKS_JSON_NAME, false).then(() => {
         if(mode == "write")
           this.writeBookmarks(false);
       });
@@ -107,15 +107,17 @@ export class MyApp{
   }
 
   checkHistory(mode: string){
-    this.file.checkFile(this.storage, this.MAIN_FOLDER_NAME + '/' + this.HISTORY_JSON_NAME).then(() => {
+    this.file.checkFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.HISTORY_JSON_NAME).then(() => {
       if(mode == "write")
         this.writeHistory(true);
       else
         this.readHistory();
     }).catch(() => {
-      this.file.createDir(this.storage, this.MAIN_FOLDER_NAME + '/' + this.HISTORY_JSON_NAME, false).then(() => {
+      this.file.createFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.HISTORY_JSON_NAME, false).then(() => {
         if(mode =="write")
           this.writeHistory(false);
+      }).catch(err => {
+        alert(err);
       })
     })
   }
@@ -139,13 +141,13 @@ export class MyApp{
   }
 
   checkSettings(mode: string){
-    this.file.checkFile(this.storage, this.MAIN_FOLDER_NAME + '/' + this.SETTINGS_JSON_NAME).then(() => {
+    this.file.checkFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME).then(() => {
       if(mode == "write")
         this.writeSettings(true);
       else
         this.readSettings();
     }).catch(() => {
-      this.file.createDir(this.storage, this.SETTINGS_JSON_NAME, false).then(() => {
+      this.file.createFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME, false).then(() => {
         this.writeSettings(false);
       })
     })
@@ -158,7 +160,8 @@ export class MyApp{
       'recentCount': this.global.getRecentCount(),
       'extraSpace': this.global.getPadding(),
       'alignment': this.global.getActiveAlignment(),
-      'fontSize' : this.global.getFontSize()
+      'fontSize' : this.global.getFontSize(),
+      'theme': this.global.getTheme()
     }
     if(!exists)
       this.file.writeFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME,
@@ -179,6 +182,7 @@ export class MyApp{
       this.global.setRecentCount(jsonData["recentCount"]);
       this.global.setPadding(jsonData["extraSpace"]);
       this.global.setActiveAlignment(jsonData["alignment"]);
+      this.global.setTheme(jsonData['theme']);
     })
   }
 }

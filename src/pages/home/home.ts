@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { GlobalService } from '../../services/global-service';
 import * as _ from 'lodash';
 
@@ -20,7 +20,7 @@ export class HomePage implements OnInit, OnDestroy{
 
   activeHymnal: string;
 
-  constructor(public homeCtrl: NavController, global : GlobalService, http: Http) {
+  constructor(public homeCtrl: NavController, global : GlobalService, http: Http, private platform: Platform) {
     this.title = "MobiHymn";
     this.myGlobal = global;
     this.myHttp = http;
@@ -54,6 +54,17 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   ngOnInit(){
+    if(this.platform.is('cordova')){
+      this.platform.ready().then(() => {
+        this.retrieveHymnals();
+      });
+    }
+    else{
+      this.retrieveHymnals();
+    }
+  }
+
+  retrieveHymnals(){
     this.myGlobal.getHymnals(this.myHttp).subscribe(res => {
       this.myGlobal.setHymnals(res.output);
     });

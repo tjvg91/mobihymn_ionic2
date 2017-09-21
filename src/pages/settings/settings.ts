@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { IonicPage, NavController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, Platform } from 'ionic-angular';
 import { RevisionsModalPage } from '../../pages/revisions-modal/revisions-modal';
 import { AuthorModalPage } from '../../pages/author-modal/author-modal';
 
 import { GlobalService } from '../../services/global-service';
+
+import { File } from '@ionic-native/file';
 
 /**
  * Generated class for the SettingsPage page.
@@ -23,17 +25,29 @@ export class SettingsPage {
   recentNum: Number;
 
   recentSubscribe: any;
-  constructor(public navCtrl: NavController, private http: Http, private revisionsModal: ModalController, private authorModal: ModalController, private global: GlobalService) {
+  constructor(public navCtrl: NavController, private http: Http, private revisionsModal: ModalController, private authorModal: ModalController, private global: GlobalService,  private platform: Platform, private file: File) {
     this.recentSubscribe = global.historyCountChange.subscribe(value =>{
       console.log(value);
     })
   }
 
   ionViewDidLoad() {
-    this.http.get('../assets/revision.html').map(res => res).subscribe(res => {
-      this.revisionString = res["_body"];
-    })
+    let url = "";
+    if(this.platform.is('cordova')){
+        this.platform.ready().then(() => {
+          url = this.file.applicationDirectory + 'www/assets/revision.html';
+          this.http.get(url).map(res => res).subscribe(res => {
+            this.revisionString = res["_body"];
+          })
+        })
+    }
+    else{
+      url = '../assets/revision.html';
+      this.http.get(url).map(res => res).subscribe(res => {
+        this.revisionString = res["_body"];
+      })
     this.recentNum = this.global.getRecentCount();
+    }
   }
 
   showRevisionModal(){
