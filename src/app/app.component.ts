@@ -12,8 +12,7 @@ import { File } from '@ionic-native/file';
 import { Insomnia } from '@ionic-native/insomnia';
 
 @Component({
-  templateUrl: 'app.html',
-  providers: [GlobalService, File, Insomnia]
+  templateUrl: 'app.html'
 })
 export class MyApp{
   rootPage:any = TabsPage;
@@ -80,10 +79,18 @@ export class MyApp{
         this.writeBookmarks(true);
       else if (mode == "read")
         this.readBookmarks();
-    }).catch(() => {
+    }).catch(err => {
       this.file.createFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.BOOKMARKS_JSON_NAME, false).then(() => {
         if(mode == "write")
           this.writeBookmarks(false);
+        else
+          this.readBookmarks();
+      }).catch(err => {
+        if(err.message == "PATH_EXISTS_ERR")
+          if(mode == "write")
+            this.writeBookmarks(true);
+          else
+            this.readBookmarks();
       });
     });
   }
@@ -101,8 +108,11 @@ export class MyApp{
   }
 
   readBookmarks(){
-    this.file.readAsText(this.storage, this.BOOKMARKS_JSON_NAME).then((data) => {
-      this.global.addToBookmarks(JSON.parse(data));
+    this.file.readAsText(this.storage + '/' + this.MAIN_FOLDER_NAME, this.BOOKMARKS_JSON_NAME).then((data) => {
+      let bkmkArray = JSON.parse(data);
+      let i = 0;
+      for(;i < bkmkArray.length; i++)
+        this.global.addToBookmarks(bkmkArray[i]);
     })
   }
 
@@ -116,8 +126,15 @@ export class MyApp{
       this.file.createFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.HISTORY_JSON_NAME, false).then(() => {
         if(mode =="write")
           this.writeHistory(false);
+        else
+          this.readHistory();
       }).catch(err => {
-        alert(err);
+        if(err.message == "PATH_EXISTS_ERR"){
+          if(mode == "write")
+            this.writeHistory(true);
+          else
+            this.readHistory();
+        }
       })
     })
   }
@@ -135,21 +152,34 @@ export class MyApp{
   }
 
   readHistory(){
-    this.file.readAsText(this.storage, this.HISTORY_JSON_NAME).then((data) => {
-      this.global.addToRecent(JSON.parse(data));
+    this.file.readAsText(this.storage + '/' + this.MAIN_FOLDER_NAME, this.HISTORY_JSON_NAME).then((data) => {      let histArray = JSON.parse(data);
+      let i = 0;
+      for(;i < histArray.length; i++)
+        this.global.addToRecent(histArray[i]);
     })
   }
 
   checkSettings(mode: string){
-    this.file.checkFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME).then(() => {
+    let path = this.storage + '/' + this.MAIN_FOLDER_NAME;
+    let filename = this.SETTINGS_JSON_NAME
+    this.file.checkFile(path, filename).then(() => {
       if(mode == "write")
         this.writeSettings(true);
       else
         this.readSettings();
-    }).catch(() => {
-      this.file.createFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME, false).then(() => {
-        this.writeSettings(false);
-      })
+    }).catch(err => {
+      if(err.message = "PATH_EXISTS_ERR"){
+        if(mode == "read")
+          this.readSettings();
+        else
+          this.writeSettings(true);
+      }
+      else{
+        this.file.createFile(path, filename, false).then(() => {
+          if(mode = "write")
+            this.writeSettings(false);
+        })
+      }
     })
   }
 
@@ -167,22 +197,27 @@ export class MyApp{
       this.file.writeFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME,
                           JSON.stringify(data), {
                             append: false, replace: true
-                          });
+                          })
     else
       this.file.writeExistingFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME,
-                          JSON.stringify(data));
+                          JSON.stringify(data))
   }
 
   readSettings(){
-    this.file.readAsText(this.storage, this.HISTORY_JSON_NAME).then((data) => {
+    this.file.readAsText(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME).then((data) => {
       let jsonData  = JSON.parse(data);
       this.global.setActiveHymnal(jsonData["activeHymnal"]);
-      this.global.setActiveHymn(jsonData["activeHymn"]);
-      this.global.setFontSize(jsonData["fontSize"]);
-      this.global.setRecentCount(jsonData["recentCount"]);
-      this.global.setPadding(jsonData["extraSpace"]);
-      this.global.setActiveAlignment(jsonData["alignment"]);
-      this.global.setTheme(jsonData['theme']);
-    })
+      this.global.activeHymn = jsonData["activeHymn"];
+      if(jsonData["fontSize"])
+        this.global.setFontSize(jsonData["fontSize"]);
+      if(jsonData["recentCount"])
+        this.global.setRecentCount(jsonData["recentCount"]);
+      if(jsonData["extraSpace"])
+        this.global.setPadding(jsonData["extraSpace"]);
+      if(jsonData["alignment"])
+        this.global.setActiveAlignment(jsonData["alignment"]);
+      if(jsonData["theme"])
+        this.global.setTheme(jsonData['theme']);
+    });
   }
 }

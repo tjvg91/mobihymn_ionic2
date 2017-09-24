@@ -58,6 +58,7 @@ export class ReaderPage implements OnDestroy{
   bookmarksSubscribe: any;
   paddingSubscribe: any;
   themeSubscribe: any;
+  fontSubscribe: any;
 
   extraSpace: Number = 0;
   alignment: string = "left";
@@ -97,7 +98,11 @@ export class ReaderPage implements OnDestroy{
 
     this.themeSubscribe = global.themeChange.subscribe((value) => {
       this.themeString = value;
-    })
+    });
+
+    this.fontSubscribe = global.fontSizeChange.subscribe((value) =>{
+      this.fontSize = value;
+    });
   }
 
   presentPopover(myEvent) {
@@ -177,6 +182,10 @@ export class ReaderPage implements OnDestroy{
     })[0];
     this.isBookmarked = this.myGlobal.isInBookmark(this.activeHymnal, this.currentHymn);
     this.fontSize = this.myGlobal.getFontSize();
+    this.extraSpace = this.myGlobal.getPadding();
+    this.themeString = this.myGlobal.getTheme();
+    this.alignment = this.myGlobal.getActiveAlignment();
+
     this.scrollContent = this.lyricsContainerRef._elementRef.nativeElement.querySelector('.scroll-content');
     this.divTab = this.readerCtrl.parent._elementRef.nativeElement.querySelector('.tabbar');
     let currentHymn = this.currentHymn;
@@ -222,7 +231,8 @@ export class ReaderPage implements OnDestroy{
   }
 
   pinchZoom(event){
-    this.zoom(Math.sign(event.scale));
+    var val = event.scale < 1 ? -1 : 1
+    this.zoom(val);
   }
 
   toggleFullLyrics(ev){
@@ -294,9 +304,9 @@ export class ReaderPage implements OnDestroy{
   }
 
   zoom(sign: number){
-    var prod = (0.2 * sign);
-    this.fontSize = parseFloat((this.fontSize + prod).toFixed(2));
-    let fontSize = this.fontSize
+    var prod = (0.01 * sign);
+    let fontSize = sign < 0 ? Math.max(parseFloat((this.fontSize + prod).toFixed(2)), 1.4) :
+                    Math.min(parseFloat((this.fontSize + prod).toFixed(2)), 3.6);
     this.myGlobal.setFontSize(fontSize);
   }
 }

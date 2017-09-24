@@ -22,7 +22,7 @@ import { File } from '@ionic-native/file';
 })
 export class SettingsPage {
   revisionString : string;
-  recentNum: Number;
+  recentNum: number;
 
   recentSubscribe: any;
   constructor(public navCtrl: NavController, private http: Http, private revisionsModal: ModalController, private authorModal: ModalController, private global: GlobalService,  private platform: Platform, private file: File) {
@@ -32,6 +32,8 @@ export class SettingsPage {
   }
 
   ionViewDidLoad() {
+    this.recentNum = this.global.getRecentCount();
+
     let url = "";
     if(this.platform.is('cordova')){
         this.platform.ready().then(() => {
@@ -46,7 +48,6 @@ export class SettingsPage {
       this.http.get(url).map(res => res).subscribe(res => {
         this.revisionString = res["_body"];
       })
-    this.recentNum = this.global.getRecentCount();
     }
   }
 

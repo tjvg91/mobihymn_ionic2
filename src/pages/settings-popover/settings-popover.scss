@@ -1,42 +1,84 @@
 page-settings-popover {
-    ion-content .scroll-content{
+    ion-content .scroll-content {
         padding: 0 !important;
-
-        ion-list-header{
+        ion-list {
+            background: inherit;
+            ion-row+ion-row {
+                margin-top: 10px;
+            }
+            ion-col {
+                text-align: center;
+                button.fab {
+                    margin: 0 auto;
+                }
+            }
+            ion-row.alignments {
+                height: 38px;
+                ion-col {
+                    padding: 0;
+                    button {
+                        width: inherit;
+                        height: 100%;
+                        margin: 0;
+                        font-size: 1.3em;
+                    }
+                }
+            }
+            ion-row.font-sizes {
+                ion-col {
+                    padding: 0;
+                    button {
+                        width: 100%;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+        ion-list-header {
             margin: 0 !important;
             min-height: 0 !important;
-            ion-label{
+            ion-label {
                 margin: 10px 0 0 !important;
             }
         }
-
+        ion-item .item-inner {
+            border-bottom: none !important;
+        }
+        ion-label {
+            color: #aaa;
+        }
+        ion-range {
+            padding: 0 5px 0 0 !important;
+            ion-label {
+                font-size: 1.6em;
+                font-weight: bold;
+            }
+            .range-slider+[range-right] {
+                margin-left: 14px;
+            }
+        }
         .button-theme {
-            width: 20px;
-            height: 20px;
-
-            &:not(.active){
+            width: 30px;
+            height: 30px;
+            &:not(.active) {
                 border: 2px solid #ccc;
             }
-            &.active{
+            &.active {
                 border: 2px solid map-get($colors, 'primary');
             }
-
-            &.theme-light{
+            &.theme-light {
                 background: map-get($colors, 'light');
             }
-            &.theme-tan{
+            &.theme-tan {
                 background: map-get($colors, 'semi');
             }
-            &.theme-dark{
+            &.theme-dark {
                 background: map-get($colors, 'dark-2');
             }
-            &.theme-pic{
+            &.theme-pic {
                 background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/Congregation%20Singing.jpg');
                 background-size: cover;
             }
         }
-    }
-    ion-label{
-        color: #aaa;
     }
 }

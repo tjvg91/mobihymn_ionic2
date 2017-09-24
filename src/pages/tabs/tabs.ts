@@ -1,6 +1,6 @@
 import { Component, ViewChild} from '@angular/core';
 
-import { Tabs } from 'ionic-angular';
+import { Tabs, NavController, Platform } from 'ionic-angular';
 
 import { SettingsPage } from '../settings/settings';
 import { HomePage } from '../home/home';
@@ -25,7 +25,19 @@ export class TabsPage {
 
   @ViewChild('#myTabs') public tabRef: Tabs;
 
-  constructor(myGlobal : GlobalService) {
+  constructor(myGlobal : GlobalService, private navCtrl: NavController, private platform: Platform) {
     this.activeHymnal = myGlobal.getActiveHymnal();
+  }
+
+  tabChange(event){
+    /*this.platform.registerBackButtonAction(() => {
+      this.navCtrl.push(event);
+    });*/
+  }
+
+  ionViewDidLoad(){
+    /*this.platform.registerBackButtonAction(() => {
+      this.navCtrl.push(this.tab1Root);
+    })*/
   }
 }

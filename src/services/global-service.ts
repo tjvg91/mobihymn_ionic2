@@ -18,7 +18,7 @@ export class GlobalService {
     bookmarks: Array<object> = new Array<object>();
     history: Array<object> = new Array<object>();
     
-    recentCount:Number = 5;
+    recentCount:number = 5;
     padding: Number=0;
     fontSize: number = 1.4;
     theme: string = "pic";
@@ -29,7 +29,7 @@ export class GlobalService {
     public activeHymnChange : Subject<string> = new Subject<string>(); 
     public bookmarksChange : Subject<Array<object>> = new Subject<Array<object>>(); 
     public historyChange : Subject<Array<object>> = new Subject<Array<object>>(); 
-    public historyCountChange : Subject<Number> = new Subject<Number>(); 
+    public historyCountChange : Subject<number> = new Subject<number>(); 
     public paddingChange : Subject<Number> = new Subject<Number>(); 
     public activeAlignmentChange : Subject<string> = new Subject<string>(); 
     public fontSizeChange : Subject<number> = new Subject<number>();
@@ -95,9 +95,13 @@ export class GlobalService {
         });
     }
 
-    setRecentCount(newValue:Number){
+    setRecentCount(newValue:number){
         this.recentCount = newValue
         this.historyCountChange.next(this.recentCount);
+
+        var diff = this.history.length - newValue;
+        if(diff > 0)
+            this.history.splice(this.history.length - diff, diff);
     }
 
     setPadding(newValue: Number){
@@ -136,7 +140,7 @@ export class GlobalService {
         return this.activeHymn;
     }
 
-    getRecentCount() : Number{
+    getRecentCount() : number{
         return this.recentCount;
     }
 

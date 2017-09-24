@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, Platform, LoadingController } from 'ionic-angular';
 import { GlobalService } from '../../services/global-service';
@@ -8,7 +8,7 @@ import * as _ from 'lodash';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements OnInit, OnDestroy{
+export class HomePage implements OnDestroy{
   title: string;
   hymnalList: Array<object>;
   hymnList:object;
@@ -17,13 +17,14 @@ export class HomePage implements OnInit, OnDestroy{
   readerLoader: any;
 
   hymnalSubscribe: any;
-  hymnSubscribe: any;
+  activeHymnalSubscribe: any;
 
   activeHymnal: string;
 
   constructor(public homeCtrl: NavController, global : GlobalService, http: Http, private platform: Platform, private loadingCtrl: LoadingController) {
     this.title = "MobiHymn";
     this.myGlobal = global;
+
     this.myHttp = http;
 
     this.hymnalSubscribe = global.hymnalChange.subscribe((value) => {
@@ -37,10 +38,13 @@ export class HomePage implements OnInit, OnDestroy{
         });
       }
     });
-    
-    if(global.getActiveHymnal()){
-      this.goToReader(true);
-    }
+
+    this.activeHymnalSubscribe = global.activeHymnalChange.subscribe(val =>{
+      if(val){
+        this.activeHymnal = val;
+        this.goToReader(true);
+      }
+    })
   }
   
   setActiveHymnal(hymnalId : string){
@@ -48,29 +52,26 @@ export class HomePage implements OnInit, OnDestroy{
     let activeHymnal = _.filter(this.hymnalList, function(h){
       return h.id == hymnalId;
     })[0]
+    this.dismissLoader();
     this.myGlobal.setActiveHymnal(activeHymnal['id']);
     this.myGlobal.setActiveHymn('1');
-    this.activeHymnal = activeHymnal['id'];
-
-    this.dismissLoader();
-    this.goToReader(true);
   }
 
   goToReader(enable: boolean){
+    this.homeCtrl.parent.getByIndex(0).enabled = enable;
     this.homeCtrl.parent.getByIndex(1).enabled = enable;
-    this.homeCtrl.parent.getByIndex(2).enabled = enable;
-    this.homeCtrl.parent.select(1);
+    this.homeCtrl.parent.select(0);
   }
 
-  ngOnInit(){
-    if(this.platform.is('cordova')){
-      this.platform.ready().then(() => {
+  ionViewDidLoad(){
+      if(this.platform.is('cordova')){
+        this.platform.ready().then(() => {
+          this.retrieveHymnals();
+        });
+      }
+      else{
         this.retrieveHymnals();
-      });
-    }
-    else{
-      this.retrieveHymnals();
-    }
+      }
   }
 
   retrieveHymnals(){
@@ -95,6 +96,6 @@ export class HomePage implements OnInit, OnDestroy{
 
   ngOnDestroy(){
     this.hymnalSubscribe.unsubscribe();
-    this.hymnSubscribe.unsubscribe();
+    this.activeHymnalSubscribe.unsubscribe();
   }
 }

@@ -5,61 +5,68 @@
   Ionic pages and navigation.
 -->
 <ion-content padding>
-  <ion-list>
-    <ion-row>
-      <ion-col>
-        <button ion-button small color="primary" *ngIf="alignmentText=='left'">
-          <span class="fa fa-align-left"></span>
-        </button>
-        <button ion-button small color="primary" clear (click)="alignmentChange('left')" *ngIf="alignmentText!='left'">
-          <span class="fa fa-align-left"></span>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button small color="primary" *ngIf="alignmentText=='center'">
-          <span class="fa fa-align-center"></span>
-        </button>
-        <button ion-button small color="primary" clear (click)="alignmentChange('center')" *ngIf="alignmentText!='center'">
-          <span class="fa fa-align-center"></span>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button small color="primary" *ngIf="alignmentText=='right'">
-          <span class="fa fa-align-right"></span>
-        </button>
-        <button ion-button small color="primary" clear (click)="alignmentChange('right')" *ngIf="alignmentText!='right'">
-          <span class="fa fa-align-right"></span>
-        </button>        
-      </ion-col>
-    </ion-row>
+    <ion-list>
+        <ion-row class="alignments">
+            <ion-col>
+                <button ion-button small color="primary" *ngIf="alignmentText=='left'">
+                    <span class="fa fa-align-left"></span>
+                </button>
+                <button ion-button small color="primary" clear (click)="alignmentChange('left')" *ngIf="alignmentText!='left'">
+                    <span class="fa fa-align-left"></span>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button small color="primary" *ngIf="alignmentText=='center'">
+                    <span class="fa fa-align-center"></span>
+                </button>
+                <button ion-button small color="primary" clear (click)="alignmentChange('center')" *ngIf="alignmentText!='center'">
+                    <span class="fa fa-align-center"></span>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button small color="primary" *ngIf="alignmentText=='right'">
+                    <span class="fa fa-align-right"></span>
+                </button>
+                <button ion-button small color="primary" clear (click)="alignmentChange('right')" *ngIf="alignmentText!='right'">
+                    <span class="fa fa-align-right"></span>
+                </button>
+            </ion-col>
+        </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <button ion-fab class="button-theme theme-light" (click)="setTheme('light')" [ngClass]="{ 'active': themeText=='light' }"></button>
-      </ion-col>
-      <ion-col>
-        <button ion-fab class="button-theme theme-tan" (click)="setTheme('tan')" [ngClass]="{ 'active': themeText=='tan' }"></button>
-      </ion-col>
-      <ion-col>
-        <button ion-fab class="button-theme theme-dark" (click)="setTheme('dark')" [ngClass]="{ 'active': themeText=='dark' }"></button>
-      </ion-col>
-      <ion-col>
-          <button ion-fab class="button-theme theme-pic" (click)="setTheme('pic')" [ngClass]="{ 'active': themeText=='pic' }"></button>
-        </ion-col>
-    </ion-row>
+        <ion-row class="font-sizes">
+            <ion-col>
+                <button ion-button small color="primary" outline (click)="decreaseFont()">
+                    <span class="fa fa-font"></span>-
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button small color="primary" outline (click)="increaseFont()">
+                    <span class="fa fa-font"></span>+
+                </button>
+            </ion-col>
+        </ion-row>
 
-    <ion-list-header>
-      <ion-label>Extra space
-        <ion-badge>{{ paddingText }}</ion-badge>
-      </ion-label>
-      
-    </ion-list-header> 
-    <ion-item>
-      
-      <ion-range min="0" max="500" [(ngModel)]="paddingText" step="10" snap="true" pin="true" (ionChange)="paddingChange()">
-        <ion-label range-left>0</ion-label>
-        <ion-label range-right>500</ion-label>
-      </ion-range>
-    </ion-item>
-  </ion-list>
+        <ion-row>
+            <ion-col>
+                <button ion-fab class="button-theme theme-light" (click)="setTheme('light')" [ngClass]="{ 'active': themeText=='light' }"></button>
+            </ion-col>
+            <ion-col>
+                <button ion-fab class="button-theme theme-tan" (click)="setTheme('tan')" [ngClass]="{ 'active': themeText=='tan' }"></button>
+            </ion-col>
+            <ion-col>
+                <button ion-fab class="button-theme theme-dark" (click)="setTheme('dark')" [ngClass]="{ 'active': themeText=='dark' }"></button>
+            </ion-col>
+            <ion-col>
+                <button ion-fab class="button-theme theme-pic" (click)="setTheme('pic')" [ngClass]="{ 'active': themeText=='pic' }"></button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-range min="0" max="500" [(ngModel)]="paddingText" step="10" snap="true" pin="true" (ionChange)="paddingChange()">
+                    <ion-label range-left>&#x2193;</ion-label>
+                    <ion-label range-right>&#x21b3;</ion-label>
+                </ion-range>
+            </ion-col>
+        </ion-row>
+    </ion-list>
 </ion-content>

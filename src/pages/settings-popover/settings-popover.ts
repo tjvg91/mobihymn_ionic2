@@ -12,7 +12,10 @@ export class SettingsPopoverPage {
   paddingText: Number;
   alignmentText: string;
   themeText: string;
-  global: GlobalService
+  global: GlobalService;
+  activeFontSize: number;
+
+  fontSizes: Array<number> = [1.4, 2.4, 3.4];
 
   constructor(private viewCtrl: ViewController, private navParams: NavParams) {
   }
@@ -46,5 +49,57 @@ export class SettingsPopoverPage {
   setTheme(theme){
     this.themeText = theme;
     this.global.setTheme(theme);
+  }
+
+  decreaseFont(){
+    let fontSet = false;
+
+    this.activeFontSize = this.global.getFontSize();
+    if(this.activeFontSize > this.fontSizes[this.fontSizes.length - 1]){
+      this.global.setFontSize(this.fontSizes[this.fontSizes.length - 1]);
+    }
+    else{
+      for(let i = 0; i < this.fontSizes.length - 1; i++){
+        if(this.fontSizes[i] < this.activeFontSize && this.fontSizes[i + 1] > this.activeFontSize){
+          this.global.setFontSize(this.fontSizes[i]);
+          fontSet = true;
+          break;
+        }
+      }
+      if(!fontSet){
+        for(let i = 1; i < this.fontSizes.length; i++){
+          if(this.fontSizes[i] == this.activeFontSize){
+            this.global.setFontSize(this.fontSizes[i - 1]);
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  increaseFont(){
+    let fontSet = false;
+    
+    this.activeFontSize = this.global.getFontSize();
+    if(this.activeFontSize > this.fontSizes[this.fontSizes.length - 1]){
+      this.global.setFontSize(this.fontSizes[this.fontSizes.length - 1]);
+    }
+    else{
+      for(let i = 0; i < this.fontSizes.length - 1; i++){
+        if(this.fontSizes[i] < this.activeFontSize && this.fontSizes[i + 1] > this.activeFontSize){
+          this.global.setFontSize(this.fontSizes[i + 1]);
+          fontSet = true;
+          break;
+        }
+      }
+      if(!fontSet){
+        for(let i = 0; i < this.fontSizes.length - 1; i++){
+          if(this.fontSizes[i] == this.activeFontSize){
+            this.global.setFontSize(this.fontSizes[i + 1]);
+            break;
+          }
+        }
+      }
+    }
   }
 }

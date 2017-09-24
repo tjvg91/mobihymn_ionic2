@@ -1,6 +1,6 @@
-<ion-tabs class="tabs-md-dark" #myTabs>
-    <ion-tab [root]="tab1Root" tabTitle="Library" tabIcon="home"></ion-tab>
+<ion-tabs class="tabs-md-dark" #myTabs [selectedIndex]="0" (ionChange)="tabChange($event)">
     <ion-tab [root]="tab2Root" tabTitle="Read" tabIcon="glasses" enabled="activeHymnal"></ion-tab>
     <ion-tab [root]="tab3Root" tabTitle="Search" tabIcon="search" enabled="activeHymnal"></ion-tab>
+    <ion-tab [root]="tab1Root" tabTitle="Library" tabIcon="home"></ion-tab>
     <ion-tab [root]="tab4Root" tabTitle="Settings" tabIcon="settings"></ion-tab>
 </ion-tabs>

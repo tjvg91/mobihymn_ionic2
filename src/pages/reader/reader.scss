@@ -15,76 +15,93 @@
 }
 
 page-reader {
-    #settings{
+    #settings {
         font-size: 1.5em !important;
     }
-    ion-content{
-        &.theme-pic{
+    ion-content {
+        user-select: text !important;
+        &.theme-pic {
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/Congregation%20Singing.jpg');
             background-size: cover;
             color: map-get($colors, 'light');
+            .hymn-line::selection,
+            .first-letter::selection {
+                background-color: map-get($colors, 'primary');
+                color: map-get($colors, 'dark');
+            }
         }
-        &.theme-light{
+        &.theme-light {
             background: map-get($colors, 'light');
-            color: map-get($colors, 'dark')
+            color: map-get($colors, 'dark');
+            .hymn-line::selection,
+            .first-letter::selection {
+                background-color: map-get($colors, 'dark');
+                color: map-get($colors, 'primary');
+            }
         }
-        &.theme-tan{
+        &.theme-tan {
             background: map-get($colors, 'semi');
-            color: map-get($colors, 'dark')
+            color: map-get($colors, 'dark');
+            .hymn-line::selection,
+            .first-letter::selection {
+                background-color: map-get($colors, 'dark');
+                color: map-get($colors, 'primary');
+            }
         }
-        &.theme-dark{
+        &.theme-dark {
             background: map-get($colors, 'dark-2');
-            color: map-get($colors, 'light')
+            color: map-get($colors, 'light');
+            .hymn-line::selection,
+            .first-letter::selection {
+                background-color: map-get($colors, 'primary');
+                color: map-get($colors, 'dark');
+            }
         }
-
-        .hymn-content{
+        .hymn-content {
             margin-bottom: 20px;
-
-            .hymn-title{
+            user-select: inherit !important;
+            .hymn-title {
                 margin-bottom: 20px;
                 font-size: inherit;
-                h2{
+                h2 {
                     display: inline;
                 }
             }
-
             .hymn-stanza {
                 display: block;
                 margin-bottom: 1em;
-                
-                .hymn-line{
+                user-select: inherit !important;
+                .hymn-line {
                     display: block;
                     line-height: 150%;
+                    user-select: inherit !important;
                 }
             }
-
             .hymn-refrain {
                 display: block;
                 margin-bottom: 20px;
-                
-                .hymn-line{
+                user-select: inherit !important;
+                .hymn-line {
                     display: block;
                     line-height: 150%;
+                    user-select: inherit !important;
                 }
             }
-
             .hymn-stanza:before {
-                display: block; 
+                display: block;
             }
-
             .hymn-refrain:before {
                 display: block;
-                content: "Refrain:"; 
+                content: "Refrain:";
             }
-
             .hymn-stanza:nth-child(1):before {
-                content: "Stanza 1:"; 
+                content: "Stanza 1:";
             }
         }
-    }    
+    }
 }
 
-ion-list-header ion-label ion-badge{
+ion-list-header ion-label ion-badge {
     float: right;
 }
 
