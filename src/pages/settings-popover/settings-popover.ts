@@ -15,7 +15,7 @@ export class SettingsPopoverPage {
   global: GlobalService;
   activeFontSize: number;
 
-  fontSizes: Array<number> = [1.4, 2.4, 3.4];
+  fontSizes: Array<number> = [1.4, 1.9, 2.4, 2.9, 3.4];
 
   constructor(private viewCtrl: ViewController, private navParams: NavParams) {
   }
@@ -25,7 +25,6 @@ export class SettingsPopoverPage {
     this.global = main['myGlobal'];
     this.paddingText = this.global.getPadding();
     this.alignmentText = this.global.getActiveAlignment();
-    //this.themeText = this.global.getTheme();
     this.themeText = this.global.getTheme();
   }
 

@@ -77,7 +77,7 @@ export class InputModalPage{
     this.keyboardShow = "shown";
     this.hymnFilterString = _.filter(this.hymnList, item => {
       return item.id == activeHymn;
-    })[0].number;
+    })[0].number.replace(/f|s|t/, '');
 
   }
 

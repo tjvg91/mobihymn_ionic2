@@ -79,7 +79,7 @@ export class SearchPage {
 
   goToReader(hymnId){
     this.global.setActiveHymn(hymnId);
-    this.searchCtrl.parent.select(1);
+    this.searchCtrl.parent.select(0);
   }
 
   sortByLine (a,b) {

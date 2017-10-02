@@ -17,25 +17,31 @@
                 <ion-icon name="star-outline" *ngIf="!isBookmarked"></ion-icon>
                 <ion-icon name="star" *ngIf="isBookmarked"></ion-icon>
             </button>
-            <button ion-button icon-only (click)="presentInputModal()">
-                <ion-icon name="musical-note"></ion-icon>
-            </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding #lyricsContainer class="{{ 'theme-' + themeString }}">
-    <div class="hymn-content" *ngIf="currentHymn" (pinch)="pinchZoom($event)" [ngStyle]="{'paddingBottom.px': extraSpace, 'text-align': alignment, 'fontSize.em': fontSize }">
+    <div class="hymn-content" *ngIf="currentHymn" (pinchmove)="pinchZoom($event)" (pinchend)="curScale = 0" [ngStyle]="{'paddingBottom.px': extraSpace, 'text-align': alignment, 'fontSize.em': fontSize }">
         <div class="hymn-title">
             <h2 class="hymn-title" (click)="presentTunePopover($event)">Hymn #{{ currentHymn.title }}</h2>
-        </div>        
-        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (click)="toggleFullLyrics($event)">
+        </div>
+        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (tap)="toggleFullLyrics($event)">
         </div>
     </div>
 
     <ion-fab bottom right>
-        <button ion-fab #btnPlay [@scale]="scaleState">
-            <ion-icon name="play"></ion-icon>
+        <button ion-fab [@scale]="scaleState" (click)="presentInputModal()">
+            <ion-icon name="musical-note"></ion-icon>
         </button>
     </ion-fab>
 </ion-content>
+
+<ion-footer #footerReader>
+    <ion-toolbar>
+        <audio controls="controls" preload="auto">
+            <source [src]="safeMidi"
+            type="audio/midi" />    
+        </audio>
+    </ion-toolbar>
+</ion-footer>

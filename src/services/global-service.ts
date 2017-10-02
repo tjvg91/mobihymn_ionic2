@@ -56,12 +56,14 @@ export class GlobalService {
     addToRecent(newValue: object){
         var index = this.history.findIndex(i => i['hymnalId'] == newValue['hymnalId'] &&
                                     i['hymnId'] == newValue['hymnId']);
+        
         if(index >= 0)
             this.history.splice(index);
-        
+
         this.history.splice(0, 0, newValue);
-        if(this.history.length > this.recentCount)
-            this.history.splice(this.history.length - 1);
+        if(index >= 0)
+            this.history.splice(index);
+            
 
         this.historyChange.next(this.history);
     }
@@ -102,6 +104,7 @@ export class GlobalService {
         var diff = this.history.length - newValue;
         if(diff > 0)
             this.history.splice(this.history.length - diff, diff);
+
     }
 
     setPadding(newValue: Number){
@@ -145,11 +148,17 @@ export class GlobalService {
     }
 
     getBookmarksList() : Array<object>{
-        return this.bookmarks;
+        let activeHymnal = this.activeHymnal
+        return this.bookmarks.filter(x => {
+            return x['hymnalId'] == activeHymnal;
+        });
     }
 
     getRecentList() : Array<object>{
-        return this.history;
+        let activeHymnal = this.activeHymnal
+        return this.history.filter(x => {
+            return x['hymnalId'] == activeHymnal;
+        });
     }
 
     getPadding() : Number{

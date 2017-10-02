@@ -60,6 +60,7 @@ page-reader {
         .hymn-content {
             margin-bottom: 20px;
             user-select: inherit !important;
+            touch-action: auto !important;
             .hymn-title {
                 margin-bottom: 20px;
                 font-size: inherit;
@@ -97,6 +98,30 @@ page-reader {
             .hymn-stanza:nth-child(1):before {
                 content: "Stanza 1:";
             }
+        }
+    }
+    ion-footer .toolbar-background {
+        background: map-get($colors, 'dark-2') !important;
+    }
+    audio {
+        width: 100%;
+        &::-webkit-media-controls-panel {
+            background: #000000;
+        }
+        &::-webkit-media-controls-mute-button,
+        &::-webkit-media-controls-fullscreen-button,
+        &::-webkit-media-controls-rewind-button,
+        &::-webkit-media-controls-return-to-realtime-button,
+        &::-webkit-media-controls-toggle-closed-captions-button {
+            display: none;
+        }
+        &::-webkit-media-controls-timeline-container,
+        &::-webkit-media-controls-current-time-display,
+        &::-webkit-media-controls-time-remaining-display {
+            color: map-get($colors, 'light') !important;
+        }
+        &::-webkit-media-controls-play-button {
+            color: white !important;
         }
     }
 }

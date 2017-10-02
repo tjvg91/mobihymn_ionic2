@@ -1,1 +1,39 @@
-webpackJsonp([3],{568:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),n.d(e,"SearchPageModuleNgFactory",function(){return w});var o=n(1),i=n(576),_=n(12),r=n(19),u=n(162),a=n(228),c=n(229),s=n(230),l=n(231),h=n(232),d=n(233),f=n(234),p=n(235),g=n(240),b=n(136),y=n(58),m=this&&this.__extends||function(){var t=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n])};return function(e,n){function o(){this.constructor=e}t(e,n),e.prototype=null===n?Object.create(n):(o.prototype=n.prototype,new o)}}(),M=function(t){function e(e){return t.call(this,e,[a.a,c.a,s.a,l.a,h.a,d.a,f.a,p.a,g.a],[])||this}return m(e,t),Object.defineProperty(e.prototype,"_NgLocalization_7",{get:function(){return null==this.__NgLocalization_7&&(this.__NgLocalization_7=new _.i(this.parent.get(o.u))),this.__NgLocalization_7},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"_ɵi_8",{get:function(){return null==this.__ɵi_8&&(this.__ɵi_8=new r.k),this.__ɵi_8},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"_FormBuilder_9",{get:function(){return null==this.__FormBuilder_9&&(this.__FormBuilder_9=new r.c),this.__FormBuilder_9},enumerable:!0,configurable:!0}),e.prototype.createInternal=function(){return this._CommonModule_0=new _.b,this._ɵba_1=new r.j,this._FormsModule_2=new r.d,this._ReactiveFormsModule_3=new r.i,this._IonicModule_4=new u.a,this._IonicPageModule_5=new u.b,this._SearchPageModule_6=new i.a,this._LAZY_LOADED_TOKEN_10=b.a,this._SearchPageModule_6},e.prototype.getInternal=function(t,e){return t===_.b?this._CommonModule_0:t===r.j?this._ɵba_1:t===r.d?this._FormsModule_2:t===r.i?this._ReactiveFormsModule_3:t===u.a?this._IonicModule_4:t===u.b?this._IonicPageModule_5:t===i.a?this._SearchPageModule_6:t===_.j?this._NgLocalization_7:t===r.k?this._ɵi_8:t===r.c?this._FormBuilder_9:t===y.a?this._LAZY_LOADED_TOKEN_10:e},e.prototype.destroyInternal=function(){},e}(o.Z),w=new o.v(M,i.a)},576:function(t,e,n){"use strict";n.d(e,"a",function(){return o});n(1),n(30),n(136);var o=function(){return function(){}}()}});
+webpackJsonp([3],{
+
+/***/ 591:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchPageModule", function() { return SearchPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search__ = __webpack_require__(140);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var SearchPageModule = (function () {
+    function SearchPageModule() {
+    }
+    return SearchPageModule;
+}());
+SearchPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__search__["a" /* SearchPage */]),
+        ],
+    })
+], SearchPageModule);
+
+//# sourceMappingURL=search.module.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=3.js.map

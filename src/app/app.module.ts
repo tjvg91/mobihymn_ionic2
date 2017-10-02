@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -66,7 +66,19 @@ import { Insomnia } from '@ionic-native/insomnia';
     Insomnia,
     File,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GlobalService
+    GlobalService,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig }
   ]
 })
 export class AppModule {}
+
+declare var Hammer: any;
+
+export class HammerConfig extends HammerGestureConfig{
+  buildHammer(element: HTMLElement){
+    let mc = new Hammer(element, {
+      touchAction: "pan-y",
+    });
+    return mc;
+  }
+}
