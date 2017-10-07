@@ -60,12 +60,14 @@ export class ReaderPage implements OnDestroy{
   bookmarksSubscribe: any;
   paddingSubscribe: any;
   themeSubscribe: any;
-  fontSubscribe: any;
+  fontSizeSubscribe: any;
+  fontNameSubscribe: any;
 
   extraSpace: Number = 0;
   alignment: string = "left";
   fontSize: number = 1.4;
   themeString: string = "pic";
+  fontName: string = "Roboto";
 
   curScale: number = 0;
 
@@ -110,8 +112,12 @@ export class ReaderPage implements OnDestroy{
       this.themeString = value;
     });
 
-    this.fontSubscribe = global.fontSizeChange.subscribe((value) =>{
+    this.fontSizeSubscribe = global.fontSizeChange.subscribe((value) =>{
       this.fontSize = value;
+    });
+
+    this.fontNameSubscribe = global.fontNameChange.subscribe((value) => {
+      this.fontName = value;
     });
   }
 

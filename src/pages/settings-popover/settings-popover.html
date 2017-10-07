@@ -62,6 +62,18 @@
         </ion-row>
         <ion-row>
             <ion-col>
+                Font Type:
+            </ion-col>
+            <ion-col>
+                <select [(ngModel)]="activeFontName" (change)="fontNameChange()">
+                    <option *ngFor="let font of fontNames" [value]="font" [ngStyle]="{ 'fontFamily': '' + font + '' }">
+                        {{ font }}
+                    </option>
+                </select>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
                 <ion-range min="0" max="500" [(ngModel)]="paddingText" step="10" snap="true" pin="true" (ionChange)="paddingChange()">
                     <ion-label range-left>&#x2193;</ion-label>
                     <ion-label range-right>&#x21b3;</ion-label>

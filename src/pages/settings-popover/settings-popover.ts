@@ -14,8 +14,11 @@ export class SettingsPopoverPage {
   themeText: string;
   global: GlobalService;
   activeFontSize: number;
+  activeFontName: string;
 
   fontSizes: Array<number> = [1.4, 1.9, 2.4, 2.9, 3.4];
+  fontNames: Array<string> = ["Roboto", "Cookie", "Cormorant", "EB Garamond", "Give You Glory",
+                              "Great Vibes", "Satisfy"]
 
   constructor(private viewCtrl: ViewController, private navParams: NavParams) {
   }
@@ -26,6 +29,7 @@ export class SettingsPopoverPage {
     this.paddingText = this.global.getPadding();
     this.alignmentText = this.global.getActiveAlignment();
     this.themeText = this.global.getTheme();
+    this.activeFontName = this.global.getFontName();
   }
 
   close(){
@@ -100,5 +104,9 @@ export class SettingsPopoverPage {
         }
       }
     }
+  }
+
+  fontNameChange(){
+    this.global.setFontName(this.activeFontName);
   }
 }

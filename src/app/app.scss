@@ -12,6 +12,47 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+@font-face{
+  font-family: "Cookie";
+  src: url("../assets/fonts/cookie/Cookie-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: "Cormorant";
+  src: url("../assets/fonts/cormorantupright/CormorantUpright-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: "EB Garamond";
+  src: url("../assets/fonts/ebgaramond/EBGaramond-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face{
+  font-family: "Give You Glory";
+  src: url("../assets/fonts/giveyouglory/GiveYouGlory.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: "Great Vibes";
+  src: url("../assets/fonts/greatvibes/GreatVibes-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: "Satisfy";
+  src: url("../assets/fonts/satisfy/Satisfy-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .content .scroll-content {
     overflow: auto;
     user-select: auto !important;

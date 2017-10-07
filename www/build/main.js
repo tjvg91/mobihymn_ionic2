@@ -415,6 +415,8 @@ var SettingsPopoverPage = (function () {
         this.viewCtrl = viewCtrl;
         this.navParams = navParams;
         this.fontSizes = [1.4, 1.9, 2.4, 2.9, 3.4];
+        this.fontNames = ["Roboto", "Cookie", "Cormorant", "EB Garamond", "Give You Glory",
+            "Great Vibes", "Satisfy"];
     }
     SettingsPopoverPage.prototype.ionViewDidLoad = function () {
         var main = this.navParams.get('ctrl');
@@ -422,6 +424,7 @@ var SettingsPopoverPage = (function () {
         this.paddingText = this.global.getPadding();
         this.alignmentText = this.global.getActiveAlignment();
         this.themeText = this.global.getTheme();
+        this.activeFontName = this.global.getFontName();
     };
     SettingsPopoverPage.prototype.close = function () {
         this.viewCtrl.dismiss();
@@ -489,16 +492,20 @@ var SettingsPopoverPage = (function () {
             }
         }
     };
+    SettingsPopoverPage.prototype.fontNameChange = function () {
+        this.global.setFontName(this.activeFontName);
+    };
     return SettingsPopoverPage;
 }());
 SettingsPopoverPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-settings-popover',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/settings-popover/settings-popover.html"*/'<!--\n  Generated template for the SettingsPopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-content padding>\n    <ion-list>\n        <ion-row class="alignments">\n            <ion-col>\n                <button ion-button small color="primary" *ngIf="alignmentText==\'left\'">\n                    <span class="fa fa-align-left"></span>\n                </button>\n                <button ion-button small color="primary" clear (click)="alignmentChange(\'left\')" *ngIf="alignmentText!=\'left\'">\n                    <span class="fa fa-align-left"></span>\n                </button>\n            </ion-col>\n            <ion-col>\n                <button ion-button small color="primary" *ngIf="alignmentText==\'center\'">\n                    <span class="fa fa-align-center"></span>\n                </button>\n                <button ion-button small color="primary" clear (click)="alignmentChange(\'center\')" *ngIf="alignmentText!=\'center\'">\n                    <span class="fa fa-align-center"></span>\n                </button>\n            </ion-col>\n            <ion-col>\n                <button ion-button small color="primary" *ngIf="alignmentText==\'right\'">\n                    <span class="fa fa-align-right"></span>\n                </button>\n                <button ion-button small color="primary" clear (click)="alignmentChange(\'right\')" *ngIf="alignmentText!=\'right\'">\n                    <span class="fa fa-align-right"></span>\n                </button>\n            </ion-col>\n        </ion-row>\n\n        <ion-row class="font-sizes">\n            <ion-col>\n                <button ion-button small color="primary" outline (click)="decreaseFont()">\n                    <span class="fa fa-font"></span>-\n                </button>\n            </ion-col>\n            <ion-col>\n                <button ion-button small color="primary" outline (click)="increaseFont()">\n                    <span class="fa fa-font"></span>+\n                </button>\n            </ion-col>\n        </ion-row>\n\n        <ion-row>\n            <ion-col>\n                <button ion-fab class="button-theme theme-light" (click)="setTheme(\'light\')" [ngClass]="{ \'active\': themeText==\'light\' }"></button>\n            </ion-col>\n            <ion-col>\n                <button ion-fab class="button-theme theme-tan" (click)="setTheme(\'tan\')" [ngClass]="{ \'active\': themeText==\'tan\' }"></button>\n            </ion-col>\n            <ion-col>\n                <button ion-fab class="button-theme theme-dark" (click)="setTheme(\'dark\')" [ngClass]="{ \'active\': themeText==\'dark\' }"></button>\n            </ion-col>\n            <ion-col>\n                <button ion-fab class="button-theme theme-pic" (click)="setTheme(\'pic\')" [ngClass]="{ \'active\': themeText==\'pic\' }"></button>\n            </ion-col>\n        </ion-row>\n        <ion-row>\n            <ion-col>\n                <ion-range min="0" max="500" [(ngModel)]="paddingText" step="10" snap="true" pin="true" (ionChange)="paddingChange()">\n                    <ion-label range-left>&#x2193;</ion-label>\n                    <ion-label range-right>&#x21b3;</ion-label>\n                </ion-range>\n            </ion-col>\n        </ion-row>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/settings-popover/settings-popover.html"*/,
+        selector: 'page-settings-popover',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/settings-popover/settings-popover.html"*/'<!--\n  Generated template for the SettingsPopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-content padding>\n    <ion-list>\n        <ion-row class="alignments">\n            <ion-col>\n                <button ion-button small color="primary" *ngIf="alignmentText==\'left\'">\n                    <span class="fa fa-align-left"></span>\n                </button>\n                <button ion-button small color="primary" clear (click)="alignmentChange(\'left\')" *ngIf="alignmentText!=\'left\'">\n                    <span class="fa fa-align-left"></span>\n                </button>\n            </ion-col>\n            <ion-col>\n                <button ion-button small color="primary" *ngIf="alignmentText==\'center\'">\n                    <span class="fa fa-align-center"></span>\n                </button>\n                <button ion-button small color="primary" clear (click)="alignmentChange(\'center\')" *ngIf="alignmentText!=\'center\'">\n                    <span class="fa fa-align-center"></span>\n                </button>\n            </ion-col>\n            <ion-col>\n                <button ion-button small color="primary" *ngIf="alignmentText==\'right\'">\n                    <span class="fa fa-align-right"></span>\n                </button>\n                <button ion-button small color="primary" clear (click)="alignmentChange(\'right\')" *ngIf="alignmentText!=\'right\'">\n                    <span class="fa fa-align-right"></span>\n                </button>\n            </ion-col>\n        </ion-row>\n\n        <ion-row class="font-sizes">\n            <ion-col>\n                <button ion-button small color="primary" outline (click)="decreaseFont()">\n                    <span class="fa fa-font"></span>-\n                </button>\n            </ion-col>\n            <ion-col>\n                <button ion-button small color="primary" outline (click)="increaseFont()">\n                    <span class="fa fa-font"></span>+\n                </button>\n            </ion-col>\n        </ion-row>\n\n        <ion-row>\n            <ion-col>\n                <button ion-fab class="button-theme theme-light" (click)="setTheme(\'light\')" [ngClass]="{ \'active\': themeText==\'light\' }"></button>\n            </ion-col>\n            <ion-col>\n                <button ion-fab class="button-theme theme-tan" (click)="setTheme(\'tan\')" [ngClass]="{ \'active\': themeText==\'tan\' }"></button>\n            </ion-col>\n            <ion-col>\n                <button ion-fab class="button-theme theme-dark" (click)="setTheme(\'dark\')" [ngClass]="{ \'active\': themeText==\'dark\' }"></button>\n            </ion-col>\n            <ion-col>\n                <button ion-fab class="button-theme theme-pic" (click)="setTheme(\'pic\')" [ngClass]="{ \'active\': themeText==\'pic\' }"></button>\n            </ion-col>\n        </ion-row>\n        <ion-row>\n            <ion-col>\n                Font Type:\n            </ion-col>\n            <ion-col>\n                <select [(ngModel)]="activeFontName" (change)="fontNameChange()">\n                    <option *ngFor="let font of fontNames" [value]="font" [ngStyle]="{ \'fontFamily\': \'\' + font + \'\' }">\n                        {{ font }}\n                    </option>\n                </select>\n            </ion-col>\n        </ion-row>\n        <ion-row>\n            <ion-col>\n                <ion-range min="0" max="500" [(ngModel)]="paddingText" step="10" snap="true" pin="true" (ionChange)="paddingChange()">\n                    <ion-label range-left>&#x2193;</ion-label>\n                    <ion-label range-right>&#x21b3;</ion-label>\n                </ion-range>\n            </ion-col>\n        </ion-row>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/settings-popover/settings-popover.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ViewController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _b || Object])
 ], SettingsPopoverPage);
 
+var _a, _b;
 //# sourceMappingURL=settings-popover.js.map
 
 /***/ }),
@@ -641,6 +648,7 @@ var ReaderPage = (function () {
         this.alignment = "left";
         this.fontSize = 1.4;
         this.themeString = "pic";
+        this.fontName = "Roboto";
         this.curScale = 0;
         this.myGlobal = global;
         this.paddingSubscribe = global.paddingChange.subscribe(function (value) {
@@ -666,8 +674,11 @@ var ReaderPage = (function () {
         this.themeSubscribe = global.themeChange.subscribe(function (value) {
             _this.themeString = value;
         });
-        this.fontSubscribe = global.fontSizeChange.subscribe(function (value) {
+        this.fontSizeSubscribe = global.fontSizeChange.subscribe(function (value) {
             _this.fontSize = value;
+        });
+        this.fontNameSubscribe = global.fontNameChange.subscribe(function (value) {
+            _this.fontName = value;
         });
     }
     ReaderPage.prototype.presentPopover = function (myEvent) {
@@ -896,7 +907,7 @@ __decorate([
 ReaderPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-reader',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/'<!--\n  Generated template for the ReaderPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header #readerHeader [@slideUp]="slideUpState">\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button icon-only (click)="presentPopover($event)" id="settings">\n                <span class="fa fa-font"></span>\n            </button>\n        </ion-buttons>\n        <ion-title>MobiHymn</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only (click)="toggleBookmark()">\n                <ion-icon name="star-outline" *ngIf="!isBookmarked"></ion-icon>\n                <ion-icon name="star" *ngIf="isBookmarked"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding #lyricsContainer class="{{ \'theme-\' + themeString }}">\n    <div class="hymn-content" *ngIf="currentHymn" (pinchmove)="pinchZoom($event)" (pinchend)="curScale = 0" [ngStyle]="{\'paddingBottom.px\': extraSpace, \'text-align\': alignment, \'fontSize.em\': fontSize }">\n        <div class="hymn-title">\n            <h2 class="hymn-title" (click)="presentTunePopover($event)">Hymn #{{ currentHymn.title }}</h2>\n        </div>\n        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (click)="toggleFullLyrics($event)">\n        </div>\n    </div>\n\n    <ion-fab bottom right>\n        <button ion-fab [@scale]="scaleState" (click)="presentInputModal()">\n            <ion-icon name="musical-note"></ion-icon>\n        </button>\n    </ion-fab>\n</ion-content>\n\n<ion-footer #footerReader>\n    <ion-toolbar>\n        <audio controls="controls" preload="auto">\n            <source [src]="midi" type="audio/midi" />    \n        </audio>\n    </ion-toolbar>\n</ion-footer>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/,
+        selector: 'page-reader',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/'<!--\n  Generated template for the ReaderPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header #readerHeader [@slideUp]="slideUpState">\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button icon-only (click)="presentPopover($event)" id="settings">\n                <span class="fa fa-font"></span>\n            </button>\n        </ion-buttons>\n        <ion-title>MobiHymn</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only (click)="toggleBookmark()">\n                <ion-icon name="star-outline" *ngIf="!isBookmarked"></ion-icon>\n                <ion-icon name="star" *ngIf="isBookmarked"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding #lyricsContainer class="{{ \'theme-\' + themeString }}">\n    <div class="hymn-content" *ngIf="currentHymn" (pinchmove)="pinchZoom($event)" (pinchend)="curScale = 0"\n        [ngStyle]="{\'paddingBottom.px\': extraSpace, \'text-align\': alignment, \'fontSize.em\': fontSize, \'fontFamily\': fontName}">\n        <div class="hymn-title">\n            <h2 class="hymn-title" (click)="presentTunePopover($event)">Hymn #{{ currentHymn.title }}</h2>\n        </div>\n        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (click)="toggleFullLyrics($event)">\n        </div>\n    </div>\n\n    <ion-fab bottom right>\n        <button ion-fab [@scale]="scaleState" (click)="presentInputModal()">\n            <ion-icon name="musical-note"></ion-icon>\n        </button>\n    </ion-fab>\n</ion-content>\n\n<ion-footer #footerReader>\n    <ion-toolbar>\n        <audio controls="controls" preload="auto">\n            <source [src]="midi" type="audio/midi" />    \n        </audio>\n    </ion-toolbar>\n</ion-footer>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/,
         animations: [
             Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* trigger */])('scale', [
                 Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* state */])('hidden', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["f" /* style */])({
@@ -1492,6 +1503,7 @@ var GlobalService = (function () {
         this.recentCount = 5;
         this.padding = 0;
         this.fontSize = 1.4;
+        this.fontName = "Roboto";
         this.theme = "pic";
         this.hymnalChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
         this.hymnChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
@@ -1503,6 +1515,7 @@ var GlobalService = (function () {
         this.paddingChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
         this.activeAlignmentChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
         this.fontSizeChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.fontNameChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
         this.themeChange = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
     }
     GlobalService.prototype.setHymnals = function (newValue) {
@@ -1570,6 +1583,10 @@ var GlobalService = (function () {
         this.fontSize = newValue;
         this.fontSizeChange.next(this.fontSize);
     };
+    GlobalService.prototype.setFontName = function (newValue) {
+        this.fontName = newValue;
+        this.fontNameChange.next(this.fontName);
+    };
     GlobalService.prototype.setTheme = function (newValue) {
         this.theme = newValue;
         this.themeChange.next(this.theme);
@@ -1609,6 +1626,9 @@ var GlobalService = (function () {
     };
     GlobalService.prototype.getFontSize = function () {
         return this.fontSize;
+    };
+    GlobalService.prototype.getFontName = function () {
+        return this.fontName;
     };
     GlobalService.prototype.getTheme = function () {
         return this.theme;

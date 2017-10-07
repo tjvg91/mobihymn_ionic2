@@ -21,6 +21,7 @@ export class GlobalService {
     recentCount:number = 5;
     padding: Number=0;
     fontSize: number = 1.4;
+    fontName: string = "Roboto"
     theme: string = "pic";
     
     public hymnalChange : Subject<Array<object>> = new Subject<Array<object>>();
@@ -33,6 +34,7 @@ export class GlobalService {
     public paddingChange : Subject<Number> = new Subject<Number>(); 
     public activeAlignmentChange : Subject<string> = new Subject<string>(); 
     public fontSizeChange : Subject<number> = new Subject<number>();
+    public fontNameChange : Subject<string> = new Subject<string>();
     public themeChange : Subject<string> = new Subject<string>();
 
     constructor(private file: File, private platform: Platform) {
@@ -122,6 +124,11 @@ export class GlobalService {
         this.fontSizeChange.next(this.fontSize);
     }
 
+    setFontName(newValue: string){
+        this.fontName = newValue;
+        this.fontNameChange.next(this.fontName);
+    }
+
     setTheme(newValue: string){
         this.theme = newValue;
         this.themeChange.next(this.theme);
@@ -171,6 +178,10 @@ export class GlobalService {
 
     getFontSize() : number{
         return this.fontSize;
+    }
+
+    getFontName() : string{
+        return this.fontName;
     }
 
     getTheme() : string{
