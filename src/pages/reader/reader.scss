@@ -101,12 +101,13 @@ page-reader {
         }
     }
     ion-footer .toolbar-background {
-        background: map-get($colors, 'dark-2') !important;
+        background: map-get($colors, 'dark') !important;
+        border-bottom: 2px solid #000000;
     }
     audio {
         width: 100%;
         &::-webkit-media-controls-panel {
-            background: #000000;
+            background: map-get($colors, 'dark') !important;
         }
         &::-webkit-media-controls-mute-button,
         &::-webkit-media-controls-fullscreen-button,
@@ -122,6 +123,10 @@ page-reader {
         }
         &::-webkit-media-controls-play-button {
             color: white !important;
+
+            &:disabled{
+                background: #000000 !important;
+            }
         }
     }
 }

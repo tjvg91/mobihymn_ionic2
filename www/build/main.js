@@ -592,15 +592,14 @@ TunePopoverPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReaderPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_global_service__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_input_modal_input_modal__ = __webpack_require__(136);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_popover_settings_popover__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tune_popover_tune_popover__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_lodash__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_global_service__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_input_modal_input_modal__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_settings_popover_settings_popover__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_tune_popover_tune_popover__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -619,7 +618,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 /**
  * Generated class for the ReaderPage page.
  *
@@ -627,7 +625,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * on Ionic pages and navigation.
  */
 var ReaderPage = (function () {
-    function ReaderPage(readerCtrl, inputPopCtrl, tunePopCtrl, inputModalCtrl, global, alertCtrl, toastCtrl, platform, domSanitizer, statusBar) {
+    function ReaderPage(readerCtrl, inputPopCtrl, tunePopCtrl, inputModalCtrl, global, alertCtrl, toastCtrl, platform, statusBar) {
         var _this = this;
         this.readerCtrl = readerCtrl;
         this.inputPopCtrl = inputPopCtrl;
@@ -636,7 +634,6 @@ var ReaderPage = (function () {
         this.alertCtrl = alertCtrl;
         this.toastCtrl = toastCtrl;
         this.platform = platform;
-        this.domSanitizer = domSanitizer;
         this.statusBar = statusBar;
         this.scaleState = 'shown';
         this.slideUpState = 'down';
@@ -645,9 +642,7 @@ var ReaderPage = (function () {
         this.fontSize = 1.4;
         this.themeString = "pic";
         this.curScale = 0;
-        this.midi = 'data:audio/midi;base64,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';
         this.myGlobal = global;
-        this.safeMidi = this.domSanitizer.bypassSecurityTrustResourceUrl(this.midi);
         this.paddingSubscribe = global.paddingChange.subscribe(function (value) {
             _this.extraSpace = value;
         });
@@ -655,12 +650,13 @@ var ReaderPage = (function () {
             _this.activeHymnal = _this.myGlobal.getActiveHymnal();
             var hymnList = _this.myGlobal.getHymnList()['hymnal' + _this.myGlobal.getActiveHymnal()];
             var activeHymn = _this.myGlobal.getActiveHymn();
-            _this.currentHymn = __WEBPACK_IMPORTED_MODULE_9_lodash__["filter"](hymnList, function (item) {
+            _this.currentHymn = __WEBPACK_IMPORTED_MODULE_8_lodash__["filter"](hymnList, function (item) {
                 return item.id == activeHymn;
             })[0];
-            var currentHymn = _this.currentHymn['number'].replace(/f|s|t/i, "");
-            _this.tunes = __WEBPACK_IMPORTED_MODULE_9_lodash__["filter"](hymnList, function (item) {
-                return new RegExp(currentHymn + "(f|s|t)", "i").test(item['number']);
+            _this.midi = "assets/midi/h" + _this.currentHymn['number'] + '.mid';
+            var currentHymnNum = _this.currentHymn['number'].replace(/f|s|t/i, "");
+            _this.tunes = __WEBPACK_IMPORTED_MODULE_8_lodash__["filter"](hymnList, function (item) {
+                return new RegExp('^' + currentHymnNum + "(f|s|t)", "i").test(item['number']);
             });
             _this.isBookmarked = global.isInBookmark(_this.activeHymnal, _this.currentHymn['id']);
         });
@@ -675,7 +671,7 @@ var ReaderPage = (function () {
         });
     }
     ReaderPage.prototype.presentPopover = function (myEvent) {
-        var popover = this.inputPopCtrl.create(__WEBPACK_IMPORTED_MODULE_6__pages_settings_popover_settings_popover__["a" /* SettingsPopoverPage */], {
+        var popover = this.inputPopCtrl.create(__WEBPACK_IMPORTED_MODULE_5__pages_settings_popover_settings_popover__["a" /* SettingsPopoverPage */], {
             ctrl: this,
         });
         popover.present({
@@ -683,7 +679,7 @@ var ReaderPage = (function () {
         });
     };
     ReaderPage.prototype.presentTunePopover = function (myEvent) {
-        var popover = this.inputPopCtrl.create(__WEBPACK_IMPORTED_MODULE_7__pages_tune_popover_tune_popover__["a" /* TunePopoverPage */], {
+        var popover = this.inputPopCtrl.create(__WEBPACK_IMPORTED_MODULE_6__pages_tune_popover_tune_popover__["a" /* TunePopoverPage */], {
             ctrl: this,
             tunes: this.tunes,
             activeHymn: this.currentHymn['number']
@@ -694,7 +690,7 @@ var ReaderPage = (function () {
     };
     ReaderPage.prototype.presentInputModal = function () {
         var hymns = this.hymnList;
-        var inputModal = this.inputModalCtrl.create(__WEBPACK_IMPORTED_MODULE_5__pages_input_modal_input_modal__["a" /* InputModalPage */], {
+        var inputModal = this.inputModalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__pages_input_modal_input_modal__["a" /* InputModalPage */], {
             allHymns: hymns,
             activeHymnal: this.activeHymnal,
             globalService: this.myGlobal
@@ -741,9 +737,10 @@ var ReaderPage = (function () {
         var hymnList = this.myGlobal.getHymnList()['hymnal' + this.activeHymnal];
         this.hymnList = hymnList;
         var activeHymn = this.myGlobal.getActiveHymn();
-        this.currentHymn = __WEBPACK_IMPORTED_MODULE_9_lodash__["filter"](hymnList, function (item) {
+        this.currentHymn = __WEBPACK_IMPORTED_MODULE_8_lodash__["filter"](hymnList, function (item) {
             return item.id == activeHymn;
         })[0];
+        this.midi = "assets/midi/h" + this.currentHymn['number'] + '.mid';
         this.isBookmarked = this.myGlobal.isInBookmark(this.activeHymnal, this.currentHymn);
         this.fontSize = this.myGlobal.getFontSize();
         this.extraSpace = this.myGlobal.getPadding();
@@ -753,8 +750,8 @@ var ReaderPage = (function () {
         this.scrollContent = this.lyricsContainerRef._elementRef.nativeElement.querySelector('.scroll-content');
         this.divTab = this.readerCtrl.parent._elementRef.nativeElement.querySelector('.tabbar');
         var currentHymn = this.currentHymn;
-        this.tunes = __WEBPACK_IMPORTED_MODULE_9_lodash__["filter"](hymnList, function (item) {
-            return new RegExp(currentHymn['number'] + "(f|s|t)", "i").test(currentHymn['number']);
+        this.tunes = __WEBPACK_IMPORTED_MODULE_8_lodash__["filter"](hymnList, function (item) {
+            return new RegExp('^' + currentHymn['number'] + "(f|s|t)", "i").test(item['number']);
         });
     };
     ReaderPage.prototype.ngOnDestroy = function () {
@@ -787,83 +784,81 @@ var ReaderPage = (function () {
         this.curScale = event.scale;
     };
     ReaderPage.prototype.toggleFullLyrics = function (ev) {
-        if (ev.tapCount == 1) {
-            var margUp = "";
-            var translateUpTab = "";
-            var translateUpFooter = "";
-            if (this.platform.is('android') || this.platform.is('core')) {
-                margUp = '63px 0 100px';
-                translateUpTab = 'translate(0, 63px)';
-                translateUpFooter = 'translate(0, 115px)';
-            }
-            else if (this.platform.is('ios')) {
-                margUp = '44px 0 80px';
-                translateUpTab = 'translate(0, 49px)';
-                translateUpFooter = 'translate(0, 115px)';
-            }
-            else {
-                margUp = '115px 0 60px';
-                translateUpTab = 'translate(0, -115px)';
-                translateUpFooter = 'translate(0, 115px)';
-            }
-            if (this.scaleState == 'shown') {
-                this.scrollContent.animate([
-                    { offset: 0, 'margin': margUp },
-                    { offset: 1, 'margin': '0 0 0 0' }
-                ], {
-                    duration: 500,
-                    easing: 'ease',
-                    fill: 'forwards'
-                });
-                this.divTab.animate([
-                    { offset: 0, 'transform': 'translate(0, 0)' },
-                    { offset: 1, 'transform': translateUpTab }
-                ], {
-                    duration: 500,
-                    easing: 'ease',
-                    fill: 'forwards'
-                });
-                this.footerReader.nativeElement.animate([
-                    { offset: 0, 'transform': 'translate(0, 0)' },
-                    { offset: 1, 'transform': translateUpFooter }
-                ], {
-                    duration: 500,
-                    easing: 'ease',
-                    fill: 'forwards'
-                });
-                this.slideUpState = 'up';
-                this.scaleState = 'hidden';
-                //this.statusBar.hide();
-            }
-            else {
-                this.scrollContent.animate([
-                    { offset: 0, margin: '0 0 0 0' },
-                    { offset: 1, margin: margUp }
-                ], {
-                    duration: 500,
-                    easing: 'ease',
-                    fill: 'forwards'
-                });
-                this.divTab.animate([
-                    { offset: 0, 'transform': translateUpTab },
-                    { offset: 1, 'transform': 'translate(0, 0)' }
-                ], {
-                    duration: 500,
-                    easing: 'ease',
-                    fill: 'forwards'
-                });
-                this.footerReader.nativeElement.animate([
-                    { offset: 0, 'transform': translateUpFooter },
-                    { offset: 1, 'transform': 'translate(0, 0)' }
-                ], {
-                    duration: 500,
-                    easing: 'ease',
-                    fill: 'forwards'
-                });
-                this.slideUpState = 'down';
-                this.scaleState = 'shown';
-                //this.statusBar.show();
-            }
+        var margUp = "";
+        var translateUpTab = "";
+        var translateUpFooter = "";
+        if (this.platform.is('android') || this.platform.is('core')) {
+            margUp = '63px 0 100px';
+            translateUpTab = 'translate(0, 63px)';
+            translateUpFooter = 'translate(0, 115px)';
+        }
+        else if (this.platform.is('ios')) {
+            margUp = '44px 0 80px';
+            translateUpTab = 'translate(0, 49px)';
+            translateUpFooter = 'translate(0, 115px)';
+        }
+        else {
+            margUp = '115px 0 60px';
+            translateUpTab = 'translate(0, -115px)';
+            translateUpFooter = 'translate(0, 115px)';
+        }
+        if (this.scaleState == 'shown') {
+            this.scrollContent.animate([
+                { offset: 0, 'margin': margUp },
+                { offset: 1, 'margin': '0 0 0 0' }
+            ], {
+                duration: 500,
+                easing: 'ease',
+                fill: 'forwards'
+            });
+            this.divTab.animate([
+                { offset: 0, 'transform': 'translate(0, 0)' },
+                { offset: 1, 'transform': translateUpTab }
+            ], {
+                duration: 500,
+                easing: 'ease',
+                fill: 'forwards'
+            });
+            this.footerReader.nativeElement.animate([
+                { offset: 0, 'transform': 'translate(0, 0)' },
+                { offset: 1, 'transform': translateUpFooter }
+            ], {
+                duration: 500,
+                easing: 'ease',
+                fill: 'forwards'
+            });
+            this.slideUpState = 'up';
+            this.scaleState = 'hidden';
+            //this.statusBar.hide();
+        }
+        else {
+            this.scrollContent.animate([
+                { offset: 0, margin: '0 0 0 0' },
+                { offset: 1, margin: margUp }
+            ], {
+                duration: 500,
+                easing: 'ease',
+                fill: 'forwards'
+            });
+            this.divTab.animate([
+                { offset: 0, 'transform': translateUpTab },
+                { offset: 1, 'transform': 'translate(0, 0)' }
+            ], {
+                duration: 500,
+                easing: 'ease',
+                fill: 'forwards'
+            });
+            this.footerReader.nativeElement.animate([
+                { offset: 0, 'transform': translateUpFooter },
+                { offset: 1, 'transform': 'translate(0, 0)' }
+            ], {
+                duration: 500,
+                easing: 'ease',
+                fill: 'forwards'
+            });
+            this.slideUpState = 'down';
+            this.scaleState = 'shown';
+            //this.statusBar.show();
         }
     };
     ReaderPage.prototype.scroll = function (e) {
@@ -882,26 +877,26 @@ var ReaderPage = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('readerHeader'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */]) === "function" && _a || Object)
 ], ReaderPage.prototype, "divHeader", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('lyricsContainer'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* Content */])
+    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* Content */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* Content */]) === "function" && _b || Object)
 ], ReaderPage.prototype, "lyricsContainerRef", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('footerReader'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */])
+    __metadata("design:type", typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */]) === "function" && _c || Object)
 ], ReaderPage.prototype, "footerReader", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* HostListener */])('mousewheel', ['$event']),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [WheelEvent]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], ReaderPage.prototype, "scroll", null);
 ReaderPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* IonicPage */])(),
+    Object(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-reader',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/'<!--\n  Generated template for the ReaderPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header #readerHeader [@slideUp]="slideUpState">\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button icon-only (click)="presentPopover($event)" id="settings">\n                <span class="fa fa-font"></span>\n            </button>\n        </ion-buttons>\n        <ion-title>MobiHymn</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only (click)="toggleBookmark()">\n                <ion-icon name="star-outline" *ngIf="!isBookmarked"></ion-icon>\n                <ion-icon name="star" *ngIf="isBookmarked"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding #lyricsContainer class="{{ \'theme-\' + themeString }}">\n    <div class="hymn-content" *ngIf="currentHymn" (pinchmove)="pinchZoom($event)" (pinchend)="curScale = 0" [ngStyle]="{\'paddingBottom.px\': extraSpace, \'text-align\': alignment, \'fontSize.em\': fontSize }">\n        <div class="hymn-title">\n            <h2 class="hymn-title" (click)="presentTunePopover($event)">Hymn #{{ currentHymn.title }}</h2>\n        </div>\n        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (tap)="toggleFullLyrics($event)">\n        </div>\n    </div>\n\n    <ion-fab bottom right>\n        <button ion-fab [@scale]="scaleState" (click)="presentInputModal()">\n            <ion-icon name="musical-note"></ion-icon>\n        </button>\n    </ion-fab>\n</ion-content>\n\n<ion-footer #footerReader>\n    <ion-toolbar>\n        <audio controls="controls" preload="auto">\n            <source [src]="safeMidi"\n            type="audio/midi" />    \n        </audio>\n    </ion-toolbar>\n</ion-footer>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/,
+        selector: 'page-reader',template:/*ion-inline-start:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/'<!--\n  Generated template for the ReaderPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header #readerHeader [@slideUp]="slideUpState">\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button icon-only (click)="presentPopover($event)" id="settings">\n                <span class="fa fa-font"></span>\n            </button>\n        </ion-buttons>\n        <ion-title>MobiHymn</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only (click)="toggleBookmark()">\n                <ion-icon name="star-outline" *ngIf="!isBookmarked"></ion-icon>\n                <ion-icon name="star" *ngIf="isBookmarked"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding #lyricsContainer class="{{ \'theme-\' + themeString }}">\n    <div class="hymn-content" *ngIf="currentHymn" (pinchmove)="pinchZoom($event)" (pinchend)="curScale = 0" [ngStyle]="{\'paddingBottom.px\': extraSpace, \'text-align\': alignment, \'fontSize.em\': fontSize }">\n        <div class="hymn-title">\n            <h2 class="hymn-title" (click)="presentTunePopover($event)">Hymn #{{ currentHymn.title }}</h2>\n        </div>\n        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (click)="toggleFullLyrics($event)">\n        </div>\n    </div>\n\n    <ion-fab bottom right>\n        <button ion-fab [@scale]="scaleState" (click)="presentInputModal()">\n            <ion-icon name="musical-note"></ion-icon>\n        </button>\n    </ion-fab>\n</ion-content>\n\n<ion-footer #footerReader>\n    <ion-toolbar>\n        <audio controls="controls" preload="auto">\n            <source [src]="midi" type="audio/midi" />    \n        </audio>\n    </ion-toolbar>\n</ion-footer>'/*ion-inline-end:"/Users/faid/mobihymn_ionic2/src/pages/reader/reader.html"*/,
         animations: [
             Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* trigger */])('scale', [
                 Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* state */])('hidden', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["f" /* style */])({
@@ -923,11 +918,10 @@ ReaderPage = __decorate([
             ])
         ]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["m" /* PopoverController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["m" /* PopoverController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* ModalController */],
-        __WEBPACK_IMPORTED_MODULE_4__services_global_service__["a" /* GlobalService */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["p" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* Platform */],
-        __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */], __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__["a" /* StatusBar */]])
+    __metadata("design:paramtypes", [typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* PopoverController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* PopoverController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* ModalController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_3__services_global_service__["a" /* GlobalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_global_service__["a" /* GlobalService */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* ToastController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Platform */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _m || Object])
 ], ReaderPage);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 //# sourceMappingURL=reader.js.map
 
 /***/ }),
@@ -1317,7 +1311,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* unused harmony export HammerConfig */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser_animations__ = __webpack_require__(270);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular__ = __webpack_require__(21);
@@ -1435,7 +1429,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__["a" /* File */],
             { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["d" /* IonicErrorHandler */] },
             __WEBPACK_IMPORTED_MODULE_7__services_global_service__["a" /* GlobalService */],
-            { provide: __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["d" /* HAMMER_GESTURE_CONFIG */], useClass: __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["e" /* HammerGestureConfig */] }
+            { provide: __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* HAMMER_GESTURE_CONFIG */], useClass: __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["d" /* HammerGestureConfig */] }
         ]
     })
 ], AppModule);
@@ -1452,7 +1446,7 @@ var HammerConfig = (function (_super) {
         return mc;
     };
     return HammerConfig;
-}(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["e" /* HammerGestureConfig */]));
+}(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["d" /* HammerGestureConfig */]));
 
 //# sourceMappingURL=app.module.js.map
 

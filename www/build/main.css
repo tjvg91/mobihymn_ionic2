@@ -33386,7 +33386,8 @@ page-reader ion-content .hymn-content .hymn-stanza:nth-child(1):before {
 }
 
 page-reader ion-footer .toolbar-background {
-  background: #2f2e2e !important;
+  background: #222 !important;
+  border-bottom: 2px solid #000000;
 }
 
 page-reader audio {
@@ -33394,7 +33395,7 @@ page-reader audio {
 }
 
 page-reader audio::-webkit-media-controls-panel {
-  background: #000000;
+  background: #222 !important;
 }
 
 page-reader audio::-webkit-media-controls-mute-button, page-reader audio::-webkit-media-controls-fullscreen-button, page-reader audio::-webkit-media-controls-rewind-button, page-reader audio::-webkit-media-controls-return-to-realtime-button, page-reader audio::-webkit-media-controls-toggle-closed-captions-button {
@@ -33407,6 +33408,10 @@ page-reader audio::-webkit-media-controls-timeline-container, page-reader audio:
 
 page-reader audio::-webkit-media-controls-play-button {
   color: white !important;
+}
+
+page-reader audio::-webkit-media-controls-play-button:disabled {
+  background: #000000 !important;
 }
 
 ion-list-header ion-label ion-badge {

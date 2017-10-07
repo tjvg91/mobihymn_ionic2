@@ -26,7 +26,7 @@
         <div class="hymn-title">
             <h2 class="hymn-title" (click)="presentTunePopover($event)">Hymn #{{ currentHymn.title }}</h2>
         </div>
-        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (tap)="toggleFullLyrics($event)">
+        <div class="lyrics" [innerHTML]="currentHymn.lyrics" (click)="toggleFullLyrics($event)">
         </div>
     </div>
 
@@ -40,8 +40,7 @@
 <ion-footer #footerReader>
     <ion-toolbar>
         <audio controls="controls" preload="auto">
-            <source [src]="safeMidi"
-            type="audio/midi" />    
+            <source [src]="midi" type="audio/midi" />    
         </audio>
     </ion-toolbar>
 </ion-footer>
