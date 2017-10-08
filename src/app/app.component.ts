@@ -212,7 +212,7 @@ export class MyApp{
       if(jsonData["fontSize"])
         this.global.setFontSize(jsonData["fontSize"]);
       if(jsonData["fontName"])
-        this.global.setFontSize(jsonData["fontName"]);
+        this.global.setFontName(jsonData["fontName"]);
       if(jsonData["recentCount"])
         this.global.setRecentCount(jsonData["recentCount"]);
       if(jsonData["extraSpace"])
