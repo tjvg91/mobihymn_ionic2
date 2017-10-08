@@ -202,6 +202,7 @@ export class ReaderPage implements OnDestroy{
     this.extraSpace = this.myGlobal.getPadding();
     this.themeString = this.myGlobal.getTheme();
     this.alignment = this.myGlobal.getActiveAlignment();
+    this.fontName = this.myGlobal.getFontName();
     this.lyricsContainer = this.lyricsContainerRef._elementRef.nativeElement;
     this.scrollContent = this.lyricsContainerRef._elementRef.nativeElement.querySelector('.scroll-content');
     this.divTab = this.readerCtrl.parent._elementRef.nativeElement.querySelector('.tabbar');

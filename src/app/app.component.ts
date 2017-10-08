@@ -188,9 +188,10 @@ export class MyApp{
       'activeHymnal' : this.global.getActiveHymnal(),
       'activeHymn' : this.global.getActiveHymn(),
       'recentCount': this.global.getRecentCount(),
-      'extraSpace': this.global.getPadding(),
+      'extraSpace' : this.global.getPadding(),
       'alignment': this.global.getActiveAlignment(),
       'fontSize' : this.global.getFontSize(),
+      'fontName' : this.global.getFontName(),
       'theme': this.global.getTheme()
     }
     if(!exists)
@@ -210,6 +211,8 @@ export class MyApp{
       this.global.activeHymn = jsonData["activeHymn"];
       if(jsonData["fontSize"])
         this.global.setFontSize(jsonData["fontSize"]);
+      if(jsonData["fontName"])
+        this.global.setFontSize(jsonData["fontName"]);
       if(jsonData["recentCount"])
         this.global.setRecentCount(jsonData["recentCount"]);
       if(jsonData["extraSpace"])
