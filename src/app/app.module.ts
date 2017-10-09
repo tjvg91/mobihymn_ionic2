@@ -19,6 +19,8 @@ import { RevisionsModalPage } from '../pages/revisions-modal/revisions-modal';
 import { SettingsPopoverPage } from '../pages/settings-popover/settings-popover';
 import { TunePopoverPage } from '../pages/tune-popover/tune-popover';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SettingsPopoverItemsPage } from '../pages/settings-popover-items/settings-popover-items';
+import { SettingsPopoverListPage } from '../pages/settings-popover-list/settings-popover-list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -37,7 +39,9 @@ import { Insomnia } from '@ionic-native/insomnia';
     SettingsPopoverPage,
     AuthorModalPage,
     RevisionsModalPage,
-    TunePopoverPage
+    TunePopoverPage,
+    SettingsPopoverItemsPage,
+    SettingsPopoverListPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +62,9 @@ import { Insomnia } from '@ionic-native/insomnia';
     SettingsPopoverPage,
     AuthorModalPage,
     RevisionsModalPage,
-    TunePopoverPage
+    TunePopoverPage,
+    SettingsPopoverItemsPage,
+    SettingsPopoverListPage
   ],
   providers: [
     StatusBar,

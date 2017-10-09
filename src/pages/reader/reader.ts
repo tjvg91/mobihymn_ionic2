@@ -62,6 +62,7 @@ export class ReaderPage implements OnDestroy{
   themeSubscribe: any;
   fontSizeSubscribe: any;
   fontNameSubscribe: any;
+  alignmentSubscribe: any;
 
   extraSpace: Number = 0;
   alignment: string = "left";
@@ -119,6 +120,10 @@ export class ReaderPage implements OnDestroy{
     this.fontNameSubscribe = global.fontNameChange.subscribe((value) => {
       this.fontName = value;
     });
+
+    this.alignmentSubscribe = global.activeAlignmentChange.subscribe((value) => {
+      this.alignment = value;
+    })
   }
 
   presentPopover(myEvent) {

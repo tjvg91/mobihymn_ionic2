@@ -48,6 +48,15 @@ page-reader {
                 color: map-get($colors, 'primary');
             }
         }
+        &.theme-black {
+            background: #000000;
+            color: map-get($colors, 'light');
+            .hymn-line::selection,
+            .first-letter::selection {
+                background-color: map-get($colors, 'primary');
+                color: map-get($colors, 'dark');
+            }
+        }
         &.theme-dark {
             background: map-get($colors, 'dark-2');
             color: map-get($colors, 'light');
