@@ -8,7 +8,7 @@ import { SettingsPopoverPage } from '../../pages/settings-popover/settings-popov
 import { TunePopoverPage } from '../../pages/tune-popover/tune-popover';
 
 import { StatusBar } from '@ionic-native/status-bar'
-
+import { Media, MediaObject } from '@ionic-native/media';
 import * as _ from 'lodash';
 
 /**
@@ -72,7 +72,12 @@ export class ReaderPage implements OnDestroy{
 
   curScale: number = 0;
 
-  midi: string;
+  midi = {
+    name: '',
+    duration: 0
+  };
+  midiFile: MediaObject;
+  curTime: number = 0;
 
   private lyricsContainer: HTMLElement;
   @ViewChild('readerHeader') divHeader: ElementRef;
@@ -83,7 +88,7 @@ export class ReaderPage implements OnDestroy{
 
   constructor(public readerCtrl: NavController, public inputPopCtrl: PopoverController, public tunePopCtrl: PopoverController, public inputModalCtrl: ModalController,
                     global: GlobalService, private alertCtrl: AlertController, private toastCtrl: ToastController, private platform: Platform,
-                    private statusBar: StatusBar) {
+                    private statusBar: StatusBar, private media : Media) {
     this.myGlobal = global;
 
     this.paddingSubscribe = global.paddingChange.subscribe((value) => {
@@ -97,7 +102,6 @@ export class ReaderPage implements OnDestroy{
       this.currentHymn = _.filter(hymnList, function(item){
         return item.id == activeHymn;
       })[0];
-      this.midi = "assets/midi/h" + this.currentHymn['number'] + '.mid';
       let currentHymnNum = this.currentHymn['number'].replace(/f|s|t/i, "");
       this.tunes = _.filter(hymnList, function(item){
         return new RegExp('^' + currentHymnNum + "(f|s|t)", "i").test(item['number']);
@@ -201,7 +205,7 @@ export class ReaderPage implements OnDestroy{
     this.currentHymn = _.filter(hymnList, function(item){
       return item.id == activeHymn;
     })[0];
-    this.midi = "assets/midi/h" + this.currentHymn['number'] + '.mid';
+    this.midi.name = "../assets/midi/h" + this.currentHymn['number'] + '.mid';
     this.isBookmarked = this.myGlobal.isInBookmark(this.activeHymnal, this.currentHymn);
     this.fontSize = this.myGlobal.getFontSize();
     this.extraSpace = this.myGlobal.getPadding();
@@ -215,6 +219,7 @@ export class ReaderPage implements OnDestroy{
     this.tunes = _.filter(hymnList, function(item){
       return new RegExp('^' + currentHymn['number'] + "(f|s|t)", "i").test(item['number']);
     });
+    this.initializePlayer();
   }
 
   ngOnDestroy(){
@@ -346,5 +351,25 @@ export class ReaderPage implements OnDestroy{
     let fontSize = sign < 0 ? Math.max(parseFloat((this.fontSize + prod).toFixed(2)), 1.4) :
                     Math.min(parseFloat((this.fontSize + prod).toFixed(2)), 3.6);
     this.myGlobal.setFontSize(fontSize);
+  }
+
+  initializePlayer(){
+    let path = this.midi.name;
+    this.midiFile = this.media.create(path);
+    this.midiFile.onSuccess.subscribe(() => {
+      this.midi.duration = this.midiFile.getDuration();
+    })
+    this.midiFile.onStatusUpdate.subscribe(status => console.log(status));
+  }
+
+  secsToMins(secs){
+    var num = parseInt(secs) / 60;
+    return num + ":" +  this.pad(secs % 60, 2);
+  }
+
+  pad(num, size) {
+    var s = String(num);
+    while (s.length < (size || 2)) {s = "0" + s;}
+    return s;
   }
 }

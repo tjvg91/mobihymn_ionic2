@@ -30,6 +30,9 @@
         },
         "cordova-plugin-insomnia": {
             "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "mobi.hymn.beta"
         }
     },
     "dependent_plugins": {

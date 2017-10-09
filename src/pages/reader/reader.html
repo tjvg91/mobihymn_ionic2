@@ -40,8 +40,14 @@
 
 <ion-footer #footerReader>
     <ion-toolbar>
-        <audio controls="controls" preload="auto">
-            <source [src]="midi" type="audio/midi" />    
-        </audio>
+        <div class="player">
+            <button ion-button clear>
+                <ion-icon name="play"></ion-icon>
+            </button>
+            <ion-range min="0" max="{{midi.duration}}" value="0" ion-Change step="1" (ionChange)="playerChange($event)">
+                <ion-label range-left>{{ secsToMins(curTime) }}</ion-label>
+                <ion-label range-right>{{ secsToMins(midi.duration) }}</ion-label>
+            </ion-range>
+        </div>
     </ion-toolbar>
 </ion-footer>

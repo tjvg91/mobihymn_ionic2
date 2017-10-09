@@ -30,6 +30,10 @@
         },
         "cordova-plugin-insomnia": {
             "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-media": {
+            "MICROPHONE_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "mobi.hymn.beta"
         }
     },
     "dependent_plugins": {

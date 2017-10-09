@@ -33450,31 +33450,30 @@ page-reader ion-content .hymn-content .hymn-stanza:nth-child(1):before {
 
 page-reader ion-footer .toolbar-background {
   background: #222 !important;
-  border-bottom: 2px solid #000000;
+  border-bottom: 2px solid #000000 !important;
 }
 
-page-reader audio {
-  width: 100%;
+page-reader .player {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-page-reader audio::-webkit-media-controls-panel {
-  background: #222 !important;
+page-reader .player button {
+  color: #f4f4f4;
+  padding-top: 6px;
 }
 
-page-reader audio::-webkit-media-controls-mute-button, page-reader audio::-webkit-media-controls-fullscreen-button, page-reader audio::-webkit-media-controls-rewind-button, page-reader audio::-webkit-media-controls-return-to-realtime-button, page-reader audio::-webkit-media-controls-toggle-closed-captions-button {
-  display: none;
+page-reader .player ion-range {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
 }
 
-page-reader audio::-webkit-media-controls-timeline-container, page-reader audio::-webkit-media-controls-current-time-display, page-reader audio::-webkit-media-controls-time-remaining-display {
-  color: #f4f4f4 !important;
-}
-
-page-reader audio::-webkit-media-controls-play-button {
-  color: white !important;
-}
-
-page-reader audio::-webkit-media-controls-play-button:disabled {
-  background: #000000 !important;
+page-reader .player ion-range [range-left], page-reader .player ion-range [range-right] {
+  color: #f4f4f4;
 }
 
 ion-list-header ion-label ion-badge {

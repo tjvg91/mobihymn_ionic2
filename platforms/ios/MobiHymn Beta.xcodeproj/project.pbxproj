@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
@@ -24,6 +23,7 @@
 		C85D820A474349BC9702A801 /* Insomnia.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AB7485E06D475BAC83486C /* Insomnia.m */; };
 		F3C7B15762C94D3895188448 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E998DA54B54188A4C9440F /* CDVDevice.m */; };
 		FCE89C463CDA44899F042BE1 /* CDVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E9193CCC09A4493B9E1D5399 /* CDVFile.m */; };
+		AA96E12E88DB4630ABF89918 /* CDVSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 7171D900173347E18757E1CF /* CDVSound.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +91,8 @@
 		F70DADD0EA4943CDBC51BABA /* IonicKeyboard.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = IonicKeyboard.m; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "MobiHymn Beta/config.xml"; sourceTree = "<group>"; };
 		F874424E0A99434889400645 /* CDVStatusBar.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVStatusBar.m; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; };
+		7171D900173347E18757E1CF /* CDVSound.m */ = {isa = PBXFileReference; name = "CDVSound.m"; path = "cordova-plugin-media/CDVSound.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		FEA0873C6F7E4FF3A4645C47 /* CDVSound.h */ = {isa = PBXFileReference; name = "CDVSound.h"; path = "cordova-plugin-media/CDVSound.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,8 @@
 				0F456699FAFF40CEB517CCBA /* CDVAssetLibraryFilesystem.h */,
 				11AB7485E06D475BAC83486C /* Insomnia.m */,
 				7ABCE83C437B4BC6B115E59B /* Insomnia.h */,
+				7171D900173347E18757E1CF /* CDVSound.m */,
+				FEA0873C6F7E4FF3A4645C47 /* CDVSound.h */,
 			);
 			name = Plugins;
 			path = "MobiHymn Beta/Plugins";
@@ -352,6 +356,7 @@
 				2DD87889FE034C73A0770B54 /* CDVLocalFilesystem.m in Sources */,
 				3C8A0A754D964F8AAF3AF16A /* CDVAssetLibraryFilesystem.m in Sources */,
 				C85D820A474349BC9702A801 /* Insomnia.m in Sources */,
+				AA96E12E88DB4630ABF89918 /* CDVSound.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

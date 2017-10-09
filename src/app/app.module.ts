@@ -26,6 +26,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { File } from '@ionic-native/file';
 import { Insomnia } from '@ionic-native/insomnia';
+import { Media } from '@ionic-native/media';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     SplashScreen,
     Insomnia,
     File,
+    Media,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GlobalService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig }

@@ -111,30 +111,19 @@ page-reader {
     }
     ion-footer .toolbar-background {
         background: map-get($colors, 'dark') !important;
-        border-bottom: 2px solid #000000;
+        border-bottom: 2px solid #000000 !important;
     }
-    audio {
-        width: 100%;
-        &::-webkit-media-controls-panel {
-            background: map-get($colors, 'dark') !important;
+    
+    .player{
+        display: flex;
+        button{
+            color: map-get($colors, 'light');
+            padding-top: 6px;
         }
-        &::-webkit-media-controls-mute-button,
-        &::-webkit-media-controls-fullscreen-button,
-        &::-webkit-media-controls-rewind-button,
-        &::-webkit-media-controls-return-to-realtime-button,
-        &::-webkit-media-controls-toggle-closed-captions-button {
-            display: none;
-        }
-        &::-webkit-media-controls-timeline-container,
-        &::-webkit-media-controls-current-time-display,
-        &::-webkit-media-controls-time-remaining-display {
-            color: map-get($colors, 'light') !important;
-        }
-        &::-webkit-media-controls-play-button {
-            color: white !important;
-
-            &:disabled{
-                background: #000000 !important;
+        ion-range{
+            flex-grow: 1;
+            [range-left], [range-right]{
+                color: map-get($colors, 'light');
             }
         }
     }
