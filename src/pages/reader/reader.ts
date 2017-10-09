@@ -9,6 +9,7 @@ import { TunePopoverPage } from '../../pages/tune-popover/tune-popover';
 
 import { StatusBar } from '@ionic-native/status-bar'
 import { Media, MediaObject } from '@ionic-native/media';
+import { File } from '@ionic-native/file';
 import * as _ from 'lodash';
 
 /**
@@ -88,7 +89,7 @@ export class ReaderPage implements OnDestroy{
 
   constructor(public readerCtrl: NavController, public inputPopCtrl: PopoverController, public tunePopCtrl: PopoverController, public inputModalCtrl: ModalController,
                     global: GlobalService, private alertCtrl: AlertController, private toastCtrl: ToastController, private platform: Platform,
-                    private statusBar: StatusBar, private media : Media) {
+                    private statusBar: StatusBar, private media: Media, private file: File) {
     this.myGlobal = global;
 
     this.paddingSubscribe = global.paddingChange.subscribe((value) => {
@@ -127,7 +128,7 @@ export class ReaderPage implements OnDestroy{
 
     this.alignmentSubscribe = global.activeAlignmentChange.subscribe((value) => {
       this.alignment = value;
-    })
+    });
   }
 
   presentPopover(myEvent) {
@@ -205,7 +206,11 @@ export class ReaderPage implements OnDestroy{
     this.currentHymn = _.filter(hymnList, function(item){
       return item.id == activeHymn;
     })[0];
-    this.midi.name = "../assets/midi/h" + this.currentHymn['number'] + '.mid';
+    if(this.platform.is('cordova'))
+        this.midi.name = this.file.applicationDirectory + "www/assets/midi/h" + this.currentHymn['number'] + '.mid';
+    else
+        this.midi.name = "../assets/midi/h" + this.currentHymn['number'] + '.mid';
+    
     this.isBookmarked = this.myGlobal.isInBookmark(this.activeHymnal, this.currentHymn);
     this.fontSize = this.myGlobal.getFontSize();
     this.extraSpace = this.myGlobal.getPadding();
@@ -354,12 +359,17 @@ export class ReaderPage implements OnDestroy{
   }
 
   initializePlayer(){
-    let path = this.midi.name;
-    this.midiFile = this.media.create(path);
-    this.midiFile.onSuccess.subscribe(() => {
-      this.midi.duration = this.midiFile.getDuration();
-    })
-    this.midiFile.onStatusUpdate.subscribe(status => console.log(status));
+    try{
+      let path = this.midi.name;
+      this.midiFile = this.media.create(path);
+      this.midiFile.onSuccess.subscribe(() => {
+        this.midi.duration = this.midiFile.getDuration();
+      });
+      this.midiFile.onStatusUpdate.subscribe(status => console.log(status));
+    }
+    catch(err){
+      console.log(err);
+    }
   }
 
   secsToMins(secs){

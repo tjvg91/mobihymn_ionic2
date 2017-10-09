@@ -204,9 +204,6 @@ export class GlobalService {
             url = this.file.applicationDirectory + 'www/assets/hymnal ' + i + '.json';
         else
             url = '../assets/hymnal ' + i + '.json';
-        http.get('../assets/midi/h1.mid').map(resp => resp.arrayBuffer()).subscribe(x => {
-            console.log(x);
-        });
         return http.get(url).map(res => res.json());
     }
 

@@ -3,9 +3,6 @@ import { IonicPageModule } from 'ionic-angular';
 import { SettingsPopoverListPage } from './settings-popover-list';
 
 @NgModule({
-  declarations: [
-    SettingsPopoverListPage,
-  ],
   imports: [
     IonicPageModule.forChild(SettingsPopoverListPage),
   ],
