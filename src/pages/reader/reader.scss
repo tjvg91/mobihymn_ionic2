@@ -85,21 +85,21 @@ page-reader {
             .hymn-stanza {
                 display: block;
                 margin-bottom: 1em;
-                user-select: inherit !important;
+                user-select: text !important;
                 .hymn-line {
                     display: block;
                     line-height: 150%;
-                    user-select: inherit !important;
+                    user-select: text !important;
                 }
             }
             .hymn-refrain {
                 display: block;
                 margin-bottom: 20px;
-                user-select: inherit !important;
+                user-select: text !important;
                 .hymn-line {
                     display: block;
                     line-height: 150%;
-                    user-select: inherit !important;
+                    user-select: text !important;
                 }
             }
             .hymn-stanza:before {
