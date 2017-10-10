@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationProperties</key>
+	<dict>
+		<key>ApplicationPath</key>
+		<string>Applications/MobiHymn Beta.app</string>
+		<key>CFBundleIdentifier</key>
+		<string>mobi.hymn.beta</string>
+		<key>CFBundleShortVersionString</key>
+		<string>0.8.0</string>
+		<key>CFBundleVersion</key>
+		<string>0.8.0</string>
+		<key>SigningIdentity</key>
+		<string>iPhone Developer: tim_gandionco@yahoo.com (93V2A79UHW)</string>
+	</dict>
+	<key>ArchiveVersion</key>
+	<integer>2</integer>
+	<key>CreationDate</key>
+	<date>2017-10-10T15:56:01Z</date>
+	<key>Name</key>
+	<string>MobiHymn Beta</string>
+	<key>SchemeName</key>
+	<string>MobiHymn Beta</string>
+</dict>
+</plist>

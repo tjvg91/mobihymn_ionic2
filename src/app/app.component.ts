@@ -66,7 +66,7 @@ export class MyApp{
               this.checkBookmarks("write");
               this.checkHistory("write");
               this.checkSettings("write");
-            });
+            }).catch(err => alert(err));
           });
         });
       }); 

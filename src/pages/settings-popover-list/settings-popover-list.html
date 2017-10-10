@@ -14,8 +14,9 @@
 
 <ion-content>
   <ion-list>
-    <button class="item item-block" ion-item *ngFor="let setting of settingsList" (click)="goToItems(setting)">
-      {{ setting }}
-    </button>
+    <ion-item *ngFor="let setting of settingsList" (tap)="goToItems(setting)">
+        {{ setting }}
+        <ion-icon name="arrow-forward"></ion-icon>
+    </ion-item>
   </ion-list>
 </ion-content>

@@ -7,8 +7,8 @@
 <ion-content padding>
     <ion-grid>
         <ion-row>
-            <ion-col col-lg-2 col-md-3 col-sm-6 *ngFor="let hymnal of hymnalList">
-                <ion-card (click)="setActiveHymnal(hymnal.id)" [ngClass]="{ 'active': (activeHymnal == hymnal.id) }">
+            <ion-col col-lg-4 col-md-6 col-sm-12 *ngFor="let hymnal of hymnalList">
+                <ion-card (tap)="setActiveHymnal(hymnal.id)" [ngClass]="{ 'active': (activeHymnal == hymnal.id) }">
                     <div class="card-image">
                         <img src="{{ 'assets/' + hymnal.image}}" />
                     </div>

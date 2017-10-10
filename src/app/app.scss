@@ -79,7 +79,6 @@
 }
 
 .bar-button-ios {
-    color: #000 !important;
     &+& {
         margin-left: 10px;
     }
@@ -99,4 +98,8 @@
 
 .list-md .item-block .item-inner{
     border-bottom: 1px solid #000;
+}
+
+.label-ios {
+    margin: 14px 8px 14px 0;
 }

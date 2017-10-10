@@ -18,6 +18,11 @@ page-reader {
     #settings {
         font-size: 1.5em !important;
     }
+    ion-header{
+        .bar-button-ios{
+            color: #000000;
+        }
+    }
     ion-content {
         user-select: text !important;
         &.theme-pic {
