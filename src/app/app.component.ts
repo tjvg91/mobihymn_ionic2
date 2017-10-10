@@ -31,7 +31,7 @@ export class MyApp{
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private global : GlobalService,
               private file: File, private insomnia: Insomnia) {
-    if(!platform.is('core')){
+    if(platform.is('cordova')){
       platform.ready().then(() => {
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
@@ -43,7 +43,7 @@ export class MyApp{
         this.ios = platform.is('ios');
         this.wp = platform.is('wp');
 
-        this.storage = this.android ? file.externalRootDirectory : file.dataDirectory;
+        this.storage = this.android ? file.externalRootDirectory : file.documentsDirectory;
         this.file.checkDir(this.storage, this.MAIN_FOLDER_NAME).then(() =>{
           this.checkBookmarks("read");
           this.checkHistory("read");

@@ -40,11 +40,11 @@ export class SettingsPopoverItemsPage {
     this.alignmentText = this.data['alignment'];
     this.themeText = this.data['theme'];
     this.paddingText = this.data['extraSpace'];
-    this.activeFontSize = this.data['fontSize'];
+    this.activeFontSize = parseFloat(this.data['fontSize']);
   }
 
   goBack(){
-    this.navCtrl.pop();
+    //this.navCtrl.pop();
     this.navCtrl.popTo(SettingsPopoverListPage, {
       'global': this.global
     })

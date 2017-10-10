@@ -14,14 +14,14 @@ page-settings-popover-list {
         
     ion-content{
         height: 100%;
-        .scroll-content{         
+        .scroll-content{ 
             z-index: 200;
 
             button{
                 background: inherit;
                 ion-icon{
                     float: right;
-                }                
+                }    
             }
         }
     }

@@ -352,7 +352,7 @@ export class ReaderPage implements OnDestroy{
   }
 
   zoom(sign: number){
-    var prod = (0.01 * sign);
+    var prod = (0.1 * sign);
     let fontSize = sign < 0 ? Math.max(parseFloat((this.fontSize + prod).toFixed(2)), 1.4) :
                     Math.min(parseFloat((this.fontSize + prod).toFixed(2)), 3.6);
     this.myGlobal.setFontSize(fontSize);
