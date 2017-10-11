@@ -269,7 +269,7 @@ export class ReaderPage implements OnDestroy{
       if(this.platform.is('android') || this.platform.is('core')){
         margUp = '63px 0 100px';
         translateUpTab = 'translate(0, 63px)';
-        translateUpFooter = 'translate(0, 115px)';
+        translateUpFooter = 'translate(0, 123px)';
       }
       else if(this.platform.is('ios')){
         margUp = '44px 0 80px';
