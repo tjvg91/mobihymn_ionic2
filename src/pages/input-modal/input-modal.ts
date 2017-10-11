@@ -84,8 +84,8 @@ export class InputModalPage{
   ngAfterViewInit(){
     setTimeout(() => {
       this.hymnFilterSearchbar.value = this.hymnFilterString;
-      //this.hymnFilterSearchbar.setFocus();
-      //this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
+      this.hymnFilterSearchbar.setFocus();
+      this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
       this.filterHymns(null);
     }, 500);
   }
