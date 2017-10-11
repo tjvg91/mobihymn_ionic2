@@ -18,7 +18,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		unYYxDs3FoceKgJwm+68wvL942I=
+		T54/2DgU03ICo9nten9XuJyvxAs=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		sDP8OGuYMl9B4JxCU74tO6CUzNg=
+		2XUtQ413F1Rkl7EzLQEFdt83zKc=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -90,7 +90,7 @@
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		HomR0bVl3S3CKNIuAXXpeiXkGHs=
+		5/OrcTlOoLTljXO/Np70ZibkMJ8=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -102,7 +102,7 @@
 		</data>
 		<key>config.xml</key>
 		<data>
-		rDbQDgbme/CqFGTEwYFxhv81iMo=
+		d2taOoD3VUgjOuIa0ucWMe3LM7A=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -188,26 +188,6 @@
 		<data>
 		befd9ElCqJ7OLz9t6gkf5BN5qmw=
 		</data>
-		<key>www/assets/fonts/greatvibes/DESCRIPTION.en_us.html</key>
-		<data>
-		K2/jdt1abqVeg7YIp8ew20WtXuw=
-		</data>
-		<key>www/assets/fonts/greatvibes/FONTLOG.txt</key>
-		<data>
-		JG+36Pc5ZNNBXJ6gVBZLQsbSbF8=
-		</data>
-		<key>www/assets/fonts/greatvibes/GreatVibes-Regular.ttf</key>
-		<data>
-		nzPH/wlJfwKxYx5XIwX9QSghxiQ=
-		</data>
-		<key>www/assets/fonts/greatvibes/METADATA.pb</key>
-		<data>
-		klnaZFzEhFcgkOweCvygKz6VsTo=
-		</data>
-		<key>www/assets/fonts/greatvibes/OFL.txt</key>
-		<data>
-		m++Q0HNOG7/zhDekKCAUBw8RZJg=
-		</data>
 		<key>www/assets/fonts/ionicons.woff</key>
 		<data>
 		0ocalkrbgCf5t2XDpT+V0TkvKz8=
@@ -215,6 +195,26 @@
 		<key>www/assets/fonts/ionicons.woff2</key>
 		<data>
 		eApJg7kU998bJ9ej8VCz3OJ63ao=
+		</data>
+		<key>www/assets/fonts/princesssofia/DESCRIPTION.en_us.html</key>
+		<data>
+		xyWDUcbO6uAdYwEZd0tHYDS1dKQ=
+		</data>
+		<key>www/assets/fonts/princesssofia/FONTLOG.txt</key>
+		<data>
+		yPsQFoW/tR+WuOzWwRte5u2XAPQ=
+		</data>
+		<key>www/assets/fonts/princesssofia/METADATA.pb</key>
+		<data>
+		lfo7cK5fBWVxShsk0zN2BQ1D+Nc=
+		</data>
+		<key>www/assets/fonts/princesssofia/OFL.txt</key>
+		<data>
+		+yT+zrTG1kHhlKZWzrvZOmbh+4U=
+		</data>
+		<key>www/assets/fonts/princesssofia/PrincessSofia-Regular.ttf</key>
+		<data>
+		3GrtTdejz+q8YfhcYhHpAimsX3k=
 		</data>
 		<key>www/assets/fonts/roboto-bold.woff</key>
 		<data>
@@ -3366,11 +3366,11 @@
 		</data>
 		<key>www/build/main.css</key>
 		<data>
-		qqpM+m0aCqsLW5l1AAOyzRaPEOE=
+		SmtHuUcSM7NPoCsK4GwfZA9m56o=
 		</data>
 		<key>www/build/main.js</key>
 		<data>
-		FwiJoxRV4VMLGY4RARJ+1DqlGHw=
+		AV1Vyb6eSyMi0i5no3GOlzyAt20=
 		</data>
 		<key>www/build/polyfills.js</key>
 		<data>
@@ -3600,11 +3600,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			unYYxDs3FoceKgJwm+68wvL942I=
+			T54/2DgU03ICo9nten9XuJyvxAs=
 			</data>
 			<key>hash2</key>
 			<data>
-			Q+8mctZqWrcMNtxVI3SLa/nPkakmxT/UcU9oSswBqz8=
+			cpNnK3F+6ERBwUrASmGkB8r1kSpjsKHs6J6WN09H9VQ=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
@@ -3622,11 +3622,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			sDP8OGuYMl9B4JxCU74tO6CUzNg=
+			2XUtQ413F1Rkl7EzLQEFdt83zKc=
 			</data>
 			<key>hash2</key>
 			<data>
-			oudQKbK47jhXsxtSjET0RPMT8untGBwAJUb8Ikkq9RU=
+			njfpKjDuIddi7FR4K1abwK4ToYzh3cQjJofmeQMiuKE=
 			</data>
 		</dict>
 		<key>LaunchImage-568h@2x.png</key>
@@ -3787,11 +3787,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HomR0bVl3S3CKNIuAXXpeiXkGHs=
+			5/OrcTlOoLTljXO/Np70ZibkMJ8=
 			</data>
 			<key>hash2</key>
 			<data>
-			pbvDPTUgS+6FDXSPNidwgmOJ/7af/WrcESpjCiyqKPo=
+			nZEWXwaCu5bYHxM/y85lykZR2yQBEmyJ5Wzosx47TG8=
 			</data>
 		</dict>
 		<key>archived-expanded-entitlements.xcent</key>
@@ -3809,11 +3809,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			rDbQDgbme/CqFGTEwYFxhv81iMo=
+			d2taOoD3VUgjOuIa0ucWMe3LM7A=
 			</data>
 			<key>hash2</key>
 			<data>
-			ROxhzqcaH2cBnTwdPqdJv+3YMgopxEUxJZDcMIy1+48=
+			UeLtBpctBPGWxEy/Erpf01dGIHSd7e44SeDtVm80Zyg=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>
@@ -4047,61 +4047,6 @@
 			DkQa6fGK0MKUzFtq45dMLbFhTKsiBZhXixtYxMwzRIU=
 			</data>
 		</dict>
-		<key>www/assets/fonts/greatvibes/DESCRIPTION.en_us.html</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			K2/jdt1abqVeg7YIp8ew20WtXuw=
-			</data>
-			<key>hash2</key>
-			<data>
-			wBNXLeSgm4rsOg5l0l+HFziwRm9bgZK9bAd2dKPFIAA=
-			</data>
-		</dict>
-		<key>www/assets/fonts/greatvibes/FONTLOG.txt</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			JG+36Pc5ZNNBXJ6gVBZLQsbSbF8=
-			</data>
-			<key>hash2</key>
-			<data>
-			sp0yAHB0pao4ccd9FDqLUcykaU4TRDZcAkuK5OR82+o=
-			</data>
-		</dict>
-		<key>www/assets/fonts/greatvibes/GreatVibes-Regular.ttf</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			nzPH/wlJfwKxYx5XIwX9QSghxiQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			m03mQ8VBzI+FuL4z6pP2Exp5EbrJy0QBW0lVLkArG1U=
-			</data>
-		</dict>
-		<key>www/assets/fonts/greatvibes/METADATA.pb</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			klnaZFzEhFcgkOweCvygKz6VsTo=
-			</data>
-			<key>hash2</key>
-			<data>
-			vWL2HfA3ikK7GXuO2OMjgXNQqlxnny3gSXVQN5v1omg=
-			</data>
-		</dict>
-		<key>www/assets/fonts/greatvibes/OFL.txt</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			m++Q0HNOG7/zhDekKCAUBw8RZJg=
-			</data>
-			<key>hash2</key>
-			<data>
-			8wpwReTiEgEYKyufxOS5YYmq6s6yyOm2jYvT3E48Wic=
-			</data>
-		</dict>
 		<key>www/assets/fonts/ionicons.woff</key>
 		<dict>
 			<key>hash</key>
@@ -4122,6 +4067,61 @@
 			<key>hash2</key>
 			<data>
 			Ssxv++6sUheVFkf1V52MmVJsZ1f/hKcKT/HzL78XNIs=
+			</data>
+		</dict>
+		<key>www/assets/fonts/princesssofia/DESCRIPTION.en_us.html</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xyWDUcbO6uAdYwEZd0tHYDS1dKQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			0dU3p1ycVX8gsHvUQ4HGT2WcFsyTvu/UW+lNdvLLLLA=
+			</data>
+		</dict>
+		<key>www/assets/fonts/princesssofia/FONTLOG.txt</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yPsQFoW/tR+WuOzWwRte5u2XAPQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			phafTSDXOirOcSR0ifBhWhT2/Fmf44h24s6eG/FLkQQ=
+			</data>
+		</dict>
+		<key>www/assets/fonts/princesssofia/METADATA.pb</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lfo7cK5fBWVxShsk0zN2BQ1D+Nc=
+			</data>
+			<key>hash2</key>
+			<data>
+			LoJ0Nuqgku3zrGi6Z+w/ma9wnX7nCNhKHm6rRgO10yI=
+			</data>
+		</dict>
+		<key>www/assets/fonts/princesssofia/OFL.txt</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+yT+zrTG1kHhlKZWzrvZOmbh+4U=
+			</data>
+			<key>hash2</key>
+			<data>
+			Pw8nkxySRTmUF2rzseeVT5qsOf4UU3TW0IxHyCLoLlk=
+			</data>
+		</dict>
+		<key>www/assets/fonts/princesssofia/PrincessSofia-Regular.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			3GrtTdejz+q8YfhcYhHpAimsX3k=
+			</data>
+			<key>hash2</key>
+			<data>
+			K13zCnuGbNdkzE/1htyMKOFpZwmdUKtYLwA/+8cijuU=
 			</data>
 		</dict>
 		<key>www/assets/fonts/roboto-bold.woff</key>
@@ -12785,22 +12785,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qqpM+m0aCqsLW5l1AAOyzRaPEOE=
+			SmtHuUcSM7NPoCsK4GwfZA9m56o=
 			</data>
 			<key>hash2</key>
 			<data>
-			ty0RTI8vY6eKAwzi1/WL/opla6aJNMZH1GMHF8qeUCg=
+			BQ4cjWOJJTHir0+NJivu+9oUh/SnVPK0iHDUEXo+GJc=
 			</data>
 		</dict>
 		<key>www/build/main.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FwiJoxRV4VMLGY4RARJ+1DqlGHw=
+			AV1Vyb6eSyMi0i5no3GOlzyAt20=
 			</data>
 			<key>hash2</key>
 			<data>
-			yMtGZTUA4Hr2l+s0c/adaOsxS2e+SQqRpBS9WMc3Q8w=
+			0ST0ROcDxv91NBydkzsaxyKFE5cY+DFCdEnk8mQdnuM=
 			</data>
 		</dict>
 		<key>www/build/polyfills.js</key>

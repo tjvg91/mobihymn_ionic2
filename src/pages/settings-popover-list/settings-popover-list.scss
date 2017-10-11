@@ -19,6 +19,7 @@ page-settings-popover-list {
 
             ion-item{
                 background: inherit;
+                z-index: 300;
                 ion-icon{
                     float: right;
                 }    

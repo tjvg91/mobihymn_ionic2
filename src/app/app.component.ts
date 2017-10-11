@@ -36,6 +36,7 @@ export class MyApp{
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
         statusBar.styleDefault();
+        statusBar.hide();
         splashScreen.hide();
         insomnia.keepAwake();
 
@@ -66,7 +67,7 @@ export class MyApp{
               this.checkBookmarks("write");
               this.checkHistory("write");
               this.checkSettings("write");
-            }).catch(err => alert(err));
+            })
           });
         });
       }); 

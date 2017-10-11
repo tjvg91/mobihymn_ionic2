@@ -17,5 +17,6 @@ page-settings-popover-items {
     }
     ion-item{
         background-color: inherit !important;
+        z-index: 300;
     }
 }

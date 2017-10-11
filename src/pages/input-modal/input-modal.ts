@@ -84,8 +84,8 @@ export class InputModalPage{
   ngAfterViewInit(){
     setTimeout(() => {
       this.hymnFilterSearchbar.value = this.hymnFilterString;
-      this.hymnFilterSearchbar.setFocus();
-      this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
+      //this.hymnFilterSearchbar.setFocus();
+      //this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
       this.filterHymns(null);
     }, 500);
   }
@@ -135,13 +135,13 @@ export class InputModalPage{
 
   bkmkSelect(){
     setTimeout(() => {
-      this.bkmkFilterSearchbar.setFocus();
+      //this.bkmkFilterSearchbar.setFocus();
     }, 200);    
   }
 
   hymnSelect(){
     setTimeout(() => {
-      this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
+      //this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
       this.hymnFilterSearchbar.setFocus();
     }, 200);    
   }

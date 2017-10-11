@@ -16,7 +16,7 @@
 <ion-content>
   <div *ngIf="activeList == 'Alignment'">
     <ion-list radio-group [(ngModel)]="alignmentText" (ionChange)="alignmentChange()">
-        <ion-item *ngFor="let align of alignments">
+        <ion-item *ngFor="let align of alignments" tappable>
           <span class="fa fa-align-{{align}}"></span>
           <ion-label>{{ align.charAt(0).toUpperCase() + align.slice(1) }}</ion-label>
           <ion-radio value="{{ align }}"></ion-radio>
@@ -25,7 +25,7 @@
   </div>
   <div *ngIf="activeList == 'Theme'">
     <ion-list radio-group [(ngModel)]="themeText" (ionChange)="themeChange()">
-      <ion-item *ngFor="let theme of themes">
+      <ion-item *ngFor="let theme of themes" tappable>
           <ion-label>{{ theme.charAt(0).toUpperCase() + theme.slice(1) }}</ion-label>
           <ion-radio value="{{ theme }}"></ion-radio>
       </ion-item>
@@ -33,7 +33,7 @@
   </div>
   <div *ngIf="activeList == 'Font Size'">
     <ion-list radio-group [(ngModel)]="activeFontSize" (ionChange)="fontSizeChange()">
-      <ion-item *ngFor="let size of fontSizes">
+      <ion-item *ngFor="let size of fontSizes" tappable>
           <ion-label>{{ size }}</ion-label>
           <ion-radio value="{{ size }}"></ion-radio>
       </ion-item>
@@ -41,7 +41,7 @@
   </div>
   <div *ngIf="activeList == 'Font Name'">
     <ion-list radio-group [(ngModel)]="activeFontName" (ionChange)="fontNameChange()">
-      <ion-item *ngFor="let name of fontNames">
+      <ion-item *ngFor="let name of fontNames" tappable>
           <ion-label [ngStyle]="{ 'fontFamily': name }">{{ name }}</ion-label>
           <ion-radio value="{{ name }}"></ion-radio>
       </ion-item>
