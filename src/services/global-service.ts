@@ -15,8 +15,8 @@ export class GlobalService {
     activeHymn:string = "";
     activeAlignment="left";
 
-    bookmarks: Array<object> = new Array<object>();
-    history: Array<object> = new Array<object>();
+    public bookmarks: Array<object> = new Array<object>();
+    public history: Array<object> = new Array<object>();
     
     recentCount:number = 5;
     padding: Number=0;
@@ -63,9 +63,8 @@ export class GlobalService {
             this.history.splice(index);
 
         this.history.splice(0, 0, newValue);
-        if(index >= 0)
-            this.history.splice(index);
-            
+        if(this.history.length > this.recentCount)
+            this.history.splice(this.history.length - 1);
 
         this.historyChange.next(this.history);
     }
@@ -163,9 +162,7 @@ export class GlobalService {
 
     getRecentList() : Array<object>{
         let activeHymnal = this.activeHymnal
-        return this.history.filter(x => {
-            return x['hymnalId'] == activeHymnal;
-        });
+        return this.history;
     }
 
     getPadding() : Number{

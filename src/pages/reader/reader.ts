@@ -273,7 +273,7 @@ export class ReaderPage implements OnDestroy{
       }
       else if(this.platform.is('ios')){
         margUp = '44px 0 80px';
-        translateUpTab = 'translate(0, 49px)';
+        translateUpTab = 'translate(0, 51px)';
         translateUpFooter = 'translate(0, 115px)';
       }
       else{ //windows

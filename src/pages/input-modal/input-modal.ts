@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, ViewController, NavParams, Searchbar, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, ViewController, NavParams, Searchbar, AlertController, ToastController, Platform } from 'ionic-angular';
 import { GlobalService } from '../../services/global-service';
+import { File } from '@ionic-native/file';
 
 import * as _ from 'lodash';
 
@@ -40,12 +41,20 @@ export class InputModalPage{
   number: string;
   tune: string;
   keyboardShow: string;
+  fileRoot: string;
+
+  MAIN_FOLDER_NAME: string = "MobiHymn";
+  BOOKMARKS_JSON_NAME: string = "bookmarks.json";
+  HISTORY_JSON_NAME: string = "history.json";
 
   constructor(public viewCtrl: ViewController, inputParams: NavParams,
-            private alertCtrl: AlertController, private toastCtrl: ToastController) {
+            private alertCtrl: AlertController, private toastCtrl: ToastController,
+            private file: File, private platform: Platform, private global: GlobalService) {
     this.inputType = "all_hymns";
     this.hymnLimit = 5;
     this.navParams = inputParams;
+
+    this.fileRoot = platform.is('android') ? file.externalRootDirectory : file.documentsDirectory;
   }
 
   dismiss() {
@@ -84,9 +93,9 @@ export class InputModalPage{
   ngAfterViewInit(){
     setTimeout(() => {
       this.hymnFilterSearchbar.value = this.hymnFilterString;
+      this.filterHymns(null);
       this.hymnFilterSearchbar.setFocus();
       this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
-      this.filterHymns(null);
     }, 500);
   }
 
@@ -141,8 +150,8 @@ export class InputModalPage{
 
   hymnSelect(){
     setTimeout(() => {
-      //this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
       this.hymnFilterSearchbar.setFocus();
+      this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
     }, 200);    
   }
 
@@ -206,6 +215,24 @@ export class InputModalPage{
       duration: 3000
     });
     confirmedUnbookmark.present();
+  }
+
+  refreshBookmarks(){
+    let path = this.fileRoot + '/' + this.MAIN_FOLDER_NAME;
+    this.file.readAsText(path, this.BOOKMARKS_JSON_NAME).then((data) => {
+      let jsonData = JSON.parse(data);
+      this.global.bookmarks = jsonData;
+      this.bookmarkList = jsonData;
+    });
+  }
+
+  refreshRecent(){
+    let path = this.fileRoot + '/' + this.MAIN_FOLDER_NAME;
+    this.file.readAsText(path, this.HISTORY_JSON_NAME).then((data) => {
+      let jsonData = JSON.parse(data);
+      this.global.history = jsonData;
+      this.recentList = jsonData;
+    });
   }
 }
 

@@ -22,6 +22,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPopoverItemsPage } from '../pages/settings-popover-items/settings-popover-items';
 import { SettingsPopoverListPage } from '../pages/settings-popover-list/settings-popover-list';
 import { ImageMakerPage } from '../pages/image-maker/image-maker';
+import { IntroSliderComponent } from '../components/intro-slider/intro-slider';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -44,7 +45,8 @@ import { Media } from '@ionic-native/media';
     TunePopoverPage,
     SettingsPopoverItemsPage,
     SettingsPopoverListPage,
-    ImageMakerPage
+    ImageMakerPage,
+    IntroSliderComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { Media } from '@ionic-native/media';
     TunePopoverPage,
     SettingsPopoverItemsPage,
     SettingsPopoverListPage,
-    ImageMakerPage
+    ImageMakerPage,
+    IntroSliderComponent
   ],
   providers: [
     StatusBar,

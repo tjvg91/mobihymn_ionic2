@@ -111,9 +111,7 @@ export class MyApp{
   readBookmarks(){
     this.file.readAsText(this.storage + '/' + this.MAIN_FOLDER_NAME, this.BOOKMARKS_JSON_NAME).then((data) => {
       let bkmkArray = JSON.parse(data);
-      let i = 0;
-      for(;i < bkmkArray.length; i++)
-        this.global.addToBookmarks(bkmkArray[i]);
+      this.global.bookmarks = bkmkArray;
     })
   }
 
@@ -153,10 +151,9 @@ export class MyApp{
   }
 
   readHistory(){
-    this.file.readAsText(this.storage + '/' + this.MAIN_FOLDER_NAME, this.HISTORY_JSON_NAME).then((data) => {      let histArray = JSON.parse(data);
-      let i = 0;
-      for(;i < histArray.length; i++)
-        this.global.addToRecent(histArray[i]);
+    this.file.readAsText(this.storage + '/' + this.MAIN_FOLDER_NAME, this.HISTORY_JSON_NAME).then((data) => {
+      let histArray = JSON.parse(data);
+      this.global.history = histArray;
     })
   }
 
