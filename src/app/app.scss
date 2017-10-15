@@ -47,8 +47,15 @@
 }
 
 @font-face{
-  font-family: "Satisfy";
-  src: url("../assets/fonts/satisfy/Satisfy-Regular.ttf") format("truetype");
+  font-family: "Redressed";
+  src: url("../assets/fonts/redressed/Redressed.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: "Dekko";
+  src: url("../assets/fonts/dekko/Dekko-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -102,4 +109,8 @@
 
 .label-ios {
     margin: 14px 8px 14px 0;
+}
+
+.popover-content{
+    height: 23em;
 }

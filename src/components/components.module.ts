@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { KeyboardComponent } from './keyboard/keyboard';
 import { IntroSliderComponent } from './intro-slider/intro-slider';
 @NgModule({
-	declarations: [KeyboardComponent,
-    IntroSliderComponent],
+	declarations: [KeyboardComponent],
 	imports: [CommonModule],
 	exports: [KeyboardComponent,
     IntroSliderComponent]
