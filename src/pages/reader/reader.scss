@@ -22,11 +22,6 @@ page-reader {
         .bar-button-ios{
             color: #000000;
         }
-        ion-navbar[color="dark"]{
-            ion-title .toolbar-title{
-                color: yellow;
-            }
-        }
     }
     ion-content {
         user-select: text !important;
