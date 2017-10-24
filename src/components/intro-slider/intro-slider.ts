@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Slides, Platform } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 
 /**
@@ -14,60 +14,49 @@ import { File } from '@ionic-native/file';
 })
 export class IntroSliderComponent {
   slideList: Array<Object>;
-  isIOS: boolean;
-  isAndroid: boolean;
-  constructor(private platform: Platform, private file: File) {
-    var url = platform.is('cordova') ? (this.file.applicationDirectory + 'www/') : '../'
-    url += "assets/images/intro/";
-    this.isIOS = this.platform.is('ios');
-    this.isAndroid = this.platform.is('android');
 
-    this.slideList = [{
-      img: url + "mh-library.png",
-      os: "ios|android",
-      size: "mobile|iphone|phablet|tablet|ipad",
-      description: "Browse hymnals"
-    },{
-      img: url + "mh-reader-ios.png",
-      os: "ios",
-      size: "iphone|ipad",
-      description: "Read and play the hymn"
-    },{
-      img: url + "mh-reader-android.png",
-      os: "android",
-      size: "mobile|phablet|tablet",
-      description: "Read and play the hymn"
-    },{
-      img: url + "mh-reader-settings-ios.png",
-      os: "ios",
-      size: "iphone|ipad",
-      description: "Customize"
-    },{
-      img: url + "mh-reader-settings-android.png",
-      os: "android",
-      size: "mobile|phablet|tablet",
-      description: "Customize"
-    },{
-      img: url + "mh-input-ios-ipad.png",
-      os: "ios",
-      size: "ipad",
-      description: "Read, bookmark, and play the hymn"
-    },{
-      img: url + "mh-input-ios-iphone.png",
-      os: "ios",
-      size: "iphone",
-      description: "Read, bookmark, and play the hymn"
-    },{
-      img: url + "mh-input-android-phone.png",
-      os: "android",
-      size: "mobile|phablet|",
-      description: "Browse hymns"
-    },{
-      img: url + "mh-input-android-tablet.png",
-      os: "android",
-      size: "tablet",
-      description: "Browse hymns"
-    }]
+  @ViewChild(Slides) slides: Slides;
+
+  constructor(private platform: Platform, private file: File) {
+    //if(window.localStorage.getItem('introSlider')){}
+    platform.ready().then(() => {
+      var url = platform.is('cordova') ? (file.applicationDirectory + 'www/') : '../';
+      
+      this.slideList = [{
+        icon: [url + "assets/images/logo/Icon-72@2x.png"],
+        iconType: "img",
+        title: "Welcome to MobiHymn"
+      },{
+        icon: ["book"],
+        iconType: "ion",
+        title: "Browse hymnals",
+        description: "Browse through all the hymnals you desire to read"
+      },{
+        icon: ["glasses"],
+        iconType: "ion",
+        title: "Read a hymn",
+        description: "MobiHymn lets you read a hymn's lyrics in a chosen hymnal"
+      },{
+        icon: ["play", "pause"],
+        iconType: "ion",
+        title: "Play a hymn",
+        description: "MobiHymn lets you also play the hymn"
+      },{
+        icon: ["font"],
+        iconType: "fa",
+        title: "Customize",
+        description: "Customize reading page to your satisfaction"
+      },{
+        icon: ["checkmark-circle-outline"],
+        iconType: "ion",
+        title: "Start reading"
+      }];
+    })
+  }
+
+  exitSlides(){
+    this.slides._elementRef.nativeElement.parentElement.style.display = "none";
+    //window.localStorage.setItem('introSlider', 'done');
   }
 
 }

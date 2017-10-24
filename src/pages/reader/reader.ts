@@ -1,5 +1,6 @@
 import { Component, OnDestroy, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { AudioProvider } from 'ionic-audio';
 
 import { IonicPage, NavController, PopoverController, ModalController, AlertController, ToastController, Gesture, Content, Platform } from 'ionic-angular';
 import { GlobalService } from '../../services/global-service';
@@ -8,7 +9,6 @@ import { SettingsPopoverPage } from '../../pages/settings-popover/settings-popov
 import { TunePopoverPage } from '../../pages/tune-popover/tune-popover';
 
 import { StatusBar } from '@ionic-native/status-bar'
-import { Media, MediaObject } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 import * as _ from 'lodash';
 
@@ -73,12 +73,8 @@ export class ReaderPage implements OnDestroy{
 
   curScale: number = 0;
 
-  midi = {
-    name: '',
-    duration: 0
-  };
-  midiFile: MediaObject;
-  curTime: number = 0;
+  track: any;
+  allTracks: any[];
 
   private lyricsContainer: HTMLElement;
   @ViewChild('readerHeader') divHeader: ElementRef;
@@ -89,7 +85,7 @@ export class ReaderPage implements OnDestroy{
 
   constructor(public readerCtrl: NavController, public inputPopCtrl: PopoverController, public tunePopCtrl: PopoverController, public inputModalCtrl: ModalController,
                     global: GlobalService, private alertCtrl: AlertController, private toastCtrl: ToastController, private platform: Platform,
-                    private statusBar: StatusBar, private media: Media, private file: File) {
+                    private statusBar: StatusBar, private file: File, private audioProv: AudioProvider) {
     this.myGlobal = global;
 
     this.paddingSubscribe = global.paddingChange.subscribe((value) => {
@@ -206,10 +202,6 @@ export class ReaderPage implements OnDestroy{
     this.currentHymn = _.filter(hymnList, function(item){
       return item.id == activeHymn;
     })[0];
-    if(this.platform.is('cordova'))
-        this.midi.name = this.file.applicationDirectory + "www/assets/midi/h" + this.currentHymn['number'] + '.mid';
-    else
-        this.midi.name = "../assets/midi/h" + this.currentHymn['number'] + '.mid';
     
     this.isBookmarked = this.myGlobal.isInBookmark(this.activeHymnal, this.currentHymn);
     this.fontSize = this.myGlobal.getFontSize();
@@ -359,17 +351,11 @@ export class ReaderPage implements OnDestroy{
   }
 
   initializePlayer(){
-    try{
-      let path = this.midi.name;
-      this.midiFile = this.media.create(path);
-      this.midiFile.onSuccess.subscribe(() => {
-        this.midi.duration = this.midiFile.getDuration();
-      });
-      this.midiFile.onStatusUpdate.subscribe(status => console.log(status));
+    this.track = {
+      src: "assets/midi/h" + this.currentHymn['number'] + ".mid",
+      preload: 'metadata'
     }
-    catch(err){
-      console.log(err);
-    }
+    this.allTracks = this.audioProv.tracks;
   }
 
   secsToMins(secs){

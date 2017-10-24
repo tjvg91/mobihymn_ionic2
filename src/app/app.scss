@@ -120,3 +120,24 @@ ion-header ion-navbar[color="dark"]{
         color: #ffeb3b;
     }
 }
+
+ion-slides{
+    ion-slide{
+        background: map-get($colors, 'dark');
+        color: map-get($colors, 'light');
+
+        .icon-container{
+            font-size: 7em;
+            color: map-get($colors, 'primary');
+        }
+    }
+
+    .swiper-navigation{
+        button.swiper-pagination-bullet{
+            background: map-get($colors, 'light') !important;
+        }
+        button.swiper-pagination-bullet-active{
+            background: map-get($colors, 'primary') !important;
+        }
+    }
+}
