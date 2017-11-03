@@ -27,23 +27,21 @@ export class IntroSliderComponent {
         iconType: "img",
         title: "Welcome to MobiHymn"
       },{
-        icon: ["book"],
-        iconType: "ion",
-        title: "Browse hymnals",
+        icon: [url + "assets/images/intro/mobihymn-lib-android.png"],
+        iconType: "img",
+        class: "cropped",
+        title: "Browse",
         description: "Browse through all the hymnals you desire to read"
       },{
-        icon: ["glasses"],
-        iconType: "ion",
-        title: "Read a hymn",
-        description: "MobiHymn lets you read a hymn's lyrics in a chosen hymnal"
+        icon: [url + "assets/images/intro/mobihymn-reader-android.png"],
+        iconType: "img",
+        class: "cropped",
+        title: "Read and Play",
+        description: "MobiHymn lets you read a hymn's lyrics and play it in a chosen hymnal"
       },{
-        icon: ["play", "pause"],
-        iconType: "ion",
-        title: "Play a hymn",
-        description: "MobiHymn lets you also play the hymn"
-      },{
-        icon: ["font"],
-        iconType: "fa",
+        icon: [url + "assets/images/intro/mobihymn-reader-edit-android.png"],
+        iconType: "img",
+        class: "cropped",
         title: "Customize",
         description: "Customize reading page to your satisfaction"
       },{

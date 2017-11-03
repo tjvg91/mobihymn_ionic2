@@ -5,6 +5,27 @@ intro-slider {
     }
     .swiper-container{
         background: map-get($colors, 'dark') !important;
+
+        .icon-container{
+            position: relative;
+            height: 1.5em;
+            img:not(.cropped){
+                height: 100%;
+            }
+            img.cropped{
+                height: 3em;
+                max-height: 3em;
+                clip: rect(0, 3em, 1.5em, 0);
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+            ion-icon{
+                display: inline-block;
+                font-size: 1.6em;
+            }
+        }
     }
     .swiper-pagination{
         background: map-get($colors, 'dark') !important;

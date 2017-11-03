@@ -7,7 +7,7 @@
 <ion-slides pager centeredSlides="true" effect="slide">
   <ion-slide *ngFor="let slide of slideList; let lastSlide = last">
     <div class="icon-container" *ngIf="slide.iconType == 'img'">
-      <img [src]="slide.icon"/>
+      <img [src]="slide.icon" [class]="slide.class"/>
     </div>
     <div class="icon-container" *ngIf="slide.iconType == 'ion'">
       <ion-icon *ngFor="let i of slide.icon" [name]="i"></ion-icon>

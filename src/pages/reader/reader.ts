@@ -104,6 +104,7 @@ export class ReaderPage implements OnDestroy{
         return new RegExp('^' + currentHymnNum + "(f|s|t)", "i").test(item['number']);
       });
       this.isBookmarked = global.isInBookmark(this.activeHymnal, this.currentHymn['id']);
+      this.scrollContent.scrollTop = 0;
     });
 
     this.bookmarksSubscribe = global.bookmarksChange.subscribe((value) => {
@@ -215,8 +216,9 @@ export class ReaderPage implements OnDestroy{
     let currentHymn = this.currentHymn;
     this.tunes = _.filter(hymnList, function(item){
       return new RegExp('^' + currentHymn['number'] + "(f|s|t)", "i").test(item['number']);
-    });
+    });    
     this.initializePlayer();
+
   }
 
   ngOnDestroy(){
