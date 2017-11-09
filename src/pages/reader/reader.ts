@@ -354,10 +354,18 @@ export class ReaderPage implements OnDestroy{
 
   initializePlayer(){
     this.track = {
-      src: "assets/midi/h" + this.currentHymn['number'] + ".mid",
+      src: "http://localhost:8100/assets/midi/h" + this.currentHymn['number'] + ".mid",
       preload: 'metadata'
     }
     this.allTracks = this.audioProv.tracks;
+  }
+
+  playTrack(){
+    this.audioProv.play(this.track);
+  }
+
+  pauseTrack(){
+    this.audioProv.pause(this.track);
   }
 
   secsToMins(secs){
