@@ -42,15 +42,12 @@
     <ion-toolbar>
         <audio-track #myAudio [track]="track">
             <div class="controls">
-                <button ion-button icon-only (click)="myAudio.play()" clear *ngIf="!myAudio.isPlaying">
-                    <ion-icon name="play"></ion-icon>
-                </button>
-                <button ion-button icon-only (click)="myAudio.pause()" clear *ngIf="myAudio.isPlaying">
-                    <ion-icon name="pause"></ion-icon
-                ></button>
+                <audio-track-play dark [audioTrack]="myAudio">
+                    <ion-spinner></ion-spinner>
+                </audio-track-play>
             </div>
             <div class="progress">
-                <audio-track-progress-bar duration progress audioTrack="myAudio">
+                <audio-track-progress-bar duration progress [audioTrack]="myAudio">
                 </audio-track-progress-bar>
             </div>
         </audio-track>
