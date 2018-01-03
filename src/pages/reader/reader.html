@@ -22,8 +22,7 @@
 </ion-header>
 
 <ion-content padding #lyricsContainer class="{{ 'theme-' + themeString }}">
-    <div class="hymn-content" *ngIf="currentHymn" (pinchmove)="pinchZoom($event)" (pinchend)="curScale = 0"
-        [ngStyle]="{'paddingBottom.px': extraSpace, 'text-align': alignment, 'fontSize.em': fontSize, 'fontFamily': fontName}">
+    <div class="hymn-content" *ngIf="currentHymn" (pinchmove)="pinchZoom($event)" (pinchend)="curScale = 0" [ngStyle]="{'paddingBottom.px': extraSpace, 'text-align': alignment, 'fontSize.em': fontSize, 'fontFamily': fontName}">
         <div class="hymn-title">
             <h2 class="hymn-title" (click)="presentTunePopover($event)">Hymn #{{ currentHymn.title }}</h2>
         </div>
@@ -40,16 +39,27 @@
 
 <ion-footer #footerReader>
     <ion-toolbar>
-        <audio-track #myAudio [track]="track">
-            <div class="controls">
-                <audio-track-play dark [audioTrack]="myAudio">
-                    <ion-spinner></ion-spinner>
-                </audio-track-play>
-            </div>
-            <div class="progress">
-                <audio-track-progress-bar duration progress [audioTrack]="myAudio">
-                </audio-track-progress-bar>
-            </div>
-        </audio-track>
+        <button ion-button clear (click)="playTrack()" *ngIf="mdiPlayer && mdiSound && !mdiPlayer.isPlaying()">
+            <ion-icon name="play"></ion-icon>
+        </button>
+        <button ion-button clear (click)="pauseTrack()" *ngIf="mdiPlayer && mdiSound && mdiPlayer.isPlaying()">
+            <ion-icon name="pause"></ion-icon>
+        </button>
+        <button ion-button clear *ngIf="!mdiSound">
+            <span class="fa fa-spinner fa-pulse fa-2x"></span>
+        </button>
+
+        <button ion-button clear (click)="stopTrack()" *ngIf="mdiPlayer && mdiSound" [disabled]="!mdiPlayer">
+            <ion-icon name="square"></ion-icon>
+        </button>
+
+        <ion-range [max]="mdiLength" [(ngModel)]="mdiCur" step="1" (panend)="mdiChange($event)" (tap)="mdiChange($event)">
+            <ion-label range-left small>{{ secsToMins(mdiCur) }}</ion-label>
+            <ion-label range-right small>{{ secsToMins(mdiLength) }}</ion-label>
+        </ion-range>
+
+        <button ion-button clear (click)="presentMidiPopover($event)">
+            <span class="fa fa-sliders fa-2x"></span>
+        </button>
     </ion-toolbar>
 </ion-footer>

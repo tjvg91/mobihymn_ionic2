@@ -46,8 +46,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSMainNibFile</key>
-	<string></string>
 	<key>NSMainNibFile~ipad</key>
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>

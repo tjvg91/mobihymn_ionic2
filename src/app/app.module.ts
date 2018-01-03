@@ -23,16 +23,13 @@ import { SettingsPopoverItemsPage } from '../pages/settings-popover-items/settin
 import { SettingsPopoverListPage } from '../pages/settings-popover-list/settings-popover-list';
 import { ImageMakerPage } from '../pages/image-maker/image-maker';
 import { IntroSliderComponent } from '../components/intro-slider/intro-slider';
+import { MidiPopoverPage } from '../pages/midi-popover/midi-popover';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { File } from '@ionic-native/file';
 import { Insomnia } from '@ionic-native/insomnia';
-import { IonicAudioModule, WebAudioProvider, CordovaMediaProvider, defaultAudioProviderFactory } from 'ionic-audio';
 
-export function myCustomAudioProviderFactory() {
-  return (window.hasOwnProperty('cordova')) ? new CordovaMediaProvider() : new WebAudioProvider();
-}
 
 @NgModule({
   declarations: [
@@ -50,13 +47,13 @@ export function myCustomAudioProviderFactory() {
     SettingsPopoverItemsPage,
     SettingsPopoverListPage,
     ImageMakerPage,
-    IntroSliderComponent
+    IntroSliderComponent,
+    MidiPopoverPage
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
-    IonicAudioModule.forRoot(myCustomAudioProviderFactory),
     HttpModule,
     CommonModule
   ],
@@ -76,7 +73,8 @@ export function myCustomAudioProviderFactory() {
     SettingsPopoverItemsPage,
     SettingsPopoverListPage,
     ImageMakerPage,
-    IntroSliderComponent
+    IntroSliderComponent,
+    MidiPopoverPage
   ],
   providers: [
     StatusBar,
