@@ -112,7 +112,7 @@
 }
 
 .popover-content{
-    height: 23em;
+    max-height: 17em !important;
 }
 
 ion-header ion-navbar[color="dark"]{
@@ -140,4 +140,9 @@ ion-slides{
             background: map-get($colors, 'primary') !important;
         }
     }
+}
+
+ion-item-divider{
+    border-bottom: none !important;
+    background-color: #101010 !important;
 }
