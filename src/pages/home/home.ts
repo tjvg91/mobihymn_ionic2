@@ -44,6 +44,11 @@ export class HomePage implements OnDestroy{
         this.activeHymnal = val;
         this.goToReader(true);
       }
+    });
+
+    let hom = this;
+    this.myGlobal.getSoundfonts().then(function(instru){
+      hom.myGlobal.instrument['data'] = instru;
     })
   }
   

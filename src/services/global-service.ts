@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import { File } from '@ionic-native/file';
 import { Platform } from 'ionic-angular';
+import * as SoundFont from 'soundfont-player';
 
 import 'rxjs/Rx';
 
@@ -23,6 +24,12 @@ export class GlobalService {
     fontSize: number = 1.4;
     fontName: string = "Roboto"
     theme: string = "pic";
+    public instrument: Object = {
+        "name" : "piano",
+        "value": "acoustic_grand_piano-mp3",
+        "data": {}
+    };
+    public ac: AudioContext;
     
     public hymnalChange : Subject<Array<object>> = new Subject<Array<object>>();
     public hymnChange : Subject<object> = new Subject<object>();
@@ -202,6 +209,17 @@ export class GlobalService {
         else
             url = '../assets/hymnal ' + i + '.json';
         return http.get(url).map(res => res.json());
+    }
+
+    getSoundfonts(){
+        let url = "";
+        if(this.platform.is('cordova'))
+            url = this.file.applicationDirectory + 'www/'
+        else
+            url = '../';
+        url += 'assets/js/soundfonts/acoustic_grand_piano-mp3.js';
+        this.ac = new AudioContext();
+        return SoundFont.instrument(this.ac, url);
     }
 
     isInBookmark(hymnalId, hymnId){
