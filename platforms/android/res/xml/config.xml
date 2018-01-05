@@ -80,4 +80,7 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="Fullscreen" value="true" />
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
 </widget>

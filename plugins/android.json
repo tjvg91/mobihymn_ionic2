@@ -33,6 +33,9 @@
         },
         "cordova-plugin-media": {
             "PACKAGE_NAME": "mobi.hymn.beta"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "mobi.hymn.beta"
         }
     },
     "dependent_plugins": {

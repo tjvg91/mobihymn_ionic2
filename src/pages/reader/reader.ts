@@ -12,7 +12,6 @@ import { StatusBar } from '@ionic-native/status-bar'
 import { File } from '@ionic-native/file';
 import * as _ from 'lodash';
 import * as MidiPlayer from 'midi-player-js';
-import * as SoundFont from 'soundfont-player';
 
 /**
  * Generated class for the ReaderPage page.
@@ -235,7 +234,6 @@ export class ReaderPage implements OnDestroy{
       return new RegExp('^' + currentHymn['number'] + "(f|s|t)", "i").test(item['number']);
     });    
     this.initializePlayer();
-
   }
 
   ngOnDestroy(){
@@ -388,9 +386,6 @@ export class ReaderPage implements OnDestroy{
       read.mdiPlayer.stop();
     })
 
-    let loc = this.platform.is('android') ? (this.file.externalRootDirectory + '/') :
-            this.platform.is('cordova') ? (this.file.documentsDirectory + '/') :
-            '';
     this.mdiPlayer.loadDataUri(read.currentHymn['midi']);
     this.mdiLength = parseInt(this.mdiPlayer.getSongTime());
     this.mdiCur = Math.max(0, parseInt(this.mdiPlayer.getSongTimeRemaining()));

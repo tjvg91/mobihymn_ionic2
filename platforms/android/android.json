@@ -43,6 +43,10 @@
                         {
                             "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -64,6 +68,10 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
                             "count": 1
                         }
                     ]
@@ -100,6 +108,9 @@
             "PACKAGE_NAME": "io.ionic.starter"
         },
         "cordova-plugin-media": {
+            "PACKAGE_NAME": "mobi.hymn.beta"
+        },
+        "cordova-plugin-network-information": {
             "PACKAGE_NAME": "mobi.hymn.beta"
         }
     },
@@ -334,6 +345,23 @@
             "clobbers": [
                 "window.Media"
             ]
+        },
+        {
+            "id": "cordova-plugin-network-information.network",
+            "file": "plugins/cordova-plugin-network-information/www/network.js",
+            "pluginId": "cordova-plugin-network-information",
+            "clobbers": [
+                "navigator.connection",
+                "navigator.network.connection"
+            ]
+        },
+        {
+            "id": "cordova-plugin-network-information.Connection",
+            "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+            "pluginId": "cordova-plugin-network-information",
+            "clobbers": [
+                "Connection"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -346,6 +374,7 @@
         "cordova-plugin-compat": "1.1.0",
         "cordova-plugin-file": "4.3.3",
         "cordova-plugin-insomnia": "4.3.0",
-        "cordova-plugin-media": "3.0.1"
+        "cordova-plugin-media": "3.0.1",
+        "cordova-plugin-network-information": "2.0.1"
     }
 }

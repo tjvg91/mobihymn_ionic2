@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { File } from '@ionic-native/file';
 import { Platform } from 'ionic-angular';
 import * as SoundFont from 'soundfont-player';
+import * as Firebase from 'firebase';
 
 import 'rxjs/Rx';
 
@@ -30,6 +31,11 @@ export class GlobalService {
         "data": {}
     };
     public ac: AudioContext;
+
+    public fireConfig: Object;
+    public firebaseApp: Firebase.app.App;
+    public firebaseStorage: Firebase.storage.Reference;
+    public firebaseAuth: Firebase.auth.Auth;
     
     public hymnalChange : Subject<Array<object>> = new Subject<Array<object>>();
     public hymnChange : Subject<object> = new Subject<object>();
@@ -45,6 +51,22 @@ export class GlobalService {
     public themeChange : Subject<string> = new Subject<string>();
 
     constructor(private file: File, private platform: Platform) {
+        this.fireConfig = {
+            apiKey: "AIzaSyBgPT51lOzkH0Lwb63r0s4iQoyKgn2VuSY",
+            authDomain: "mobihymn.firebaseapp.com",
+            databaseURL: "https://mobihymn.firebaseio.com",
+            projectId: "mobihymn",
+            storageBucket: "mobihymn.appspot.com",
+            messagingSenderId: "525477034225"
+        };
+        let global = this;
+        this.firebaseApp = Firebase.initializeApp(this.fireConfig);
+        this.firebaseAuth = Firebase.auth(this.firebaseApp);
+        this.firebaseAuth.onAuthStateChanged(function(user){
+            global.firebaseStorage = Firebase.storage().ref();            
+        });
+        this.firebaseAuth.signInWithEmailAndPassword("tim.gandionco@gmail.com", "Tjvg1991");
+        
      }
 
     setHymnals(newValue:Array<object>) {        
@@ -195,8 +217,10 @@ export class GlobalService {
     getHymnals(http: Http){
         let url = "";
         
-        if(this.platform.is('cordova'))
-            url = this.file.applicationDirectory + 'www/assets/hymnals.json';
+        if(this.platform.is('android'))
+            url = this.file.externalRootDirectory + '/hymnals.json';
+        else if(this.platform.is('ios'))
+            url = this.file.documentsDirectory + '/hymnals.json';
         else
             url = '../assets/hymnals.json';
         return http.get(url).map(res => res.json());
@@ -204,8 +228,10 @@ export class GlobalService {
 
     getHymns(http: Http, i: number){
         let url = "";
-        if(this.platform.is('cordova'))
-            url = this.file.applicationDirectory + 'www/assets/hymnal ' + i + '.json';
+        if(this.platform.is('android'))
+            url = this.file.externalRootDirectory + '/hymnal ' + i + '.json';
+        else if(this.platform.is('ios'))
+            url = this.file.documentsDirectory + '/hymnal ' + i + '.json';
         else
             url = '../assets/hymnal ' + i + '.json';
         return http.get(url).map(res => res.json());
