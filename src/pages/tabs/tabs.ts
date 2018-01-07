@@ -23,10 +23,17 @@ export class TabsPage {
   activeHymnal: string;
   activeHymn: string;
 
+  isIntroHidden: boolean = false;
+
   @ViewChild('#myTabs') public tabRef: Tabs;
 
   constructor(myGlobal : GlobalService, private navCtrl: NavController, private platform: Platform) {
     this.activeHymnal = myGlobal.getActiveHymnal();
+    let intro = window.localStorage.getItem('intro');
+    if(intro)
+      isIntroHidden = true;
+    else
+      window.localStorage.setItem('intro', 'true');
   }
 
   tabChange(event){

@@ -218,9 +218,9 @@ export class GlobalService {
         let url = "";
         
         if(this.platform.is('android'))
-            url = this.file.externalRootDirectory + '/hymnals.json';
+            url = this.file.externalRootDirectory + '/MobiHymn/hymnals.json';
         else if(this.platform.is('ios'))
-            url = this.file.documentsDirectory + '/hymnals.json';
+            url = this.file.documentsDirectory + '/MobiHymn/hymnals.json';
         else
             url = '../assets/hymnals.json';
         return http.get(url).map(res => res.json());
@@ -229,9 +229,9 @@ export class GlobalService {
     getHymns(http: Http, i: number){
         let url = "";
         if(this.platform.is('android'))
-            url = this.file.externalRootDirectory + '/hymnal ' + i + '.json';
+            url = this.file.externalRootDirectory + '/MobiHymn/hymnal ' + i + '.json';
         else if(this.platform.is('ios'))
-            url = this.file.documentsDirectory + '/hymnal ' + i + '.json';
+            url = this.file.documentsDirectory + '/MobiHymn/hymnal ' + i + '.json';
         else
             url = '../assets/hymnal ' + i + '.json';
         return http.get(url).map(res => res.json());
