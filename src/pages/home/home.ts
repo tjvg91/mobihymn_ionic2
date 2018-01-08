@@ -57,6 +57,8 @@ export class HomePage implements OnDestroy{
         this.activeHymnal = val;
         this.myGlobal.getHymns(this.myHttp, parseInt(hom.activeHymnal)).subscribe(res1 => {
           this.myGlobal.addToHymns('hymnal' + hom.activeHymnal, res1);
+          this.myGlobal.setActiveHymn('1');
+          this.goToReader(true);
         }, err => {
           hom.isOnline = true;
 
@@ -80,17 +82,20 @@ export class HomePage implements OnDestroy{
                               url.replace(hom.firebaseRegEx, hom.firebaseStorage);
                       let progressAlert = hom.alertCtrl.create({
                         title: 'Download',
-                        message: 'Downloading ' + hom.progressIndicator + '%...'
+                        message: 'Downloading ' + hom.progressIndicator + '%...',
+                        enableBackdropDismiss: false
                       });
                       progressAlert.present();
                       hom.fileTransferObj.onProgress(x => {
-                        hom.progressIndicator = (x.loaded / x.total).toFixed(0);
+                        hom.progressIndicator = (x.loaded / x.total * 100).toFixed(0);
                       })
                       hom.fileTransferObj.download(newUrl, target, true).then(x => {
                         hom.myGlobal.addToHymns('hymnal' + hom.activeHymnal, x);
                         hom.myGlobal.setActiveHymn('1');
+                        this.goToReader(true);
                         progressAlert.dismiss();
                       }, err => {
+                        progressAlert.dismiss();
                         let downloadErr = hom.alertCtrl.create({
                           title: 'Error',
                           message: 'Error downloading! Check internet connection.',
