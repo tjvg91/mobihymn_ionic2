@@ -28,6 +28,7 @@ import { MidiPopoverPage } from '../pages/midi-popover/midi-popover';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
 import { Insomnia } from '@ionic-native/insomnia';
 import { Network } from '@ionic-native/network';
 
@@ -81,6 +82,7 @@ import { Network } from '@ionic-native/network';
     SplashScreen,
     Insomnia,
     File,
+    FileTransfer,
     Network,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GlobalService,

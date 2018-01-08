@@ -1,6 +1,6 @@
 import { Component, ViewChild} from '@angular/core';
 
-import { Tabs, NavController, Platform } from 'ionic-angular';
+import { Tabs, Slides, NavController, Platform } from 'ionic-angular';
 
 import { SettingsPage } from '../settings/settings';
 import { HomePage } from '../home/home';
@@ -23,17 +23,10 @@ export class TabsPage {
   activeHymnal: string;
   activeHymn: string;
 
-  isIntroHidden: boolean = false;
-
   @ViewChild('#myTabs') public tabRef: Tabs;
 
   constructor(myGlobal : GlobalService, private navCtrl: NavController, private platform: Platform) {
     this.activeHymnal = myGlobal.getActiveHymnal();
-    let intro = window.localStorage.getItem('intro');
-    if(intro)
-      isIntroHidden = true;
-    else
-      window.localStorage.setItem('intro', 'true');
   }
 
   tabChange(event){
