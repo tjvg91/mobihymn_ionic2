@@ -19,6 +19,7 @@ export class GlobalService {
 
     public bookmarks: Array<object> = new Array<object>();
     public history: Array<object> = new Array<object>();
+    public hymnSettings: Object;
     
     recentCount:number = 5;
     padding: Number=0;

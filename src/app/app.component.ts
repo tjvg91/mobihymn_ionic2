@@ -190,7 +190,8 @@ export class MyApp{
       'alignment': this.global.getActiveAlignment(),
       'fontSize' : this.global.getFontSize(),
       'fontName' : this.global.getFontName(),
-      'theme': this.global.getTheme()
+      'theme': this.global.getTheme(),
+      'hymnSettings': this.global.hymnSettings
     }
     if(!exists)
       this.file.writeFile(this.storage + '/' + this.MAIN_FOLDER_NAME, this.SETTINGS_JSON_NAME,
@@ -219,6 +220,8 @@ export class MyApp{
         this.global.setActiveAlignment(jsonData["alignment"]);
       if(jsonData["theme"])
         this.global.setTheme(jsonData['theme']);
+      if(jsonData["hymnSettings"])
+        this.global.hymnSettings = jsonData["hymnSettings"];
     });
   }
 }

@@ -24,5 +24,15 @@
         </ion-select>
       </ion-item>
     </ion-item-group> -->
+    <ion-item-group>
+        <ion-item-divider>Tracks</ion-item-divider>
+        <ion-item *ngFor="let track of tracks">
+          <p item-start>Track {{ track.number - 1 }}</p>
+          <button ion-button item-end color="primary"[disabled]="player && player.isPlaying()" (click)="trackChange(track, event)">
+            <ion-icon name="volume-up" *ngIf="!track.mute" ></ion-icon>
+            <ion-icon name="volume-off" *ngIf="track.mute" ></ion-icon>
+          </button>
+        </ion-item>
+      </ion-item-group>
   </ion-list>
 </ion-content>

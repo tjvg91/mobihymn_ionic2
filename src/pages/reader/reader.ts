@@ -109,9 +109,22 @@ export class ReaderPage implements OnDestroy{
       });
       this.isBookmarked = global.isInBookmark(this.activeHymnal, this.currentHymn['id']);
       this.scrollContent.scrollTop = 0;
-      this.mdiPlayer.loadDataUri(this.currentHymn['midi']);
-      this.mdiLength = parseInt(this.mdiPlayer.getSongTime());
-      this.mdiCur = 0;
+      let read = this;
+      setTimeout(function() {
+        read.mdiPlayer.stop();
+        read.mdiCur = 0;
+        read.mdiPlayer.loadDataUri(read.currentHymn['midi']);
+        
+        if(this.myGlobal.hymnSettings)
+          if(this.myGlobal.hymnSettings[this.activeHymnal])
+            if(this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]])
+              if(this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]]["tempo"])
+                this.mdiPlayer["tempo"] = this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]]["tempo"];
+
+        
+        read.mdiLength = parseInt(read.mdiPlayer.getSongTime());
+      }, 100);
+      
     });
 
     this.bookmarksSubscribe = global.bookmarksChange.subscribe((value) => {
@@ -389,6 +402,11 @@ export class ReaderPage implements OnDestroy{
     this.mdiPlayer.loadDataUri(read.currentHymn['midi']);
     this.mdiLength = parseInt(this.mdiPlayer.getSongTime());
     this.mdiCur = Math.max(0, parseInt(this.mdiPlayer.getSongTimeRemaining()));
+    if(this.myGlobal.hymnSettings)
+      if(this.myGlobal.hymnSettings[this.activeHymnal])
+        if(this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]])
+          if(this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]]["tempo"])
+            this.mdiPlayer["tempo"] = this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]]["tempo"];
 
     this.ac = this.myGlobal.ac;
     this.mdiSound = this.myGlobal.instrument['data'];
@@ -403,8 +421,20 @@ export class ReaderPage implements OnDestroy{
   }
 
   stopTrack(){
+    let myTracks = [];
+    this.mdiPlayer["tracks"].forEach((e, i) => {
+      console.log(e);
+      console.log(i);
+      if(i != 0)
+        myTracks.push(e["enabled"]);
+    });
     this.mdiPlayer.stop();
     this.mdiCur = 0;
+    for(let i = 1; i < this.mdiPlayer["tracks"].length; i++){      
+      this.mdiPlayer["tracks"].filter(x => {
+        return x["index"] == i;
+      })[0]["enabled"] = myTracks[i - 1];
+    }
   }
 
   mdiChange(ev){
