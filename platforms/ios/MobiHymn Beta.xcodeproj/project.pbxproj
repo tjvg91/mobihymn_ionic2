@@ -29,6 +29,10 @@
 		DD5F23E3F02E4329AFDC7E4C /* CDVFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = C34DF4205E18480C916A1D9E /* CDVFileTransfer.m */; };
 		F3C7B15762C94D3895188448 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E998DA54B54188A4C9440F /* CDVDevice.m */; };
 		FCE89C463CDA44899F042BE1 /* CDVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E9193CCC09A4493B9E1D5399 /* CDVFile.m */; };
+		EB095D980B504B7F8D9862E5 /* MainViewController+MusicControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFBA2C6245F42A785972CEA /* MainViewController+MusicControls.m */; };
+		41B83786EFDF4D64A5BACEF6 /* MusicControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED5865268746C9A19FB3D3 /* MusicControls.m */; };
+		A15A05BAF8E94A17A4BF5D03 /* MusicControlsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DEF9AF89124D2EA4736733 /* MusicControlsInfo.m */; };
+		AF039C0EA59E48659755557A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FBF2BC10FD48FBA841051A /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +110,13 @@
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "MobiHymn Beta/config.xml"; sourceTree = "<group>"; };
 		F874424E0A99434889400645 /* CDVStatusBar.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVStatusBar.m; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; };
 		FEA0873C6F7E4FF3A4645C47 /* CDVSound.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVSound.h; path = "cordova-plugin-media/CDVSound.h"; sourceTree = "<group>"; };
+		1CFBA2C6245F42A785972CEA /* MainViewController+MusicControls.m */ = {isa = PBXFileReference; name = "MainViewController+MusicControls.m"; path = "cordova-plugin-music-controls/MainViewController+MusicControls.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		38ED5865268746C9A19FB3D3 /* MusicControls.m */ = {isa = PBXFileReference; name = "MusicControls.m"; path = "cordova-plugin-music-controls/MusicControls.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		54DEF9AF89124D2EA4736733 /* MusicControlsInfo.m */ = {isa = PBXFileReference; name = "MusicControlsInfo.m"; path = "cordova-plugin-music-controls/MusicControlsInfo.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		38215F883E3D4008B8757306 /* MainViewController+MusicControls.h */ = {isa = PBXFileReference; name = "MainViewController+MusicControls.h"; path = "cordova-plugin-music-controls/MainViewController+MusicControls.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		94393BEA8BF14ADD8B17681B /* MusicControls.h */ = {isa = PBXFileReference; name = "MusicControls.h"; path = "cordova-plugin-music-controls/MusicControls.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		41D7A81E144A46359B0DC55E /* MusicControlsInfo.h */ = {isa = PBXFileReference; name = "MusicControlsInfo.h"; path = "cordova-plugin-music-controls/MusicControlsInfo.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		21FBF2BC10FD48FBA841051A /* MediaPlayer.framework */ = {isa = PBXFileReference; name = "MediaPlayer.framework"; path = "System/Library/Frameworks/MediaPlayer.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +127,7 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				A7135E2671D54423BAC84D4A /* SystemConfiguration.framework in Frameworks */,
 				70A1E363F2174CF2930574DA /* CoreTelephony.framework in Frameworks */,
+				AF039C0EA59E48659755557A /* MediaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +200,7 @@
 			children = (
 				945BC10EC8EF4019B7D8965B /* SystemConfiguration.framework */,
 				C46A85183C27420FB2A26FAD /* CoreTelephony.framework */,
+				21FBF2BC10FD48FBA841051A /* MediaPlayer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -242,6 +255,12 @@
 				AD4C0FE6A48844E9A14C11A4 /* CDVReachability.h */,
 				C34DF4205E18480C916A1D9E /* CDVFileTransfer.m */,
 				52D5284D1D4B443D94F273FA /* CDVFileTransfer.h */,
+				1CFBA2C6245F42A785972CEA /* MainViewController+MusicControls.m */,
+				38ED5865268746C9A19FB3D3 /* MusicControls.m */,
+				54DEF9AF89124D2EA4736733 /* MusicControlsInfo.m */,
+				38215F883E3D4008B8757306 /* MainViewController+MusicControls.h */,
+				94393BEA8BF14ADD8B17681B /* MusicControls.h */,
+				41D7A81E144A46359B0DC55E /* MusicControlsInfo.h */,
 			);
 			name = Plugins;
 			path = "MobiHymn Beta/Plugins";
@@ -383,6 +402,9 @@
 				B7A269F0C01E45C98B7718DF /* CDVConnection.m in Sources */,
 				1AC386C0C54F4911AA86CA95 /* CDVReachability.m in Sources */,
 				DD5F23E3F02E4329AFDC7E4C /* CDVFileTransfer.m in Sources */,
+				EB095D980B504B7F8D9862E5 /* MainViewController+MusicControls.m in Sources */,
+				41B83786EFDF4D64A5BACEF6 /* MusicControls.m in Sources */,
+				A15A05BAF8E94A17A4BF5D03 /* MusicControlsInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

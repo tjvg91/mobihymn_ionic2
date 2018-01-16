@@ -262,6 +262,14 @@ module.exports = [
         "clobbers": [
             "window.FileTransfer"
         ]
+    },
+    {
+        "id": "cordova-plugin-music-controls.MusicControls",
+        "file": "plugins/cordova-plugin-music-controls/www/MusicControls.js",
+        "pluginId": "cordova-plugin-music-controls",
+        "clobbers": [
+            "MusicControls"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -278,7 +286,8 @@ module.exports.metadata =
     "cordova-plugin-insomnia": "4.3.0",
     "cordova-plugin-media": "3.0.1",
     "cordova-plugin-network-information": "2.0.1",
-    "cordova-plugin-file-transfer": "1.7.0"
+    "cordova-plugin-file-transfer": "1.7.0",
+    "cordova-plugin-music-controls": "2.1.4"
 };
 // BOTTOM OF METADATA
 });

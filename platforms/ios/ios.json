@@ -55,6 +55,10 @@
                         {
                             "xml": "<feature name=\"FileTransfer\"><param name=\"ios-package\" value=\"CDVFileTransfer\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"MusicControls\"><param name=\"ios-package\" value=\"MusicControls\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -107,6 +111,9 @@
             "PACKAGE_NAME": "mobi.hymn.beta"
         },
         "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "mobi.hymn.beta"
+        },
+        "cordova-plugin-music-controls": {
             "PACKAGE_NAME": "mobi.hymn.beta"
         }
     },
@@ -390,6 +397,14 @@
             "clobbers": [
                 "window.FileTransfer"
             ]
+        },
+        {
+            "id": "cordova-plugin-music-controls.MusicControls",
+            "file": "plugins/cordova-plugin-music-controls/www/MusicControls.js",
+            "pluginId": "cordova-plugin-music-controls",
+            "clobbers": [
+                "MusicControls"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -404,6 +419,7 @@
         "cordova-plugin-insomnia": "4.3.0",
         "cordova-plugin-media": "3.0.1",
         "cordova-plugin-network-information": "2.0.1",
-        "cordova-plugin-file-transfer": "1.7.0"
+        "cordova-plugin-file-transfer": "1.7.0",
+        "cordova-plugin-music-controls": "2.1.4"
     }
 }

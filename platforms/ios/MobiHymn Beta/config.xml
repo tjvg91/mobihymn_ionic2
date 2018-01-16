@@ -122,4 +122,7 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="Fullscreen" value="true" />
     <preference name="deployment-target" value="11.0" />
+    <feature name="MusicControls">
+        <param name="ios-package" value="MusicControls" />
+    </feature>
 </widget>

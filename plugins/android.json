@@ -39,6 +39,9 @@
         },
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "mobi.hymn.beta"
+        },
+        "cordova-plugin-music-controls": {
+            "PACKAGE_NAME": "mobi.hymn.beta"
         }
     },
     "dependent_plugins": {

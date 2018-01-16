@@ -6,29 +6,18 @@
 
 <ion-content>
     <div class="banner" type="error" *ngIf="!isOnline">
-        No network connection detected.
+        No internet connection.
     </div>
     <div class="banner" type="progress" *ngIf="isOnline && !hymnalList">
         Loading hymnals...
     </div>
-    <ion-grid>
-        <ion-row>
-            <ion-col col-lg-4 col-md-6 col-sm-12 *ngFor="let hymnal of hymnalList">
-                <ion-card (tap)="setActiveHymnal(hymnal.id)" [ngClass]="{ 'active': (activeHymnal == hymnal.id) }">
-                    <div class="card-image">
-                        <img [src]="hymnal.image" [alt]="hymnal.name" (error)="updateImage($event)" #img/>
-                        <!-- <ion-icon name="book" *ngIf="!hymnal.image"></ion-icon> -->
-                    </div>
-                    <ion-card-content>
-                        <ion-card-title>
-                            {{hymnal.name}}
-                        </ion-card-title>
-                        <p>
-                            {{hymnal.count}} hymns
-                        </p>
-                    </ion-card-content>
-                </ion-card>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <ion-list>
+        <ion-item *ngFor="let hymnal of hymnalList" (tap)="setActiveHymnal(hymnal.id)" [ngClass]="{ 'active': (activeHymnal == hymnal.id) }">
+            <ion-thumbnail item-start>
+                <img [src]="hymnal.image" [alt]="hymnal.name"/>
+            </ion-thumbnail>
+            <h2>{{ hymnal.name }}</h2>
+            <p>{{hymnal.count}} hymns</p>
+        </ion-item>
+    </ion-list>
 </ion-content>

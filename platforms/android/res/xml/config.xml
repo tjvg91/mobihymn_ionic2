@@ -36,6 +36,9 @@
     <feature name="FileTransfer">
         <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
     </feature>
+    <feature name="MusicControls">
+        <param name="android-package" value="com.homerours.musiccontrols.MusicControls" />
+    </feature>
     <name>MobiHymn Beta</name>
     <description>Hymnal app</description>
     <author email="tim.gandionco@gmail.com">Timothy John V. Gandionco</author>

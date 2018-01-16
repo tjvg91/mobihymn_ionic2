@@ -28,15 +28,16 @@ export class GlobalService {
     theme: string = "pic";
     public instrument: Object = {
         "name" : "piano",
-        "value": "acoustic_grand_piano-mp3",
-        "data": {}
+        "value": "acoustic_grand_piano-mp3"
     };
+    public soundfont: any;
     public ac: AudioContext;
 
     public fireConfig: Object;
     public firebaseApp: Firebase.app.App;
     public firebaseStorage: Firebase.storage.Reference;
     public firebaseAuth: Firebase.auth.Auth;
+    public isAuthenticated: boolean = false;
     
     public hymnalChange : Subject<Array<object>> = new Subject<Array<object>>();
     public hymnChange : Subject<object> = new Subject<object>();
@@ -64,10 +65,12 @@ export class GlobalService {
         this.firebaseApp = Firebase.initializeApp(this.fireConfig);
         this.firebaseAuth = Firebase.auth(this.firebaseApp);
         this.firebaseAuth.onAuthStateChanged(function(user){
-            global.firebaseStorage = Firebase.storage().ref();            
+            if(user){
+                global.isAuthenticated = true;
+                global.firebaseStorage = Firebase.storage().ref();            
+            }
         });
-        this.firebaseAuth.signInWithEmailAndPassword("tim.gandionco@gmail.com", "Tjvg1991");
-        
+        this.firebaseAuth.signInWithEmailAndPassword("tim.gandionco@gmail.com", "Tjvg1991")
      }
 
     setHymnals(newValue:Array<object>) {        

@@ -111,18 +111,7 @@ export class ReaderPage implements OnDestroy{
       this.scrollContent.scrollTop = 0;
       let read = this;
       setTimeout(function() {
-        read.mdiPlayer.stop();
-        read.mdiCur = 0;
-        read.mdiPlayer.loadDataUri(read.currentHymn['midi']);
-        
-        if(this.myGlobal.hymnSettings)
-          if(this.myGlobal.hymnSettings[this.activeHymnal])
-            if(this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]])
-              if(this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]]["tempo"])
-                this.mdiPlayer["tempo"] = this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]]["tempo"];
-
-        
-        read.mdiLength = parseInt(read.mdiPlayer.getSongTime());
+        read.initializePlayer();
       }, 100);
       
     });
@@ -232,7 +221,7 @@ export class ReaderPage implements OnDestroy{
     this.currentHymn = _.filter(hymnList, function(item){
       return item.id == activeHymn;
     })[0];
-    
+    this.initializePlayer();
     this.isBookmarked = this.myGlobal.isInBookmark(this.activeHymnal, this.currentHymn);
     this.fontSize = this.myGlobal.getFontSize();
     this.extraSpace = this.myGlobal.getPadding();
@@ -245,8 +234,7 @@ export class ReaderPage implements OnDestroy{
     let currentHymn = this.currentHymn;
     this.tunes = _.filter(hymnList, function(item){
       return new RegExp('^' + currentHymn['number'] + "(f|s|t)", "i").test(item['number']);
-    });    
-    this.initializePlayer();
+    });
   }
 
   ngOnDestroy(){
@@ -383,11 +371,15 @@ export class ReaderPage implements OnDestroy{
   initializePlayer(){
     let read = this;
     this.mdiPlayer = new MidiPlayer.Player(function(x) {
-      console.log(x);
       if(x.name && x.name == "Note on"){
-        read.mdiSound.play(x.noteNumber, read.ac.currentTime, {
-          gain: x['velocity'] / 100
-        });
+        try {
+          read.mdiSound.play(x.noteNumber, read.ac.currentTime, {
+            gain: x['velocity'] / 100
+          });
+        } catch (error) {
+          alert(error);
+          read.stopTrack();
+        }
       }
       read.mdiLength = parseInt(read.mdiPlayer.getSongTime());
       read.mdiCur = read.mdiLength - read.mdiPlayer.getSongTimeRemaining();
@@ -396,7 +388,7 @@ export class ReaderPage implements OnDestroy{
       read.mdiCur = read.mdiLength - read.mdiPlayer.getSongTimeRemaining();
     });
     this.mdiPlayer.on('endOfFile', function(){
-      read.mdiPlayer.stop();
+      read.stopTrack();
     })
 
     this.mdiPlayer.loadDataUri(read.currentHymn['midi']);
@@ -409,11 +401,17 @@ export class ReaderPage implements OnDestroy{
             this.mdiPlayer["tempo"] = this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]]["tempo"];
 
     this.ac = this.myGlobal.ac;
-    this.mdiSound = this.myGlobal.instrument['data'];
+    this.mdiSound = this.myGlobal.soundfont;
+    console.log(this.mdiPlayer);
   }
 
   playTrack(){
-    this.mdiPlayer.play();
+    try {
+      this.mdiPlayer.play();
+    } catch (error) {
+      alert(error)
+    }
+    
   }
 
   pauseTrack(){
@@ -423,8 +421,6 @@ export class ReaderPage implements OnDestroy{
   stopTrack(){
     let myTracks = [];
     this.mdiPlayer["tracks"].forEach((e, i) => {
-      console.log(e);
-      console.log(i);
       if(i != 0)
         myTracks.push(e["enabled"]);
     });
