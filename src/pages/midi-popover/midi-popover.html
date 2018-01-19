@@ -7,7 +7,8 @@
 <ion-content>
   <ion-list>
     <ion-item-group>
-      <ion-item-divider>Tempo ({{ valTempo }})</ion-item-divider>
+      <ion-item-divider>Tempo <ion-badge item-end>{{ valTempo }}</ion-badge>        
+      </ion-item-divider>
       <ion-item>
         <ion-range [min]="minTempo" [max]="maxTempo" [(ngModel)]="valTempo" steps="5" (tap)="tempoChange()" (panend)="tempoChange()">
           <ion-label range-left>60</ion-label>
@@ -28,8 +29,10 @@
         <ion-item-divider>Tracks</ion-item-divider>
         <ion-item *ngFor="let track of tracks">
           <p item-start>Track {{ track.number - 1 }}</p>
-          <button ion-button item-end color="primary"[disabled]="player && player.isPlaying()" (click)="trackChange(track, event)">
-            <ion-icon name="volume-up" *ngIf="!track.mute" ></ion-icon>
+          <button ion-button item-end color="primary" (click)="trackChange(track, event)" *ngIf="!track.mute">
+            <ion-icon name="volume-up"></ion-icon>
+          </button>
+          <button ion-button outline item-end color="primary" (click)="trackChange(track, event)" *ngIf="track.mute">            
             <ion-icon name="volume-off" *ngIf="track.mute" ></ion-icon>
           </button>
         </ion-item>

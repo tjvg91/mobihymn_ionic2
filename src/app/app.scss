@@ -145,4 +145,6 @@ ion-slides{
 ion-item-divider{
     border-bottom: none !important;
     background-color: #101010 !important;
+    color: map-get($colors, 'light') !important;
+    font-weight: bold;
 }

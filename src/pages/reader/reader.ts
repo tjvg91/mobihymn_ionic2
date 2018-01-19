@@ -402,7 +402,7 @@ export class ReaderPage implements OnDestroy{
 
     this.ac = this.myGlobal.ac;
     this.mdiSound = this.myGlobal.soundfont;
-    console.log(this.mdiPlayer);
+    console.log(this.mdiSound);
   }
 
   playTrack(){

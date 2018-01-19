@@ -15,6 +15,7 @@ export class HomePage implements OnDestroy{
   title: string;
   hymnalList: Array<object>;
   offlineHymnalList: Array<object>;
+  onlineHymnalList: Array<object>;
   hymnList:object;
   myHttp: Http;
   myGlobal: GlobalService;
@@ -60,69 +61,53 @@ export class HomePage implements OnDestroy{
           hom.isOnline = true;
 
           if(this.isCordova){
-            let confirmDownload = this.alertCtrl.create({
-              title: 'Download Confirm',
-              message: 'Do you want to download the hymnal?',
-              buttons: [
-                {
-                  text: 'No',
-                  handler: () => {}
-                },
-                {
-                  text: 'Yes',
-                  handler: () => {
-                    let target = hom.platform.is('android') ? hom.file.externalRootDirectory :
-                                  hom.file.documentsDirectory;
-                    target += '/MobiHymn/hymnal ' + hom.activeHymnal + '.json';
-                    hom.myGlobal.firebaseStorage.child('hymnal ' + hom.activeHymnal + '.json').getDownloadURL().then(function(url){
-                      var newUrl = hom.platform.is('cordova') ? url :
-                              url.replace(hom.firebaseRegEx, hom.firebaseStorage);
-                      let progressLoad = hom.loadingCtrl.create({
-                        content: 'Downloading 0%...',
-                        spinner: 'circles'
-                      });
-                      progressLoad.present();
-                      hom.fileTransferObj.onProgress(x => {
-                        let progressIndicator = ((x.loaded / x.total) * 100).toFixed(0);
-                        progressLoad.setContent('Downloading ' + progressIndicator + '%...');
-                      })
-                      hom.fileTransferObj.download(newUrl, target, true).then(x => {
-                        progressLoad.dismiss();
-                        hom.myGlobal.getHymns(hom.myHttp, parseInt(hom.activeHymnal)).subscribe(x =>{
-                          hom.myGlobal.addToHymns('hymnal' + hom.activeHymnal, x);
-                          let activeHymn = hom.myGlobal.getActiveHymn();
-                          if(!activeHymn)
-                            hom.myGlobal.setActiveHymn('1');
-                          let item = hom.hymnalList.filter(function(y){
-                            return y['id'] = hom.activeHymnal
-                          })[0];
-                          hom.offlineHymnalList.push(item);
-                          hom.saveHymnals();
-                          hom.goToReader(true);
-                        }, err => {
-                          alert(err);
-                        });
-                        
-                      }, err => {
-                        progressLoad.dismiss();
-                        let downloadErr = hom.alertCtrl.create({
-                          title: 'Error',
-                          message: 'Error downloading! Check internet connection.',
-                          buttons: [{
-                            text: 'OK',
-                            handler: () => {
-                              downloadErr.dismiss();
-                            }
-                          }]
-                        });
-                        downloadErr.present();               
-                      })
-                    });
-                  }
-                }
-              ]
+            let target = hom.platform.is('android') ? hom.file.externalRootDirectory :
+                          hom.file.documentsDirectory;
+            target += '/MobiHymn/hymnal ' + hom.activeHymnal + '.json';
+            hom.myGlobal.firebaseStorage.child('hymnal ' + hom.activeHymnal + '.json').getDownloadURL().then(function(url){
+              var newUrl = hom.platform.is('cordova') ? url :
+                      url.replace(hom.firebaseRegEx, hom.firebaseStorage);
+              let progressLoad = hom.loadingCtrl.create({
+                content: 'Downloading 0%...',
+                spinner: 'circles'
+              });
+              progressLoad.present();
+              hom.fileTransferObj.onProgress(x => {
+                let progressIndicator = ((x.loaded / x.total) * 100).toFixed(0);
+                progressLoad.setContent('Downloading ' + progressIndicator + '%...');
+              })
+              hom.fileTransferObj.download(newUrl, target, true).then(x => {
+                progressLoad.dismiss();
+                hom.myGlobal.getHymns(hom.myHttp, parseInt(hom.activeHymnal)).subscribe(x =>{
+                  hom.myGlobal.addToHymns('hymnal' + hom.activeHymnal, x);
+                  let activeHymn = hom.myGlobal.getActiveHymn();
+                  if(!activeHymn)
+                    hom.myGlobal.setActiveHymn('1');
+                  let item = hom.hymnalList.filter(function(y){
+                    return y['id'] = hom.activeHymnal
+                  })[0];
+                  hom.offlineHymnalList.push(item);
+                  hom.saveHymnals();
+                  hom.goToReader(true);
+                }, err => {
+                  alert(err);
+                });
+                
+              }, err => {
+                progressLoad.dismiss();
+                let downloadErr = hom.alertCtrl.create({
+                  title: 'Error',
+                  message: 'Error downloading! Check internet connection.',
+                  buttons: [{
+                    text: 'OK',
+                    handler: () => {
+                      downloadErr.dismiss();
+                    }
+                  }]
+                });
+                downloadErr.present();               
+              })
             });
-            confirmDownload.present();
           }
           else{
             this.myGlobal.firebaseAuth.onAuthStateChanged(function(user){
@@ -196,6 +181,7 @@ export class HomePage implements OnDestroy{
     this.myGlobal.getHymnals(this.myHttp).subscribe(res => {
       this.myGlobal.setHymnals(res.output);
       this.offlineHymnalList = res.output;
+      this.onlineHymnalList = _.difference(this.hymnalList, this.offlineHymnalList)
     });
     this.myGlobal.firebaseAuth.onAuthStateChanged(function(user){
       if(user){
@@ -204,6 +190,7 @@ export class HomePage implements OnDestroy{
                       url.replace(hom.firebaseRegEx, hom.firebaseStorage);
           hom.myHttp.get(newUrl).map(x => x.json()).subscribe(x => {
             hom.myGlobal.setHymnals(x.output);
+            hom.onlineHymnalList = _.difference(hom.hymnalList, hom.offlineHymnalList)
           });
         }).catch(function(err){
         });
