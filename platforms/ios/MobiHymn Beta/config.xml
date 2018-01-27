@@ -48,6 +48,9 @@
     <feature name="FileTransfer">
         <param name="ios-package" value="CDVFileTransfer" />
     </feature>
+    <feature name="MusicControls">
+        <param name="ios-package" value="MusicControls" />
+    </feature>
     <name>MobiHymn Beta</name>
     <description>Hymnal app</description>
     <author email="tim.gandionco@gmail.com">Timothy John V. Gandionco</author>
@@ -122,7 +125,4 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="Fullscreen" value="true" />
     <preference name="deployment-target" value="11.0" />
-    <feature name="MusicControls">
-        <param name="ios-package" value="MusicControls" />
-    </feature>
 </widget>

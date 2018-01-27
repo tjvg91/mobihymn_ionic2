@@ -30,7 +30,7 @@ export class GlobalService {
         "name" : "piano",
         "value": "acoustic_grand_piano-mp3"
     };
-    public soundfont: any;
+    public soundfont: object;
     public ac: AudioContext;
 
     public fireConfig: Object;
@@ -51,6 +51,7 @@ export class GlobalService {
     public fontSizeChange : Subject<number> = new Subject<number>();
     public fontNameChange : Subject<string> = new Subject<string>();
     public themeChange : Subject<string> = new Subject<string>();
+    public soundFontChange: Subject<object> = new Subject<object>();
 
     constructor(private file: File, private platform: Platform) {
         this.fireConfig = {
@@ -166,6 +167,11 @@ export class GlobalService {
         this.themeChange.next(this.theme);
     }
 
+    setSoundFont(newValue: object){
+        this.soundfont = newValue;
+        this.soundFontChange.next(newValue);
+    }
+
     getHymnalList() : Array<object>{
         return this.hymnals;
     }
@@ -220,11 +226,10 @@ export class GlobalService {
 
     getHymnals(http: Http){
         let url = "";
-        
         if(this.platform.is('android'))
-            url = this.file.externalRootDirectory + '/MobiHymn/hymnals.json';
+            url = this.file.externalRootDirectory + 'MobiHymn/hymnals.json';
         else if(this.platform.is('ios'))
-            url = this.file.documentsDirectory + '/MobiHymn/hymnals.json';
+            url = this.file.documentsDirectory + 'MobiHymn/hymnals.json';
         else
             url = '../assets/hymnals.json';
         return http.get(url).map(res => res.json());

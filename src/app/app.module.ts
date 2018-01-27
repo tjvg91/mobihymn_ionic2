@@ -31,6 +31,7 @@ import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { Insomnia } from '@ionic-native/insomnia';
 import { Network } from '@ionic-native/network';
+import { MusicControls } from '@ionic-native/music-controls';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { Network } from '@ionic-native/network';
     File,
     FileTransfer,
     Network,
+    MusicControls,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GlobalService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig }

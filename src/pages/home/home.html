@@ -8,14 +8,14 @@
     <div class="banner" type="error" *ngIf="!isOnline">
         No internet connection.
     </div>
-    <div class="banner" type="progress" *ngIf="isOnline && !hymnalList">
+    <div class="banner" type="progress" *ngIf="isOnline && fetching">
         Loading hymnals...
     </div>
-    <ion-item-group *ngIf="offlineHymnalList">
+    <ion-item-group *ngIf="offlineHymnalList.length > 0">
         <ion-item-divider>OFFLINE HYMNALS</ion-item-divider>
         <ion-item *ngFor="let hymnal of offlineHymnalList" (tap)="setActiveHymnal(hymnal.id)" [ngClass]="{ 'active': (activeHymnal == hymnal.id) }">
             <ion-thumbnail item-start>
-                <img [src]="hymnal.image" [alt]="hymnal.name"/>
+                <img [src]="hymnal.image" [alt]="hymnal.name" />
             </ion-thumbnail>
             <h2>{{ hymnal.name }}</h2>
             <p>{{hymnal.count}} hymns</p>
@@ -25,11 +25,14 @@
         <ion-item-divider>ONLINE HYMNALS</ion-item-divider>
         <ion-item *ngFor="let hymnal of onlineHymnalList" [ngClass]="{ 'active': (activeHymnal == hymnal.id) }">
             <ion-thumbnail item-start>
-                <img [src]="hymnal.image" [alt]="hymnal.name"/>
+                <img [src]="hymnal.image" [alt]="hymnal.name" />
             </ion-thumbnail>
             <h2>{{ hymnal.name }}</h2>
             <p>{{hymnal.count}} hymns</p>
-            <button ion-button item-end clear (tap)="setActiveHymnal(hymnal.id)">{{ !isCordova ? "View" : "Download" }}</button>
+            <button ion-button item-end clear (tap)="setActiveHymnal(hymnal.id)" *ngIf="!isCordova">View</button>
+            <button ion-button item-end clear (tap)="setActiveHymnal(hymnal.id)" *ngIf="isCordova">
+                <ion-icon name="download"></ion-icon>
+            </button>
         </ion-item>
     </ion-item-group>
 </ion-content>

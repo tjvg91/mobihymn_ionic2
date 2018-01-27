@@ -10,6 +10,7 @@ import { MidiPopoverPage } from '../../pages/midi-popover/midi-popover';
 
 import { StatusBar } from '@ionic-native/status-bar'
 import { File } from '@ionic-native/file';
+import { MusicControls, MusicControlsOptions } from '@ionic-native/music-controls';
 import * as _ from 'lodash';
 import * as MidiPlayer from 'midi-player-js';
 
@@ -47,7 +48,8 @@ import * as MidiPlayer from 'midi-player-js';
 })
 
 export class ReaderPage implements OnDestroy{
-  hymnList: object;
+  hymnList: Array<object>;
+  hymnalList: Array<object>;
   myGlobal:GlobalService;
   currentHymn: object;
   activeHymnal: string;
@@ -65,6 +67,7 @@ export class ReaderPage implements OnDestroy{
   fontSizeSubscribe: any;
   fontNameSubscribe: any;
   alignmentSubscribe: any;
+  soundFontSubscribe: any;
 
   extraSpace: Number = 0;
   alignment: string = "left";
@@ -87,9 +90,19 @@ export class ReaderPage implements OnDestroy{
   scrollContent: any;
   divTab: any;
 
+  mdiControl: {
+    track       : string,
+    cover       : string,
+    dismissable : true,
+
+    hasPrev   : false,
+    hasNext   : false,
+    hasClose  : false,
+  }
+
   constructor(public readerCtrl: NavController, public inputPopCtrl: PopoverController, public tunePopCtrl: PopoverController, public inputModalCtrl: ModalController,
                     global: GlobalService, private alertCtrl: AlertController, private toastCtrl: ToastController, private platform: Platform,
-                    private statusBar: StatusBar, private file: File) {
+                    private statusBar: StatusBar, private file: File, private musicCtrls: MusicControls) {
     this.myGlobal = global;
 
     this.paddingSubscribe = global.paddingChange.subscribe((value) => {
@@ -99,7 +112,8 @@ export class ReaderPage implements OnDestroy{
     this.hymnSubscribe = global.activeHymnChange.subscribe((value) => {
       this.activeHymnal = this.myGlobal.getActiveHymnal();
       let hymnList = this.myGlobal.getHymnList()['hymnal' + this.myGlobal.getActiveHymnal()];
-      let activeHymn = this.myGlobal.getActiveHymn();
+      let activeHymn = value;
+      let activeHymnal = this.activeHymnal;
       this.currentHymn = _.filter(hymnList, function(item){
         return item.id == activeHymn;
       })[0];
@@ -113,7 +127,14 @@ export class ReaderPage implements OnDestroy{
       setTimeout(function() {
         read.initializePlayer();
       }, 100);
-      
+      this.mdiControl.cover = this.hymnalList.filter(function(val){
+        return val['id'] == activeHymnal;
+      })[0]['image'];
+      this.mdiControl.track = "Hymn #" + this.currentHymn['title'];
+      this.musicCtrls.destroy();
+      this.musicCtrls.create(read.mdiControl);
+      this.musicCtrls.listen();
+      this.musicCtrls.updateIsPlaying(false);
     });
 
     this.bookmarksSubscribe = global.bookmarksChange.subscribe((value) => {
@@ -135,6 +156,9 @@ export class ReaderPage implements OnDestroy{
     this.alignmentSubscribe = global.activeAlignmentChange.subscribe((value) => {
       this.alignment = value;
     });
+    this.soundFontSubscribe = global.soundFontChange.subscribe((value) => {
+      this.mdiSound = value;
+    })
   }
 
   presentPopover(myEvent) {
@@ -214,9 +238,11 @@ export class ReaderPage implements OnDestroy{
   }
 
   ionViewDidLoad() {
+    let read = this;
     this.activeHymnal = this.myGlobal.getActiveHymnal();
     let hymnList = this.myGlobal.getHymnList()['hymnal' + this.activeHymnal];
     this.hymnList = hymnList;
+    this.hymnalList = this.myGlobal.getHymnalList();
     let activeHymn = this.myGlobal.getActiveHymn();
     this.currentHymn = _.filter(hymnList, function(item){
       return item.id == activeHymn;
@@ -234,6 +260,22 @@ export class ReaderPage implements OnDestroy{
     let currentHymn = this.currentHymn;
     this.tunes = _.filter(hymnList, function(item){
       return new RegExp('^' + currentHymn['number'] + "(f|s|t)", "i").test(item['number']);
+    });
+    this.musicCtrls.subscribe().subscribe(action => {
+      function events(action){
+        const message = JSON.parse(action).message;
+        switch(message){
+          case 'music-controls-pause':
+            read.pauseTrack();
+            break;
+          case 'music-controls-play':
+            read.playTrack();
+            break;
+          case 'music-controls-destroy':
+            read.stopTrack();
+            break;
+        }
+      }
     });
   }
 
@@ -389,6 +431,7 @@ export class ReaderPage implements OnDestroy{
     });
     this.mdiPlayer.on('endOfFile', function(){
       read.stopTrack();
+      read.musicCtrls.destroy()
     })
 
     this.mdiPlayer.loadDataUri(read.currentHymn['midi']);
@@ -400,14 +443,14 @@ export class ReaderPage implements OnDestroy{
           if(this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]]["tempo"])
             this.mdiPlayer["tempo"] = this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]]["tempo"];
 
-    this.ac = this.myGlobal.ac;
     this.mdiSound = this.myGlobal.soundfont;
-    console.log(this.mdiSound);
+    this.ac = this.myGlobal.ac;
   }
 
   playTrack(){
     try {
       this.mdiPlayer.play();
+      this.musicCtrls.updateIsPlaying(true);
     } catch (error) {
       alert(error)
     }
@@ -416,6 +459,7 @@ export class ReaderPage implements OnDestroy{
 
   pauseTrack(){
     this.mdiPlayer.pause();
+    this.musicCtrls.updateIsPlaying(false);
   }
 
   stopTrack(){
