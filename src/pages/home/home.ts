@@ -34,6 +34,14 @@ export class HomePage implements OnDestroy{
   firebaseStorage = '/storageapi/';
   fileTransferObj: FileTransferObject;
 
+  android: boolean;
+  ios: boolean;
+  wp: boolean;
+  
+  storage: string;
+
+  hymnalsDateModified: Number;
+
   constructor(public homeCtrl: NavController, global : GlobalService, http: Http, private platform: Platform,
               private loadingCtrl: LoadingController, private network: Network, private fileTransfer: FileTransfer,
               private alertCtrl: AlertController, private file: File) {
@@ -73,6 +81,12 @@ export class HomePage implements OnDestroy{
         hom.myGlobal.setSoundFont(instru);
       });
     }
+
+    this.android = platform.is('android');
+    this.ios = platform.is('ios');
+    this.wp = platform.is('wp');
+
+    this.storage = this.android ? file.externalRootDirectory : file.documentsDirectory;
   }
   
   setActiveHymnal(hymnalId : string){
@@ -111,11 +125,42 @@ export class HomePage implements OnDestroy{
       this.isOnline = navigator.onLine;
       this.retrieveHymnals();
     }
+    this.getFBHymnalsDateModified();
   }
 
   getHymnalsFirebase(){
     return this.myGlobal.firebaseStorage.child('hymnals.json').getDownloadURL();
   }
+
+  getFBHymnalsDateModified(){
+    let ret = 0;
+    this.myGlobal.firebaseAuth.onAuthStateChanged((user) => {
+      if(user){
+        this.myGlobal.firebaseStorage.child('hymnals.json').getMetadata().then(metedata => {
+          ret = new Date(metedata.updated).valueOf();
+          if(this.hymnalsDateModified && ret > this.hymnalsDateModified){
+            this.saveHymnals();
+          }
+        });
+      }
+    });    
+  }
+
+  getUserHymnalsDateModified(){
+    this.file.resolveDirectoryUrl(this.storage).then(rootDir => {
+      this.file.getFile(rootDir, 'MobiHymn/hymnals.json', { create: false }).then(fileEntry => {
+        fileEntry.getMetadata(metadata => {          
+          this.hymnalsDateModified = metadata.modificationTime.valueOf();
+        })
+      })
+    })
+  }
+
+  /*getFBHymnalMetadata(){
+    this.offlineHymnalList.forEach(x => {
+      
+    })
+  }*/
 
   retrieveHymnals(){
     let hom = this;
@@ -154,7 +199,7 @@ export class HomePage implements OnDestroy{
       url += '/MobiHymn/hymnals.json';
       hom.myHttp.post(url, JSON.stringify(hom.offlineHymnalList));
     }, err => {
-      hom.file.createFile(url + '/MobiHymn', 'hymnals.json', false).then(() => {
+      hom.file.createFile(url + '/MobiHymn', 'hymnals.json', true).then(() => {
         this.file.writeFile(url + '/MobiHymn', 'hymnals.json', JSON.stringify(hom.offlineHymnalList), {
           append: false, replace: true
         });

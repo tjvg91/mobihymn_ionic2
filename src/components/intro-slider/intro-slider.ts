@@ -15,16 +15,9 @@ import { File } from '@ionic-native/file';
 export class IntroSliderComponent {
   slideList: Array<Object>;
 
-  @ViewChild(Slides) slides: Slides;
-
   constructor(private platform: Platform, private file: File) {
     //if(window.localStorage.getItem('introSlider')){}
     platform.ready().then(() => {
-      let intro = window.localStorage.getItem('intro');
-      if(intro)
-        this.exitSlides();
-      else
-        window.localStorage.setItem('intro', 'true');
 
       let url = platform.is('cordova') ? (file.applicationDirectory + 'www/') : '../';
       let ios = platform.is('ios');
@@ -89,10 +82,4 @@ export class IntroSliderComponent {
       }
     })
   }
-
-  exitSlides(){
-    this.slides._elementRef.nativeElement.parentElement.style.display = "none";
-    //window.localStorage.setItem('introSlider', 'done');
-  }
-
 }
