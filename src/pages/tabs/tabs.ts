@@ -25,8 +25,16 @@ export class TabsPage {
 
   @ViewChild('#myTabs') public tabRef: Tabs;
 
+  hideIntro: boolean = false;
+
   constructor(myGlobal : GlobalService, private navCtrl: NavController, private platform: Platform) {
     this.activeHymnal = myGlobal.getActiveHymnal();
+
+    let intro = window.localStorage.getItem('intro');
+    if(intro)
+      this.hideIntro = intro == 'true';
+    else
+      window.localStorage.setItem('intro', 'true');
   }
 
   tabChange(event){

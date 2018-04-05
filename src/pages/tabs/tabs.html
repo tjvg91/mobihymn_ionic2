@@ -5,4 +5,4 @@
     <ion-tab [root]="tab4Root" tabTitle="Settings" tabIcon="settings"></ion-tab>
 </ion-tabs>
 
-<intro-slider></intro-slider>
+<intro-slider *ngIf="!hideIntro"></intro-slider>

@@ -39,4 +39,11 @@ intro-slider {
             }
         }
     }
+    .container{
+        position: absolute;
+        clip: rect(0, 350px, 334px, 0px);
+        left: 50%;
+        transform: translateX(-50%);
+        top: 55px;
+    }
 }
