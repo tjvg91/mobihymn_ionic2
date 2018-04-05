@@ -85,8 +85,14 @@ export class GlobalService {
     }
 
     addToBookmarks(newValue: object){
-        this.bookmarks.push(newValue);
-        this.bookmarksChange.next(this.bookmarks);
+        var dup = this.bookmarks.filter(val => {
+            return val['hymnalId'] == newValue['hymnalId'] &&
+                val['hymnId'] == newValue['hymnId'];
+        })
+        if(dup.length <= 0){
+            this.bookmarks.push(newValue);
+            this.bookmarksChange.next(this.bookmarks);
+        }
     }
 
     addToRecent(newValue: object){

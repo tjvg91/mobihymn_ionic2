@@ -1,36 +1,30 @@
 page-home {
-    ion-list{
+    ion-item-group {
         margin-top: 0 !important;
-        ion-item{
-            &.active, &:hover{
-                border: 1px solid map-get($colors, 'primary');
+        ion-item {
+            .item-inner {
+                border-bottom: 1px solid #000 !important;
+            }
+        }
+
+        &.empty{
+            ion-item ion-label{
+                text-align: center;
             }
         }
     }
-
-    .banner{
+    .banner {
         text-align: center;
-        &[type="error"]{
+        padding: 5px 0;
+        &[type="error"] {
             background: map-get($colors, 'danger');
         }
-        &[type="success"]{
+        &[type="success"] {
             background: map-get($colors, 'secondary');
         }
-        &[type="progress"]{
+        &[type="progress"] {
             background: map-get($colors, 'primary');
             color: #222;
-        }
-    }
-    @media screen and (min-width: 283px) and (max-width: 575px) {
-        .col {
-            flex-basis: 100% !important;
-        }
-    }
-    @media screen and (min-width: 576px) and (max-width: 767px) {
-        .col {
-            &[col-md-6]{
-                max-width: 50% !important;
-            }
         }
     }
 }

@@ -47,6 +47,8 @@ export class InputModalPage{
   BOOKMARKS_JSON_NAME: string = "bookmarks.json";
   HISTORY_JSON_NAME: string = "history.json";
 
+  bkmkChangeSubscribe: any;
+
   constructor(public viewCtrl: ViewController, inputParams: NavParams,
             private alertCtrl: AlertController, private toastCtrl: ToastController,
             private file: File, private platform: Platform, private global: GlobalService) {
@@ -55,6 +57,11 @@ export class InputModalPage{
     this.navParams = inputParams;
 
     this.fileRoot = platform.is('android') ? file.externalRootDirectory : file.documentsDirectory;
+
+    this.bkmkChangeSubscribe = global.bookmarksChange.subscribe(val => {
+      this.bookmarkList = val;
+      this.origBkmkList = this.bookmarkList.map(x => Object.assign({}, x));
+    })
   }
 
   dismiss() {
@@ -155,40 +162,7 @@ export class InputModalPage{
     }, 200);    
   }
 
-  handleKeyChange(inp){
-    if(inp.go != true){
-      this.number = inp.outs;
-      this.tune = inp.tune;
-      this.hymnFilter['number'] = this.number;
-      this.hymnFilter['tune']= this.tune;
-
-      this.hymnFilterString = this.hymnFilter['number'] + this.hymnFilter['tune'];
-
-      let num = this.hymnFilter['number'];
-      let tune = this.hymnFilter['tune'];
-      this.hymnList = this.origHymnList.filter((item) => {
-        return new RegExp(num + '' + tune).test(item['number']);
-      });
-    }
-    else{
-      let activeHymn = this.hymnFilterString;
-      let hymnIds = this.origHymnList.filter(x => {
-        return x['number'] == activeHymn
-      });
-      if(hymnIds.length > 0)
-        this.setActiveHymn(hymnIds[0]['id']);
-    }
-  }
-
-  showKeyboard(){
-    setTimeout(function() {
-      this.keyboardShow = "shown";
-      console.log(this.keyboardShow);
-    }, 100);
-    
-  }
-
-  presentConfirmUnbookmark(){
+  presentConfirmUnbookmark(hymn){
     let confirmUnbookmark = this.alertCtrl.create({
       title: 'Confirm removal',
       message: 'Are you sure you want to remove bookmark?',
@@ -200,7 +174,7 @@ export class InputModalPage{
         {
           text: 'Yes',
           handler: () => {
-            this.myGlobal.removeFromBookmarks(this.activeHymnal, this.activeHymn);
+            this.myGlobal.removeFromBookmarks(this.activeHymnal, hymn);
             this.presentUnbookmarkConfirmed();
           }
         }

@@ -90,20 +90,22 @@ export class ReaderPage implements OnDestroy{
   scrollContent: any;
   divTab: any;
 
-  mdiControl: {
-    track       : string,
-    cover       : string,
-    dismissable : true,
-
-    hasPrev   : false,
-    hasNext   : false,
-    hasClose  : false,
-  }
+  mdiControl: Object = new Object();
 
   constructor(public readerCtrl: NavController, public inputPopCtrl: PopoverController, public tunePopCtrl: PopoverController, public inputModalCtrl: ModalController,
                     global: GlobalService, private alertCtrl: AlertController, private toastCtrl: ToastController, private platform: Platform,
                     private statusBar: StatusBar, private file: File, private musicCtrls: MusicControls) {
     this.myGlobal = global;
+
+    this. mdiControl = {
+      track       : "",
+      cover       : "",
+      dismissable : true,
+
+      hasPrev   : false,
+      hasNext   : false,
+      hasClose  : false,
+    }
 
     this.paddingSubscribe = global.paddingChange.subscribe((value) => {
       this.extraSpace = value;
@@ -127,12 +129,12 @@ export class ReaderPage implements OnDestroy{
       setTimeout(function() {
         read.initializePlayer();
       }, 100);
-      this.mdiControl.cover = this.hymnalList.filter(function(val){
+      this.mdiControl['cover'] = this.hymnalList.filter(function(val){
         return val['id'] == activeHymnal;
       })[0]['image'];
-      this.mdiControl.track = "Hymn #" + this.currentHymn['title'];
+      this.mdiControl['track'] = "Hymn #" + this.currentHymn['title'];
       this.musicCtrls.destroy();
-      this.musicCtrls.create(read.mdiControl);
+      //this.musicCtrls.create(read.mdiControl);
       this.musicCtrls.listen();
       this.musicCtrls.updateIsPlaying(false);
     });
@@ -242,6 +244,9 @@ export class ReaderPage implements OnDestroy{
     this.activeHymnal = this.myGlobal.getActiveHymnal();
     let hymnList = this.myGlobal.getHymnList()['hymnal' + this.activeHymnal];
     this.hymnList = hymnList;
+
+    if(this.activeHymnal == "2")
+      this.syncOldBookmarks();
     this.hymnalList = this.myGlobal.getHymnalList();
     let activeHymn = this.myGlobal.getActiveHymn();
     this.currentHymn = _.filter(hymnList, function(item){
@@ -261,6 +266,15 @@ export class ReaderPage implements OnDestroy{
     this.tunes = _.filter(hymnList, function(item){
       return new RegExp('^' + currentHymn['number'] + "(f|s|t)", "i").test(item['number']);
     });
+    let activeHymnal = this.activeHymnal;
+    this.mdiControl['cover'] = this.hymnalList.filter(function(val){
+      return val['id'] == activeHymnal;
+    })[0]['image'];
+    this.mdiControl['track'] = "Hymn #" + this.currentHymn['title'];
+    this.musicCtrls.destroy();
+    //this.musicCtrls.create(read.mdiControl);
+    this.musicCtrls.listen();
+    this.musicCtrls.updateIsPlaying(false);
     this.musicCtrls.subscribe().subscribe(action => {
       function events(action){
         const message = JSON.parse(action).message;
@@ -434,9 +448,15 @@ export class ReaderPage implements OnDestroy{
       read.musicCtrls.destroy()
     })
 
-    this.mdiPlayer.loadDataUri(read.currentHymn['midi']);
-    this.mdiLength = parseInt(this.mdiPlayer.getSongTime());
-    this.mdiCur = Math.max(0, parseInt(this.mdiPlayer.getSongTimeRemaining()));
+    if(read.currentHymn['midi']){
+      this.mdiPlayer.loadDataUri(read.currentHymn['midi']);
+      this.mdiLength = parseInt(this.mdiPlayer.getSongTime());
+      this.mdiCur = Math.max(0, parseInt(this.mdiPlayer.getSongTimeRemaining()));
+    }
+    else{
+      this.mdiLength = 0;
+      this.mdiCur = 0;
+    }
     if(this.myGlobal.hymnSettings)
       if(this.myGlobal.hymnSettings[this.activeHymnal])
         if(this.myGlobal.hymnSettings[this.activeHymnal][this.currentHymn["id"]])
@@ -448,13 +468,8 @@ export class ReaderPage implements OnDestroy{
   }
 
   playTrack(){
-    try {
-      this.mdiPlayer.play();
-      this.musicCtrls.updateIsPlaying(true);
-    } catch (error) {
-      alert(error)
-    }
-    
+    this.mdiPlayer.play();
+    this.musicCtrls.updateIsPlaying(true);
   }
 
   pauseTrack(){
@@ -476,6 +491,40 @@ export class ReaderPage implements OnDestroy{
       })[0]["enabled"] = myTracks[i - 1];
     }
   }
+
+  syncOldBookmarks(){
+    if(this.platform.is('android')){
+      let hom = this;
+      let path = this.file.externalRootDirectory;
+      let folder = 'MobiHymnal/files/bookmarks';
+      this.file.checkDir(path, folder).then(val => {
+        this.file.listDir(path, folder).then(val2 => {
+          val2.forEach((x, i, arr) => {
+            let name = x.name.replace(/\.mkbk/, '');
+            let actHymn = hom.hymnList.filter(y => {
+              return y['number'] == name
+            })[0];
+
+            hom.myGlobal.addToBookmarks({
+              'hymnalId': hom.activeHymnal,
+              'hymnId': actHymn['id'],
+              'firstLine': actHymn['firstLine'],
+              'number': actHymn['number'],
+              'title': actHymn['title']
+            })
+          });
+          this.file.removeRecursively(path, 'MobiHymnal').catch(err => {
+            alert("Remove dir: " + err.message);
+          });
+        }).catch(err => {
+          alert("List dir: " + err.message);
+        })
+      }).catch(err => {
+        alert("Check dir: " + err.message);
+      })
+    }
+  }
+
 
   mdiChange(ev){
     this.mdiPlayer.skipToSeconds(this.mdiCur);

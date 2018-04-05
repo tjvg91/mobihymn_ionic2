@@ -56,13 +56,13 @@
             </ion-refresher>-->
             <ion-searchbar (ionInput)="filterHymns($event)" [showCancelButton]="true" placeholder="Search bookmarks" type="number" [(ngModel)]="bkmkFilterText" #bkmkFilter></ion-searchbar>
             <ion-list>
-                <ion-item-sliding *ngFor="let bkmk of bookmarkList" (click)="setActiveHymn(bkmk['hymnId'])">
-                    <ion-item>
+                <ion-item-sliding *ngFor="let bkmk of bookmarkList">
+                    <ion-item (click)="setActiveHymn(bkmk['hymnId'])">
                         <h2>{{ bkmk['firstLine'] }}</h2>
                         <p>Hymn #{{ bkmk['title'] }}</p>
                     </ion-item>
                     <ion-item-options side="left">
-                        <button ion-button color="danger" (click)="presentConfirmUnbookmark()">
+                        <button ion-button color="danger" (click)="presentConfirmUnbookmark(bkmk['hymnId'])">
                             <ion-icon name="close"></ion-icon>
                             Remove
                         </button>

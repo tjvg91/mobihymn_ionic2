@@ -16,7 +16,7 @@ export class HomePage implements OnDestroy{
   hymnalList: Array<object>;
   offlineHymnalList: Array<object> = new Array<object>();
   onlineHymnalList: Array<object>;
-  hymnList:object;
+  hymnList: Array<object>;
   myHttp: Http;
   myGlobal: GlobalService;
   readerLoader: any;
@@ -57,6 +57,7 @@ export class HomePage implements OnDestroy{
 
     this.activeHymnalSubscribe = global.activeHymnalChange.subscribe(val => {
       if(val){
+        this.showLoader();
         this.activeHymnal = val;
         this.getOfflineHymns();
       }
@@ -108,6 +109,7 @@ export class HomePage implements OnDestroy{
       this.retrieveHymnals();
     }
     else{
+      this.fetching = true;
       this.isOnline = navigator.onLine;
       this.retrieveHymnals();
     }
@@ -196,6 +198,7 @@ export class HomePage implements OnDestroy{
               hom.offlineHymnalList.push(item);
               hom.onlineHymnalList = _.difference(hom.hymnalList, hom.offlineHymnalList);
               hom.saveHymnals();
+              this.dismissLoader();
               hom.goToReader(true);
             }, err => {
               alert(err);
@@ -227,16 +230,17 @@ export class HomePage implements OnDestroy{
       let curHymn = this.myGlobal.getActiveHymn();
       if(!curHymn)
         this.myGlobal.setActiveHymn('1');
+      this.dismissLoader();
       this.goToReader(true);
     }, err => {
       if(this.isCordova){
+        this.dismissLoader();
         if(this.isOnline)
           this.downloadHymns();
       }
       else{
         this.myGlobal.firebaseAuth.onAuthStateChanged(function(user){
           if(user){
-            hom.showLoader();
             hom.myGlobal.firebaseStorage.child('hymnal ' + hom.activeHymnal + '.json').getDownloadURL().then(function(url){
               var newUrl = hom.platform.is('cordova') ? url :
                       url.replace(hom.firebaseRegEx, hom.firebaseStorage);
@@ -263,15 +267,18 @@ export class HomePage implements OnDestroy{
 
   showLoader() {
     this.readerLoader = this.loadingCtrl.create({
-      content: 'Fetching hymns...',
+      content: 'Getting settings...',
       spinner: 'circles'
     });
 
     this.readerLoader.present();
   }
 
+
+
   dismissLoader(){
-    this.readerLoader.dismiss();
+    if(this.readerLoader)
+      this.readerLoader.dismiss();
   }
 
   ngOnDestroy(){
