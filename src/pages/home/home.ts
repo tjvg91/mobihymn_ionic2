@@ -26,6 +26,7 @@ export class HomePage implements OnDestroy{
 
   hymnalSubscribe: any;
   activeHymnalSubscribe: any;
+  loadingHymnalsInfo: any;
 
   activeHymnal: string;
   progressIndicator: string = "0";
@@ -40,7 +41,8 @@ export class HomePage implements OnDestroy{
   
   storage: string;
 
-  hymnalsDateModified: Number;
+  fbHymnalsDateModified: Number;
+  userHymnalsDateModified: Number;
 
   constructor(public homeCtrl: NavController, global : GlobalService, http: Http, private platform: Platform,
               private loadingCtrl: LoadingController, private network: Network, private fileTransfer: FileTransfer,
@@ -103,7 +105,8 @@ export class HomePage implements OnDestroy{
     this.homeCtrl.parent.select(0);
   }
 
-  ionViewDidLoad(){    
+  ionViewDidLoad(){
+    this.getFBHymnalsDateModified(); 
     if(this.platform.is('cordova')){
       this.activeHymnal = this.myGlobal.getActiveHymnal();
       this.isCordova = true;
@@ -127,7 +130,6 @@ export class HomePage implements OnDestroy{
       this.isOnline = navigator.onLine;
       this.retrieveHymnals();
     }
-    this.getFBHymnalsDateModified();
   }
 
   getHymnalsFirebase(){
@@ -135,24 +137,34 @@ export class HomePage implements OnDestroy{
   }
 
   getFBHymnalsDateModified(){
-    let ret = 0;
-    this.myGlobal.firebaseAuth.onAuthStateChanged((user) => {
+    let hom = this;
+    this.myGlobal.firebaseAuth.onAuthStateChanged(user => {
       if(user){
-        this.myGlobal.firebaseStorage.child('hymnals.json').getMetadata().then(metedata => {
-          ret = new Date(metedata.updated).valueOf();
-          if(this.hymnalsDateModified && ret > this.hymnalsDateModified){
-            this.saveHymnals();
+        this.myGlobal.firebaseStorage.child('hymnals.json').getMetadata().then(metadata => {
+          hom.fbHymnalsDateModified = new Date(metadata.updated).valueOf();
+          console.log(hom.userHymnalsDateModified);
+          if(hom.userHymnalsDateModified && hom.fbHymnalsDateModified > hom.userHymnalsDateModified){
+            hom.saveHymnals();
           }
+        }, err => {
+          alert(err);
         });
       }
+    }, err => {
+      alert(err);
     });    
   }
 
   getUserHymnalsDateModified(){
+    let hom = this;
     this.file.resolveDirectoryUrl(this.storage).then(rootDir => {
-      this.file.getFile(rootDir, 'MobiHymn/hymnals.json', { create: false }).then(fileEntry => {
+      hom.file.getFile(rootDir, 'MobiHymn/hymnals.json', { create: false }).then(fileEntry => {
         fileEntry.getMetadata(metadata => {          
-          this.hymnalsDateModified = metadata.modificationTime.valueOf();
+          hom.userHymnalsDateModified = metadata.modificationTime.valueOf();
+          if(hom.fbHymnalsDateModified && hom.userHymnalsDateModified > hom.fbHymnalsDateModified){
+            hom.presentHymnalsInfoUpdating();
+            hom.saveHymnals();
+          }
         })
       })
     })
@@ -200,6 +212,9 @@ export class HomePage implements OnDestroy{
     this.file.checkFile(url + '/MobiHymn', 'hymnals.json').then(() => {
       url += '/MobiHymn/hymnals.json';
       hom.myHttp.post(url, JSON.stringify(hom.offlineHymnalList));
+
+      if(hom.userHymnalsDateModified)
+        hom.loadingHymnalsInfo.dismiss();
     }, err => {
       hom.file.createFile(url + '/MobiHymn', 'hymnals.json', true).then(() => {
         this.file.writeFile(url + '/MobiHymn', 'hymnals.json', JSON.stringify(hom.offlineHymnalList), {
@@ -302,6 +317,14 @@ export class HomePage implements OnDestroy{
     });
   }
 
+  presentHymnalsInfoUpdating(){
+    this.loadingHymnalsInfo = this.loadingCtrl.create({
+      content: 'Updating hymnals info',
+      spinner: 'circles'
+    });
+    this.loadingHymnalsInfo.present();
+  }
+
   comparer(otherArray){
     return function(current){
       return otherArray.filter(function(other){
@@ -318,8 +341,6 @@ export class HomePage implements OnDestroy{
 
     this.readerLoader.present();
   }
-
-
 
   dismissLoader(){
     if(this.readerLoader)

@@ -1,6 +1,6 @@
 {
   "name": "mobihymn_ionic2",
-  "app_id": "",
+  "app_id": "91b67970",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
