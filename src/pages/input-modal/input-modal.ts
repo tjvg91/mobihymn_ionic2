@@ -102,7 +102,9 @@ export class InputModalPage{
       this.hymnFilterSearchbar.value = this.hymnFilterString;
       this.filterHymns(null);
       this.hymnFilterSearchbar.setFocus();
-      this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
+      setTimeout(() => {
+        this.hymnFilterSearchbar._searchbarInput.nativeElement.select();
+      }, 500);
     }, 500);
   }
 
