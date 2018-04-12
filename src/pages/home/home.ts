@@ -1,7 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, Platform, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, Platform, LoadingController, AlertController, ModalController } from 'ionic-angular';
+import { LoginModalPage } from '../../pages/login-modal/login-modal';
 import { GlobalService } from '../../services/global-service';
+import { UserService } from '../../services/user-service';
 import { Network } from '@ionic-native/network';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
@@ -44,7 +46,7 @@ export class HomePage implements OnDestroy{
 
   constructor(public homeCtrl: NavController, global : GlobalService, http: Http, private platform: Platform,
               private loadingCtrl: LoadingController, private network: Network, private fileTransfer: FileTransfer,
-              private alertCtrl: AlertController, private file: File) {
+              private alertCtrl: AlertController, private file: File, private user: UserService, private modalCtrl: ModalController) {
     this.title = "MobiHymn";
     this.myGlobal = global;
 
@@ -65,9 +67,27 @@ export class HomePage implements OnDestroy{
 
     this.activeHymnalSubscribe = global.activeHymnalChange.subscribe(val => {
       if(val){
-        this.showLoader();
-        this.activeHymnal = val;
-        this.getOfflineHymns();
+        if(this.isCordova){
+          this.showLoader();
+          this.getOfflineHymns();
+        }
+        else{
+          this.myGlobal.firebaseAuth.onAuthStateChanged(function(user){
+            if(user){
+              hom.myGlobal.firebaseStorage.child('hymnal ' + hom.activeHymnal + '.json').getDownloadURL().then(function(url){
+                var newUrl = hom.platform.is('cordova') ? url :
+                        url.replace(hom.firebaseRegEx, hom.firebaseStorage);
+                hom.myHttp.get(newUrl).map(x => x.json()).subscribe(x => {
+                  hom.myGlobal.addToHymns('hymnal' + hom.activeHymnal, x)
+                  hom.myGlobal.setActiveHymn('1');
+                  hom.dismissLoader();
+                  hom.goToReader(true);
+                })
+              });
+            }
+          })
+        }
+        this.activeHymnal = val;        
       }
     });
 
@@ -88,6 +108,8 @@ export class HomePage implements OnDestroy{
     this.wp = platform.is('wp');
 
     this.storage = this.android ? file.externalRootDirectory : file.documentsDirectory;
+
+    this.showLogin();
   }
   
   setActiveHymnal(hymnalId : string){
@@ -111,7 +133,8 @@ export class HomePage implements OnDestroy{
         this.isOnline = true;
         this.fetching = true;
         if(!this.myGlobal.isAuthenticated)
-            this.myGlobal.firebaseAuth.signInWithEmailAndPassword("tim.gandionco@gmail.com", "Tjvg1991");
+            //this.myGlobal.firebaseAuth.signInWithEmailAndPassword("tim.gandionco@gmail.com", "Tjvg1991");
+            this.showLogin();
         if(this.hymnalList == undefined){
           this.retrieveHymnals();
         }
@@ -319,7 +342,11 @@ export class HomePage implements OnDestroy{
     this.readerLoader.present();
   }
 
-
+  showLogin(){
+    if(!this.myGlobal.firebaseAuth.currentUser){
+      this.modalCtrl.create(LoginModalPage).present();
+    }
+  }
 
   dismissLoader(){
     if(this.readerLoader)

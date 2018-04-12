@@ -158,6 +158,7 @@ export class ReaderPage implements OnDestroy{
     this.alignmentSubscribe = global.activeAlignmentChange.subscribe((value) => {
       this.alignment = value;
     });
+    
     this.soundFontSubscribe = global.soundFontChange.subscribe((value) => {
       this.mdiSound = value;
     })

@@ -37,6 +37,9 @@ export class GlobalService {
     public firebaseApp: Firebase.app.App;
     public firebaseStorage: Firebase.storage.Reference;
     public firebaseAuth: Firebase.auth.Auth;
+    public firebaseAuthGmailProvider: Firebase.auth.GoogleAuthProvider;
+    public firebaseAuthFBProvider: Firebase.auth.FacebookAuthProvider;
+    public firebaseCollection: Firebase.firestore.Firestore;
     public isAuthenticated: boolean = false;
     
     public hymnalChange : Subject<Array<object>> = new Subject<Array<object>>();
@@ -65,13 +68,18 @@ export class GlobalService {
         let global = this;
         this.firebaseApp = Firebase.initializeApp(this.fireConfig);
         this.firebaseAuth = Firebase.auth(this.firebaseApp);
+        this.firebaseAuthGmailProvider = new Firebase.auth.GoogleAuthProvider();
+        this.firebaseAuthFBProvider = new Firebase.auth.FacebookAuthProvider();
+        console.log(this.firebaseApp);
+        this.firebaseCollection = this.firebaseApp.firestore();
+
         this.firebaseAuth.onAuthStateChanged(function(user){
             if(user){
                 global.isAuthenticated = true;
                 global.firebaseStorage = Firebase.storage().ref();            
             }
         });
-        this.firebaseAuth.signInWithEmailAndPassword("tim.gandionco@gmail.com", "Tjvg1991")
+        //this.firebaseAuth.signInWithEmailAndPassword("tim.gandionco@gmail.com", "Tjvg1991")
      }
 
     setHymnals(newValue:Array<object>) {        

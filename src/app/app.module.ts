@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { GlobalService } from '../services/global-service';
+import { UserService } from '../services/user-service';
 
 //import { KeyboardComponent } from '../components/keyboard/keyboard';
 
@@ -24,6 +25,8 @@ import { SettingsPopoverListPage } from '../pages/settings-popover-list/settings
 import { ImageMakerPage } from '../pages/image-maker/image-maker';
 import { IntroSliderComponent } from '../components/intro-slider/intro-slider';
 import { MidiPopoverPage } from '../pages/midi-popover/midi-popover';
+import { LoginModalPage } from '../pages/login-modal/login-modal';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -50,7 +53,8 @@ import { MusicControls } from '@ionic-native/music-controls';
     SettingsPopoverListPage,
     ImageMakerPage,
     IntroSliderComponent,
-    MidiPopoverPage
+    MidiPopoverPage,
+    LoginModalPage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +80,8 @@ import { MusicControls } from '@ionic-native/music-controls';
     SettingsPopoverListPage,
     ImageMakerPage,
     IntroSliderComponent,
-    MidiPopoverPage
+    MidiPopoverPage,
+    LoginModalPage
   ],
   providers: [
     StatusBar,
@@ -88,6 +93,7 @@ import { MusicControls } from '@ionic-native/music-controls';
     MusicControls,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GlobalService,
+    UserService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig }
   ]
 })

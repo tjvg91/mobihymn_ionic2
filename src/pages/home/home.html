@@ -21,6 +21,9 @@
                 <img [src]="hymnal.image" [alt]="hymnal.name" />
             </ion-thumbnail>
             <h2>{{ hymnal.name }}</h2>
+            <h3 *ngIf="hymnal.url">
+                <a [href]="hymnal.url" target="_blank">{{ hymnal.url }}</a>
+            </h3>
             <p>{{hymnal.count}} hymns</p>
         </ion-item>
     </ion-item-group>
@@ -37,6 +40,9 @@
                 <img [src]="hymnal.image" [alt]="hymnal.name" />
             </ion-thumbnail>
             <h2>{{ hymnal.name }}</h2>
+            <h3 *ngIf="hymnal.url">
+                <a [href]="hymnal.url" target="_blank">{{ hymnal.url }}</a>
+            </h3>
             <p>{{hymnal.count}} hymns</p>
             <button ion-button item-end clear (tap)="setActiveHymnal(hymnal.id)" *ngIf="!isCordova">View</button>
             <button ion-button item-end clear (tap)="setActiveHymnal(hymnal.id)" *ngIf="isCordova">
